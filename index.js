@@ -123,7 +123,7 @@ async function startPayment(name, email, mobile, city, state, degree) {
         utm_campaign,
         utm_medium,
         utm_source,
-        source: 6,
+        source: 14,
       }),
     });
 
