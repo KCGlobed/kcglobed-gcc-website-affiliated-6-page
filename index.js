@@ -350,6 +350,7 @@ async function completePayment(cf_order_id, form) {
       } catch (studentErr) {
         console.error("Student creation failed:", studentErr);
       }
+      closeForm(); // Ensure registration form is closed and reset
       window.location.href = "/thank-you.html?cf_order_id=" + cf_order_id;
 
     } else {
@@ -450,6 +451,7 @@ function showLoadingModal(message) {
 function closeStatusModal() {
   var overlay = document.getElementById("statusModalOverlay");
   if (overlay) overlay.classList.remove("active");
+  closeForm(); // Ensure registration form is also closed and reset
 }
 
 function reportFailure(cf_order_id, payment_id, description, code) {
