@@ -5048,11 +5048,10 @@ table.cmp tr:last-child td {
 
 /* MAIN GRID */
 .footer-grid {
-    display: grid;
-    grid-template-columns: 1.1fr .8fr 1fr;
+    display: flex;
     gap: 120px;
+    justify-content: space-between;
     padding-bottom: 42px;
-    align-items: start;
 }
 
 /* LEFT COLUMN */
