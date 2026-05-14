@@ -420,6 +420,52 @@
         font-size: 38px;
       }
     }
+    /* ── Back to Home ── */
+    .back-home {
+      position: fixed;
+      top: 32px;
+      left: 32px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(160, 110, 230, 0.2);
+      border-radius: 12px;
+      color: var(--text-white);
+      text-decoration: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .back-home:hover {
+      background: rgba(160, 110, 230, 0.15);
+      border-color: var(--accent-purple);
+      transform: translateX(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .back-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width: 768px) {
+      .back-home {
+        top: 20px;
+        left: 20px;
+        width: 42px;
+        height: 42px;
+      }
+    }
   </style>
 </head>
 
@@ -428,6 +474,12 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NVDGXLR"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+
+  <a href="index.html" class="back-home" aria-label="Back to home">
+    <svg viewBox="0 0 24 24">
+      <path d="M19 12H5M5 12L12 19M5 12L12 5"></path>
+    </svg>
+  </a>
 
   <div class="bg-layer" aria-hidden="true"></div>
 
