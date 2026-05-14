@@ -8,6 +8,105 @@ var FORM_TYPE = 1
 
 var finalFormSubmitFired = false;
 
+var OTP_BASE_URL = "https://kcglobed-gcc-website-932479078084.asia-south1.run.app";
+var isOtpVerified = false;
+var otpTimerInterval = null;
+
+async function sendOtp() {
+  const phone = document.getElementById("gcc_phone").value.trim();
+  const btn = document.getElementById("btn_send_otp");
+  
+  if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
+    setFieldError("gcc_phone", "Please enter a valid 10-digit mobile number to send OTP.");
+    return;
+  }
+  
+  setFieldError("gcc_phone", ""); // Clear any previous error
+  btn.disabled = true;
+  btn.innerText = "Sending...";
+  
+  try {
+    const res = await fetch(OTP_BASE_URL + '/api/otp/send', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mobile: phone })
+    });
+    const data = await res.json();
+    
+    if (data.success || res.ok) {
+      document.getElementById("otp_section").style.display = "block";
+      
+      let otpCountdown = 60;
+      btn.innerText = `Resend in ${otpCountdown}s`;
+      
+      if (otpTimerInterval) clearInterval(otpTimerInterval);
+      otpTimerInterval = setInterval(() => {
+        otpCountdown--;
+        if (otpCountdown > 0) {
+          btn.innerText = `Resend in ${otpCountdown}s`;
+        } else {
+          clearInterval(otpTimerInterval);
+          btn.innerText = "Resend OTP";
+          btn.disabled = false;
+        }
+      }, 1000);
+      
+    } else {
+      setFieldError("gcc_phone", data.message || data.statusMessage || "Failed to send OTP");
+      btn.disabled = false;
+      btn.innerText = "Send OTP";
+    }
+  } catch (err) {
+    console.error(err);
+    setFieldError("gcc_phone", "Failed to send OTP. Please try again.");
+    btn.disabled = false;
+    btn.innerText = "Send OTP";
+  }
+}
+
+async function verifyOtp() {
+  const phone = document.getElementById("gcc_phone").value.trim();
+  const otp = document.getElementById("gcc_otp").value.trim();
+  const btn = document.getElementById("btn_verify_otp");
+  
+  if (!otp || otp.length !== 6) {
+    setFieldError("gcc_otp", "Please enter a valid 6-digit OTP.");
+    return;
+  }
+  
+  setFieldError("gcc_otp", "");
+  btn.disabled = true;
+  btn.innerText = "Verifying...";
+  
+  try {
+    const res = await fetch(OTP_BASE_URL + '/api/otp/verify', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mobile: phone, otp: otp })
+    });
+    const data = await res.json();
+    
+    if (data.success || res.ok) {
+      isOtpVerified = true;
+      if (otpTimerInterval) clearInterval(otpTimerInterval);
+      document.getElementById("otp_success_msg").style.display = "block";
+      document.getElementById("gcc_otp").disabled = true;
+      document.getElementById("gcc_phone").disabled = true;
+      document.getElementById("btn_send_otp").style.display = "none";
+      btn.innerText = "Verified";
+    } else {
+      setFieldError("gcc_otp", data.message || data.statusMessage || "Invalid or expired OTP");
+      btn.disabled = false;
+      btn.innerText = "Verify";
+    }
+  } catch (err) {
+    console.error(err);
+    setFieldError("gcc_otp", "Failed to verify OTP. Please try again.");
+    btn.disabled = false;
+    btn.innerText = "Verify";
+  }
+}
+
 // Registration Modal Logic
 function openForm() {
   const modal = document.getElementById('registrationModal');
@@ -100,6 +199,8 @@ function handlePayClick() {
   if (!degree) { setFieldError("gcc_degree", "University selection is required"); hasError = true; }
   if (!commerceChecked) { setFieldError("gcc_commerce_graduate", "This confirmation is required"); hasError = true; }
 
+  if (!isOtpVerified) { setFieldError("gcc_phone", "Please verify your mobile number with OTP"); hasError = true; }
+
   if (hasError) {
     // Scroll to first error
     const firstErr = document.querySelector(".field-error[style*='display: block']");
@@ -128,7 +229,7 @@ function resetGccForm() {
   }
 
   // Reset errors
-  const fieldsForErrors = ["gcc_name", "gcc_email", "gcc_phone", "gcc_state", "gcc_city", "gcc_degree", "gcc_commerce_graduate"];
+  const fieldsForErrors = ["gcc_name", "gcc_email", "gcc_phone", "gcc_state", "gcc_city", "gcc_degree", "gcc_commerce_graduate", "gcc_otp"];
   fieldsForErrors.forEach(f => {
     const errEl = document.getElementById("err_" + f);
     if (errEl) errEl.style.display = "none";
@@ -141,6 +242,22 @@ function resetGccForm() {
 
   // Reset tracking flag to allow subsequent submissions
   finalFormSubmitFired = false;
+
+  // Reset OTP state
+  isOtpVerified = false;
+  if (otpTimerInterval) clearInterval(otpTimerInterval);
+  const otpSection = document.getElementById("otp_section");
+  if (otpSection) otpSection.style.display = "none";
+  const otpSuccessMsg = document.getElementById("otp_success_msg");
+  if (otpSuccessMsg) otpSuccessMsg.style.display = "none";
+  const sendBtn = document.getElementById("btn_send_otp");
+  if (sendBtn) { sendBtn.style.display = "block"; sendBtn.disabled = false; sendBtn.innerText = "Send OTP"; }
+  const verifyBtn = document.getElementById("btn_verify_otp");
+  if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.innerText = "Verify"; }
+  const phoneInput = document.getElementById("gcc_phone");
+  if (phoneInput) phoneInput.disabled = false;
+  const otpInput = document.getElementById("gcc_otp");
+  if (otpInput) { otpInput.value = ""; otpInput.disabled = false; }
 }
 
 function setFieldError(fieldId, msg) {

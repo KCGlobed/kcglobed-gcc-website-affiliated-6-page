@@ -1775,8 +1775,21 @@
         <div class="lf-row single">
           <div class="lf-field">
             <label class="lf-label" for="gcc_phone">Mobile Number*</label>
-            <input class="lf-input" id="gcc_phone" type="tel" placeholder="10-digit mobile number" autocomplete="tel">
+            <div style="display: flex; gap: 10px;">
+              <input class="lf-input" id="gcc_phone" type="tel" placeholder="10-digit mobile number" autocomplete="tel" style="flex: 1;">
+              <button type="button" id="btn_send_otp" onclick="sendOtp()" class="btn btn-purple" style="white-space: nowrap; padding: 9px 20px;">Send OTP</button>
+            </div>
             <div class="field-error" id="err_gcc_phone"></div>
+
+            <div id="otp_section" style="display: none; margin-top: 15px;">
+              <label class="lf-label" for="gcc_otp">Enter OTP*</label>
+              <div style="display: flex; gap: 10px;">
+                <input class="lf-input" id="gcc_otp" type="text" placeholder="6-digit OTP" maxlength="6" style="flex: 1;">
+                <button type="button" id="btn_verify_otp" onclick="verifyOtp()" class="btn btn-purple" style="white-space: nowrap; padding: 10px 20px;">Verify</button>
+              </div>
+              <div class="field-error" id="err_gcc_otp"></div>
+              <div id="otp_success_msg" style="display: none; color: green; font-size: 0.85rem; margin-top: 5px;">OTP Verified Successfully!</div>
+            </div>
           </div>
         </div>
 
