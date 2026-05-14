@@ -21,6 +21,7 @@ function closeForm() {
   if (modal) {
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    resetGccForm();
   }
 }
 
@@ -108,6 +109,38 @@ function handlePayClick() {
 
   showLoadingModal("Initializing secure checkout...");
   startPayment(name, email, phone, city, state, degree);
+}
+
+function resetGccForm() {
+  const formIds = ["gcc_name", "gcc_email", "gcc_phone", "gcc_state", "gcc_city", "gcc_degree", "gcc_degree_search"];
+  formIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+
+  const checkbox = document.getElementById("gcc_commerce_graduate");
+  if (checkbox) checkbox.checked = false;
+
+  // Reset city dropdown
+  const citySelect = document.getElementById("gcc_city");
+  if (citySelect) {
+    citySelect.innerHTML = '<option value="">Select city</option>';
+  }
+
+  // Reset errors
+  const fieldsForErrors = ["gcc_name", "gcc_email", "gcc_phone", "gcc_state", "gcc_city", "gcc_degree", "gcc_commerce_graduate"];
+  fieldsForErrors.forEach(f => {
+    const errEl = document.getElementById("err_" + f);
+    if (errEl) errEl.style.display = "none";
+    const inputEl = document.getElementById(f === "gcc_degree" ? "gcc_degree_search" : f);
+    if (inputEl) inputEl.classList.remove("invalid");
+  });
+
+  const mainErrEl = document.getElementById("gccFormError");
+  if (mainErrEl) mainErrEl.style.display = "none";
+
+  // Reset tracking flag to allow subsequent submissions
+  finalFormSubmitFired = false;
 }
 
 function setFieldError(fieldId, msg) {
@@ -206,6 +239,7 @@ async function startPayment(name, email, mobile, city, state, degree) {
 
     if (!paymentData.success) {
       showStatusModal(false, paymentData.message || "Could not initiate payment. Please try again.", null);
+      closeForm();
       return;
     }
 
@@ -224,16 +258,19 @@ async function startPayment(name, email, mobile, city, state, degree) {
 
       setTimeout(function () {
         closeStatusModal();
+        closeForm();
         launchCashfree(paymentData, { name, email, mobile, city, state, latest_form_id });
       }, 2000);
 
     } else {
       showStatusModal(false, "Unexpected gateway response. Please contact support.", null);
+      closeForm();
     }
 
   } catch (err) {
     console.error("Critical error in startPayment:", err);
     showStatusModal(false, "Something went wrong. Please try again.", null);
+    closeForm();
   }
 }
 
@@ -255,6 +292,7 @@ function launchCashfree(data, form) {
       console.warn("Cashfree checkout returned an error:", result.error);
       reportFailure(data.cf_order_id, null, result.error.message, result.error.code);
       showStatusModal(false, result.error.message, data.cf_order_id);
+      closeForm();
     } else if (result.paymentDetails) {
       console.log("Cashfree checkout success (via result object):", result.paymentDetails);
       completePayment(data.cf_order_id, form);
@@ -317,11 +355,13 @@ async function completePayment(cf_order_id, form) {
     } else {
       console.warn("Payment verification failed.", paymentData.message || "Unknown error");
       showStatusModal(false, paymentData.message || "Payment verification failed.", cf_order_id);
+      closeForm();
     }
 
   } catch (err) {
     console.error("complete-payment error:", err);
     showStatusModal(false, "Network error during verification.", cf_order_id);
+    closeForm();
   }
 }
 function showStatusModal(isSuccess, message, orderId) {
