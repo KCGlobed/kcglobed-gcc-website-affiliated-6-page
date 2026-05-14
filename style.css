@@ -606,7 +606,6 @@ img {
 
 /* Range Input Reset & Track Styling */
 input[type=range] {
-    -webkit-appearance: none;
     background: transparent;
     cursor: pointer;
 }
@@ -2096,11 +2095,15 @@ input[type=range]::-moz-range-thumb {
 /* CONTENT */
 
 .roadmap-content {
-    display: grid;
+    display: none;
     grid-template-columns: 170px 1fr;
     background: white;
     border: 1px solid #ece8f2;
     min-height: 140px;
+}
+
+.roadmap-content.active {
+    display: grid;
 }
 
 /* WEEK BOX */
@@ -4883,12 +4886,12 @@ table.cmp tr:last-child td {
 /* ANSWER CONTENT */
 
 .faq-a-inner {
-    padding: 0 60px 26px 0;
-
+    padding: 0 60px 5px 10px;
     font-size: 17px;
     line-height: 1.8;
-
     color: #66667b;
+    border-left: 2px solid #FDAC36;
+    margin-bottom: 20px;
 }
 
 /* ACTIVE */

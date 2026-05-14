@@ -813,38 +813,37 @@
       <!-- TABS -->
       <div class="roadmap-tabs">
 
-        <button class="roadmap-tab active">
+        <button class="roadmap-tab active" onclick="switchRoadmapPhase(0)">
           Phase 1
         </button>
 
-        <button class="roadmap-tab">
+        <button class="roadmap-tab" onclick="switchRoadmapPhase(1)">
           Phase 2
         </button>
 
-        <button class="roadmap-tab">
+        <button class="roadmap-tab" onclick="switchRoadmapPhase(2)">
           Phase 3
         </button>
 
-        <button class="roadmap-tab">
+        <button class="roadmap-tab" onclick="switchRoadmapPhase(3)">
           Phase 4
         </button>
 
-        <button class="roadmap-tab">
+        <button class="roadmap-tab" onclick="switchRoadmapPhase(4)">
           Ongoing
         </button>
 
       </div>
 
       <!-- CONTENT -->
-      <div class="roadmap-content">
-
+      <!-- PHASE 1 -->
+      <div class="roadmap-content active" id="rc0">
         <!-- LEFT -->
         <div class="roadmap-week-box">
           <div class="roadmap-week-box-text">
             Weeks 1–4
           </div>
         </div>
-
         <!-- RIGHT -->
         <div class="roadmap-detail">
           <h3>
@@ -854,6 +853,90 @@
             You appear for the NFET Entrance Exam. On passing,
             GCC School matches you with a Conditional Offer from one of
             200+ hiring partners. Offer letter issued before training begins.
+          </p>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="roadmap-content" id="rc1">
+        <!-- LEFT -->
+        <div class="roadmap-week-box">
+          <div class="roadmap-week-box-text">
+            Months 1–3
+          </div>
+        </div>
+        <!-- RIGHT -->
+        <div class="roadmap-detail">
+          <h3>
+            UK ACCA Foundation + GCC Context
+          </h3>
+          <p>
+            Core ACCA papers begin. Financial reporting,
+            management accounting, audit, and tax — taught inside
+            the GCC environment. AI tools introduced from week one.
+          </p>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="roadmap-content" id="rc2">
+        <!-- LEFT -->
+        <div class="roadmap-week-box">
+          <div class="roadmap-week-box-text">
+            Months 3–6
+          </div>
+        </div>
+        <!-- RIGHT -->
+        <div class="roadmap-detail">
+          <h3>
+            AIMA PGCM + GCC Business Intelligence
+          </h3>
+          <p>
+            Management and strategy layer. Business analytics,
+            decision-making frameworks, stakeholder communication
+            inside GCC structures. Live case studies from partner companies.
+          </p>
+        </div>
+      </div>
+
+      <!-- PHASE 4 -->
+      <div class="roadmap-content" id="rc3">
+        <!-- LEFT -->
+        <div class="roadmap-week-box">
+          <div class="roadmap-week-box-text">
+            Months 6–9
+          </div>
+        </div>
+        <!-- RIGHT -->
+        <div class="roadmap-detail">
+          <h3>
+            British Council Master’s + AI-Accountant Certification
+          </h3>
+          <p>
+            Academic capstone. British Council-validated Master’s
+            assessment. Certified AI-Accountant credential issued.
+            Transition from Conditional Offer to confirmed placement.
+          </p>
+        </div>
+      </div>
+
+      <!-- ONGOING -->
+      <div class="roadmap-content" id="rc4">
+        <!-- LEFT -->
+        <div class="roadmap-week-box">
+          <div class="roadmap-week-box-text">
+            Ongoing
+          </div>
+        </div>
+        <!-- RIGHT -->
+        <div class="roadmap-detail">
+          <h3>
+            GCC Mentor Network + Career Acceleration
+          </h3>
+          <p>
+            40+ industry mentors from Goldman, EY, JPMorgan & beyond.
+            Mock interviews, placement prep, and career reviews.
+            Alumni network access from Day 1.
           </p>
         </div>
       </div>

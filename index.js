@@ -25,7 +25,7 @@ function closeForm() {
 }
 
 // Connect all "open-popup" buttons (using event delegation for robustness)
-document.addEventListener("click", function(e) {
+document.addEventListener("click", function (e) {
   const btn = e.target.closest('.open-popup');
   if (btn) {
     console.log("Open-popup button clicked");
@@ -44,6 +44,27 @@ window.addEventListener("scroll", function () {
       dc.classList.add("visible");
     }
   }
+});
+
+const faqButtons = document.querySelectorAll(".faq-q");
+
+faqButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+
+    const answer = btn.nextElementSibling;
+    const icon = btn.querySelector(".faq-ico");
+
+    btn.classList.toggle("active");
+
+    if (answer.style.maxHeight) {
+      answer.style.maxHeight = null;
+      icon.textContent = "+";
+    } else {
+      answer.style.maxHeight = answer.scrollHeight + "px";
+      icon.textContent = "×";
+    }
+
+  });
 });
 
 
@@ -378,7 +399,7 @@ function showLoadingModal(message) {
 
   title.innerHTML = 'Please <span>Wait</span>';
   desc.innerHTML = message || 'Initializing payment...';
-  
+
   if (footer) {
     footer.innerHTML = 'Do not refresh or close this window.';
   }
@@ -542,10 +563,10 @@ function initSearchableSelect() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  try { loadStateCityData(); } catch(e) { console.error(e); }
-  try { loadUniversityData(); } catch(e) { console.error(e); }
-  try { setupAbandonmentTracking(); } catch(e) { console.error(e); }
-  try { initVideoControl(); } catch(e) { console.error(e); }
+  try { loadStateCityData(); } catch (e) { console.error(e); }
+  try { loadUniversityData(); } catch (e) { console.error(e); }
+  try { setupAbandonmentTracking(); } catch (e) { console.error(e); }
+  try { initVideoControl(); } catch (e) { console.error(e); }
   console.log("GCC School JS Initialized");
 });
 
@@ -755,7 +776,7 @@ async function submitBrochure() {
 
   btn.innerHTML = originalText;
   btn.disabled = false;
-  
+
   closePopup();
 
   // Trigger PDF download
@@ -771,7 +792,7 @@ async function submitBrochure() {
 
 // ── Reveal on scroll ─────────────────────────────────────────────────────────
 const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
@@ -796,7 +817,7 @@ function togglePlan() {
   const card = document.getElementById('flipCard');
   const track = document.getElementById('switchTrack');
   const lblOff = document.getElementById('lbl-off');
-  const lblOn  = document.getElementById('lbl-on');
+  const lblOn = document.getElementById('lbl-on');
 
   card.classList.toggle('flipped', planState);
   track.classList.toggle('on', planState);
@@ -806,8 +827,13 @@ function togglePlan() {
 
 // ── Phase tabs ────────────────────────────────────────────────────────────────
 function switchPhase(i) {
-  document.querySelectorAll('.ptab').forEach((t,j)  => t.classList.toggle('on', j===i));
-  document.querySelectorAll('.pc').forEach((c,j) => c.classList.toggle('on', j===i));
+  document.querySelectorAll('.ptab').forEach((t, j) => t.classList.toggle('on', j === i));
+  document.querySelectorAll('.pc').forEach((c, j) => c.classList.toggle('on', j === i));
+}
+
+function switchRoadmapPhase(i) {
+  document.querySelectorAll('.roadmap-tab').forEach((t, j) => t.classList.toggle('active', j === i));
+  document.querySelectorAll('.roadmap-content').forEach((c, j) => c.classList.toggle('active', j === i));
 }
 
 // ── Mentor expand/collapse ────────────────────────────────────────────────────
@@ -819,7 +845,7 @@ function toggleMentors(btn) {
     btn.textContent = 'Show Fewer Mentors';
   } else {
     const cards = grid.querySelectorAll('.mentor-card');
-    cards.forEach((c,i) => { if(i>=6) c.classList.add('hidden'); });
+    cards.forEach((c, i) => { if (i >= 6) c.classList.add('hidden'); });
     btn.textContent = 'See All 40+ Mentors';
   }
 }
@@ -828,7 +854,7 @@ function toggleMentors(btn) {
 // ── FAQ accordion ─────────────────────────────────────────────────────────────
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
-  const ans  = item.querySelector('.faq-a');
+  const ans = item.querySelector('.faq-a');
   const open = ans.classList.contains('on');
   document.querySelectorAll('.faq-a.on').forEach(a => a.classList.remove('on'));
   document.querySelectorAll('.faq-q.on').forEach(q => {
