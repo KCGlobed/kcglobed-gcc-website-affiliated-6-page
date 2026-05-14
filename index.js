@@ -205,7 +205,7 @@ async function startPayment(name, email, mobile, city, state, degree) {
           form_id: latest_form_id,
           source: 6,
           action: "pay_now",
-          commingAmount: 249
+          commingAmount: 2950
         }),
       });
 
@@ -230,7 +230,7 @@ async function startPayment(name, email, mobile, city, state, degree) {
         form_type: 2,
         form_id: latest_form_id,
         source: 6,
-        commingAmount: 249
+        commingAmount: 2950
       }),
     });
 
@@ -465,7 +465,7 @@ function reportFailure(cf_order_id, payment_id, description, code) {
       re_attempt_status: false,
       error_code: code || "",
       error_description: description || "",
-      commingAmount: 249
+      commingAmount: 2950
     }),
   }).then(res => res.json()).then(data => {
     console.log("report-payment-failure response:", data);
