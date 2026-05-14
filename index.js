@@ -849,6 +849,22 @@ function toggleMentors(btn) {
     btn.textContent = 'See All 40+ Mentors';
   }
 }
+
+function toggleMentorsGrid(btn) {
+  const grid = document.querySelector('.mentor-grid-ui');
+  const hiddenImages = grid.querySelectorAll('.hidden-mentor');
+  const isExpanded = btn.getAttribute('data-expanded') === 'true';
+
+  if (!isExpanded) {
+    hiddenImages.forEach(img => img.style.display = 'block');
+    btn.textContent = 'Show Less';
+    btn.setAttribute('data-expanded', 'true');
+  } else {
+    hiddenImages.forEach(img => img.style.display = 'none');
+    btn.textContent = 'See All 40+ Mentors';
+    btn.setAttribute('data-expanded', 'false');
+  }
+}
 // Initially hide extras (just showing 6 for now, all visible since placeholder)
 
 // ── FAQ accordion ─────────────────────────────────────────────────────────────

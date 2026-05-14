@@ -1385,8 +1385,7 @@ input[type=range]::-moz-range-thumb {
 
 .placement-logos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(11, 1fr);
     margin: 0 auto;
 }
 
@@ -2561,6 +2560,10 @@ input[type=range]::-moz-range-thumb {
     gap: 20px;
     max-width: 1100px;
     padding: 0 18px;
+}
+
+.hidden-mentor {
+    display: none;
 }
 
 .mentor-ui-card {
