@@ -256,11 +256,12 @@ async function completePayment(cf_order_id, form) {
 
   try {
     await new Promise(resolve => setTimeout(resolve, 2000));
-    const paymentRes = await fetch(BASE_URL + "/api/v1/verify-payment", {
+    const paymentRes = await fetch(BASE_URL + "/api/complete-payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         cf_order_id: cf_order_id,
+        re_attempt_status: false,
         source: 1, // Updated source to 1
       }),
     });
@@ -308,11 +309,9 @@ function showStatusModal(isSuccess, message, orderId) {
 
   var iconWrap = document.getElementById("statusIconWrap");
   var title = document.getElementById("statusTitle");
-  var titleHighlight = document.getElementById("statusTitleHighlight");
   var desc = document.getElementById("statusDesc");
   var badge = document.getElementById("statusBadge");
-  var dot = document.getElementById("statusDot");
-  var leftText = document.getElementById("statusLeftText");
+  var footer = document.querySelector(".status-footer");
   var pid = document.getElementById("statusPaymentId");
   var retryBtn = document.getElementById("statusRetryBtn");
   var closeBtn = document.querySelector(".status-close-btn");
@@ -322,27 +321,29 @@ function showStatusModal(isSuccess, message, orderId) {
 
   if (isSuccess) {
     iconWrap.className = "status-icon-wrap";
-    iconWrap.innerHTML = '<div class="status-icon-outer"></div><div class="status-icon-middle"></div><div class="status-icon-inner"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>';
+    iconWrap.style.background = "#F0FDF4";
+    iconWrap.style.color = "#22C55E";
+    iconWrap.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>';
     badge.className = "status-badge";
+    badge.style.background = "#DCFCE7";
+    badge.style.color = "#15803D";
     badge.textContent = "✦ CONFIRMED";
-    title.childNodes[0].nodeValue = "Thank ";
-    titleHighlight.textContent = "You!";
-    titleHighlight.className = "text-yellow";
-    desc.innerHTML = message ? message : 'Our team will <span class="text-highlight">reach out to you within 2 hours.</span><br>Please keep your phone accessible.';
-    dot.className = "green-dot";
-    leftText.textContent = "Team is online";
+    title.innerHTML = 'Thank <span>You!</span>';
+    desc.innerHTML = message || 'Our team will reach out to you within 2 hours.';
+    if (footer) footer.innerHTML = 'Secure Connection';
     retryBtn.style.display = "none";
   } else {
     iconWrap.className = "status-icon-wrap failed";
-    iconWrap.innerHTML = '<div class="status-icon-outer"></div><div class="status-icon-middle"></div><div class="status-icon-inner"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>';
+    iconWrap.style.background = "#FEF2F2";
+    iconWrap.style.color = "#EF4444";
+    iconWrap.innerHTML = '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
     badge.className = "status-badge failed";
+    badge.style.background = "#FEE2E2";
+    badge.style.color = "#B91C1C";
     badge.textContent = "✦ FAILED";
-    title.childNodes[0].nodeValue = "Payment ";
-    titleHighlight.textContent = "Failed";
-    titleHighlight.className = "text-red";
+    title.innerHTML = 'Payment <span>Failed</span>';
     desc.innerHTML = message || "Your payment could not be processed.";
-    dot.className = "red-dot";
-    leftText.textContent = "System Error";
+    if (footer) footer.innerHTML = 'System Error';
     retryBtn.style.display = "block";
   }
 
@@ -360,12 +361,9 @@ function showLoadingModal(message) {
 
   var iconWrap = document.getElementById("statusIconWrap");
   var title = document.getElementById("statusTitle");
-  var titleHighlight = document.getElementById("statusTitleHighlight");
   var desc = document.getElementById("statusDesc");
   var badge = document.getElementById("statusBadge");
-  var dot = document.getElementById("statusDot");
-  var leftText = document.getElementById("statusLeftText");
-  var pid = document.getElementById("statusPaymentId");
+  var footer = document.querySelector(".status-footer");
   var retryBtn = document.getElementById("statusRetryBtn");
   var closeBtn = document.querySelector(".status-close-btn");
 
@@ -373,22 +371,19 @@ function showLoadingModal(message) {
   if (closeBtn) closeBtn.style.display = "none";
 
   iconWrap.className = "status-icon-wrap loading";
-  iconWrap.innerHTML = '<div class="status-icon-outer" style="animation: spin 3s linear infinite;"></div><div class="status-icon-middle" style="animation: spin 2s linear infinite reverse;"></div><div class="status-icon-inner"><svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4m10-10h-4M6 12H2m15.07-7.07l-2.83 2.83M7.76 16.24l-2.83 2.83M19.07 19.07l-2.83-2.83M4.93 4.93l2.83 2.83" style="animation: spin 1.5s linear infinite; transform-origin: 12px 12px;"/></svg></div>';
+  iconWrap.innerHTML = '<div class="spinner-ring"></div>';
 
   badge.className = "status-badge loading";
   badge.textContent = "✦ PROCESSING";
 
-  title.childNodes[0].nodeValue = "Please ";
-  titleHighlight.textContent = "Wait";
-  titleHighlight.className = "text-yellow";
-
-  desc.innerHTML = message || 'We are securely initializing your payment gateway.<br>Do not refresh or close this window.';
-
-  dot.className = "green-dot";
-  leftText.textContent = "Secure Connection";
+  title.innerHTML = 'Please <span>Wait</span>';
+  desc.innerHTML = message || 'Initializing payment...';
+  
+  if (footer) {
+    footer.innerHTML = 'Do not refresh or close this window.';
+  }
 
   retryBtn.style.display = "none";
-  pid.style.display = "none";
 }
 
 function closeStatusModal() {
@@ -556,34 +551,86 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function initVideoControl() {
   const video = document.getElementById('heroVideo');
-  const btn = document.getElementById('videoControlBtn');
-  if (!video || !btn) return;
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const progressBar = document.getElementById('videoProgressBar');
+  const progressFilled = document.getElementById('progressFilled');
+  const muteBtn = document.getElementById('muteBtn');
+  const volumeSlider = document.getElementById('volumeSlider');
+  const currentTimeEl = document.getElementById('currentTime');
+  const durationTimeEl = document.getElementById('durationTime');
 
-  const playIcon = btn.querySelector('.play-icon');
-  const pauseIcon = btn.querySelector('.pause-icon');
+  if (!video || !playPauseBtn) return;
 
-  btn.addEventListener('click', () => {
+  // Helper to format time
+  function formatTime(seconds) {
+    const min = Math.floor(seconds / 60);
+    const sec = Math.floor(seconds % 60);
+    return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+  }
+
+  // Play/Pause toggle
+  function togglePlay() {
     if (video.paused) {
       video.play();
-      playIcon.style.display = 'none';
-      pauseIcon.style.display = 'block';
+      playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
     } else {
       video.pause();
-      playIcon.style.display = 'block';
-      pauseIcon.style.display = 'none';
+      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+  }
+
+  playPauseBtn.addEventListener('click', togglePlay);
+  video.addEventListener('click', togglePlay);
+
+  // Update progress bar & time
+  video.addEventListener('timeupdate', () => {
+    const percent = (video.currentTime / video.duration) * 100;
+    progressBar.value = percent;
+    progressFilled.style.width = `${percent}%`;
+    currentTimeEl.textContent = formatTime(video.currentTime);
+  });
+
+  // Seek video
+  progressBar.addEventListener('input', () => {
+    const seekTime = (progressBar.value / 100) * video.duration;
+    video.currentTime = seekTime;
+  });
+
+  // Set duration once metadata is loaded
+  video.addEventListener('loadedmetadata', () => {
+    durationTimeEl.textContent = formatTime(video.duration);
+  });
+
+  // Mute/Unmute toggle
+  muteBtn.addEventListener('click', () => {
+    video.muted = !video.muted;
+    if (video.muted) {
+      muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+      volumeSlider.value = 0;
+    } else {
+      muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+      volumeSlider.value = video.volume;
     }
   });
 
-  // Handle cases where autoplay might fail or browser pauses video
-  video.addEventListener('play', () => {
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'block';
+  // Volume slider
+  volumeSlider.addEventListener('input', () => {
+    video.volume = volumeSlider.value;
+    video.muted = video.volume === 0;
+    if (video.muted) {
+      muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    } else if (video.volume < 0.5) {
+      muteBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+    } else {
+      muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }
   });
 
-  video.addEventListener('pause', () => {
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
-  });
+  // Initial volume setup
+  if (video.muted) {
+    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    volumeSlider.value = 0;
+  }
 }
 
 // Abandonment tracking
@@ -744,36 +791,17 @@ function scrollToVSL() {
 
 // ── Toggle Plan B → Plan A ────────────────────────────────────────────────────
 let planState = false;
-let autoTimer;
+function togglePlan() {
+  planState = !planState;
+  const card = document.getElementById('flipCard');
+  const track = document.getElementById('switchTrack');
+  const lblOff = document.getElementById('lbl-off');
+  const lblOn  = document.getElementById('lbl-on');
 
-// function togglePlan() {
-//   planState = !planState;
-//   const card = document.getElementById('flipCard');
-//   const track = document.getElementById('switchTrack');
-//   const lblOff = document.getElementById('lbl-off');
-//   const lblOn  = document.getElementById('lbl-on');
-
-//   card.classList.toggle('flipped', planState);
-//   track.classList.toggle('on', planState);
-//   lblOff.classList.toggle('active', !planState);
-//   lblOn.classList.toggle('active', planState);
-// }
-
-// Auto-cycle every 3.2 seconds
-function startAuto() {
-  autoTimer = setInterval(() => { togglePlan(); }, 3200);
-}
-
-// Pause auto on manual click, resume after 6s
-document.getElementById('switchTrack').addEventListener('click', () => {
-  clearInterval(autoTimer);
-  setTimeout(startAuto, 6000);
-});
-
-try {
-  startAuto();
-} catch (e) {
-  console.warn("Auto-cycle failed to start:", e);
+  card.classList.toggle('flipped', planState);
+  track.classList.toggle('on', planState);
+  lblOff.classList.toggle('active', !planState);
+  lblOn.classList.toggle('active', planState);
 }
 
 // ── Phase tabs ────────────────────────────────────────────────────────────────

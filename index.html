@@ -7,6 +7,7 @@
   <title>GCC School — Get Hired at Goldman Sachs, EY & JPMorgan Before You Start Training</title>
   <meta name="description"
     content="India's First GCC Career Programme. Conditional Offer Letter before training begins. UK ACCA + AIMA PGCM + British Council in one cohort.">
+  <link rel="shortcut icon" href="https://storage.googleapis.com/static_files_backend/media/images/image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -96,16 +97,28 @@
               type="video/mp4">
           </video>
 
-          <!-- CUSTOM PLAY/PAUSE BUTTON -->
-          <button id="videoControlBtn" class="video-control-btn" aria-label="Toggle Video Play/Pause">
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor">
-              <rect x="6" y="4" width="4" height="16"></rect>
-              <rect x="14" y="4" width="4" height="16"></rect>
-            </svg>
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
-              <polygon points="5 3 19 12 5 21 5 3"></polygon>
-            </svg>
-          </button>
+          <!-- CUSTOM VIDEO CONTROLS -->
+          <div class="video-controls">
+            <div class="progress-bar-container">
+              <input type="range" id="videoProgressBar" class="video-progress-bar" min="0" max="100" value="0">
+              <div class="progress-filled" id="progressFilled"></div>
+            </div>
+            
+            <div class="controls-main">
+              <div class="controls-left">
+                <button id="playPauseBtn" class="control-btn" aria-label="Play/Pause">
+                  <i class="fas fa-pause"></i>
+                </button>
+                <div class="volume-container">
+                  <button id="muteBtn" class="control-btn" aria-label="Mute/Unmute">
+                    <i class="fas fa-volume-up"></i>
+                  </button>
+                  <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                </div>
+                
+              </div>
+            </div>
+          </div>
         </div>
         <div class="video-caption">
           ▷ Watch: How the Hire-First Model Works (4 min)
@@ -171,11 +184,11 @@
                   <div class="flip-sub">Traditional route. Uncertain outcome.</div>
                 </div>
                 <!-- ON face — Plan A -->
-                <!-- <div class="flip-face flip-back">
+                <div class="flip-face flip-back">
                   <div class="flip-state-label">ON STATE — PLAN A</div>
                   <div class="flip-plan-a">GCC Career</div>
                   <div class="flip-sub">Conditional Offer. Before training begins.</div>
-                </div> -->
+                </div>
               </div>
             </div>
           </div>
@@ -1763,7 +1776,8 @@
       </h2>
       <!-- SUBTEXT -->
       <p class="exam-subtext">
-        The NFET Entrance Exam is your entry point into GCC School. Appear. Qualify. Receive your Conditional Offer Letter. Then train.
+        The NFET Entrance Exam is your entry point into GCC School. Appear. Qualify. Receive your Conditional Offer
+        Letter. Then train.
       </p>
 
       <!-- GRID -->
@@ -2111,13 +2125,14 @@
     <div class="status-modal">
       <div class="status-close-btn" onclick="closeStatusModal()"
         style="position: absolute; top: 16px; right: 16px; cursor: pointer;">✕</div>
-      <div id="statusIconWrap" class="status-icon-wrap loading"></div>
+      <div id="statusIconWrap" class="status-icon-wrap loading">
+        <div class="spinner-ring"></div>
+      </div>
       <div id="statusBadge" class="status-badge loading">✦ PROCESSING</div>
-      <h3 id="statusTitle">Please <span id="statusTitleHighlight" class="text-yellow">Wait</span></h3>
-      <p id="statusDesc"></p>
+      <h3 id="statusTitle">Please <span>Wait</span></h3>
+      <p id="statusDesc">Initializing payment...</p>
       <div class="status-footer">
-        <div id="statusDot" class="green-dot"></div>
-        <span id="statusLeftText">Secure Connection</span>
+        Do not refresh or close this window.
       </div>
       <div id="statusPaymentId" style="font-size: 0.75rem; color: var(--t3); margin-top: 12px; display: none;"></div>
       <button id="statusRetryBtn" class="status-retry-btn"
