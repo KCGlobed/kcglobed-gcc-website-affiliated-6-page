@@ -203,7 +203,7 @@ async function startPayment(name, email, mobile, city, state, degree) {
           state,
           form_type: 1,
           form_id: latest_form_id,
-          source: 6,
+          source: 14,
           action: "pay_now",
           commingAmount: 2950
         }),
@@ -229,7 +229,7 @@ async function startPayment(name, email, mobile, city, state, degree) {
         state,
         form_type: 2,
         form_id: latest_form_id,
-        source: 6,
+        source: 14,
         commingAmount: 2950
       }),
     });
@@ -743,7 +743,7 @@ function setupAbandonmentTracking() {
           utm_campaign,
           utm_medium,
           utm_source,
-          source: 6
+          source: 14
         }),
       });
       console.log("Abandonment form submitted");
@@ -803,7 +803,7 @@ async function submitBrochure() {
         full_name: n,
         email: em,
         phone: p,
-        source: 6,
+        source: 14,
         source_form: 1,
         utm_source: utm_source,
         utm_medium: utm_medium,
