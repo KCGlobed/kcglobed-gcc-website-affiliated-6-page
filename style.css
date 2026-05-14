@@ -132,12 +132,23 @@ img {
     padding: 18px 48px
 }
 
-.btn-link {
-    color: #fff;
-    font-size: .92rem;
+.specialistBtn {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.specialistBtn button {
+    width: 100%;
+    color: #e5e3e3;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 18px;
+    padding: 10px 10px;
+    border-radius: 10px;
     font-weight: 600;
-    text-decoration: none;
-    transition: opacity .2s;
+    border: 1px solid white;
 }
 
 .btn-link:hover {
