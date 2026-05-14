@@ -550,8 +550,41 @@ document.addEventListener("DOMContentLoaded", function () {
   try { loadStateCityData(); } catch(e) { console.error(e); }
   try { loadUniversityData(); } catch(e) { console.error(e); }
   try { setupAbandonmentTracking(); } catch(e) { console.error(e); }
+  try { initVideoControl(); } catch(e) { console.error(e); }
   console.log("GCC School JS Initialized");
 });
+
+function initVideoControl() {
+  const video = document.getElementById('heroVideo');
+  const btn = document.getElementById('videoControlBtn');
+  if (!video || !btn) return;
+
+  const playIcon = btn.querySelector('.play-icon');
+  const pauseIcon = btn.querySelector('.pause-icon');
+
+  btn.addEventListener('click', () => {
+    if (video.paused) {
+      video.play();
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+    } else {
+      video.pause();
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+    }
+  });
+
+  // Handle cases where autoplay might fail or browser pauses video
+  video.addEventListener('play', () => {
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
+  });
+
+  video.addEventListener('pause', () => {
+    playIcon.style.display = 'block';
+    pauseIcon.style.display = 'none';
+  });
+}
 
 // Abandonment tracking
 let abandonmentSentFor = "";
@@ -713,18 +746,18 @@ function scrollToVSL() {
 let planState = false;
 let autoTimer;
 
-function togglePlan() {
-  planState = !planState;
-  const card = document.getElementById('flipCard');
-  const track = document.getElementById('switchTrack');
-  const lblOff = document.getElementById('lbl-off');
-  const lblOn  = document.getElementById('lbl-on');
+// function togglePlan() {
+//   planState = !planState;
+//   const card = document.getElementById('flipCard');
+//   const track = document.getElementById('switchTrack');
+//   const lblOff = document.getElementById('lbl-off');
+//   const lblOn  = document.getElementById('lbl-on');
 
-  card.classList.toggle('flipped', planState);
-  track.classList.toggle('on', planState);
-  lblOff.classList.toggle('active', !planState);
-  lblOn.classList.toggle('active', planState);
-}
+//   card.classList.toggle('flipped', planState);
+//   track.classList.toggle('on', planState);
+//   lblOff.classList.toggle('active', !planState);
+//   lblOn.classList.toggle('active', planState);
+// }
 
 // Auto-cycle every 3.2 seconds
 function startAuto() {

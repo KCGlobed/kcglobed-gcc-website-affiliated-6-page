@@ -12,3747 +12,12 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap"
     rel="stylesheet">
-  <style>
-    /* ─── RESET ──────────────────────────────────────────────────────────────── */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0
-    }
-
-    html {
-      scroll-behavior: smooth
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: #0D0D25;
-      background: #fff;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.6
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none
-    }
-
-    button {
-      cursor: pointer;
-      border: none;
-      background: none;
-      font-family: 'Poppins', sans-serif
-    }
-
-    img {
-      max-width: 100%;
-      display: block
-    }
-
-    /* ─── TOKENS ─────────────────────────────────────────────────────────────── */
-    :root {
-      --navy: #5f1295;
-      --navy2: #500a81;
-      --navy3: #51157c;
-      --gold: #F8CA4D;
-      --gold2: #E6B52E;
-      --gold3: #FFF8E1;
-      --teal: #2DD4BF;
-      --white: #FFFFFF;
-      --fafa: #FAFAFA;
-      --f8: #F8F8F8;
-      --grey: #F2F2F2;
-      --t2: #4A4A6A;
-      --t3: #9090AA;
-      --red: #8B1A1A;
-      --gn: #1A7A4A;
-    }
-
-    /* ─── LAYOUT ─────────────────────────────────────────────────────────────── */
-    .w {
-      width: 100%;
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 28px
-    }
-
-    .w-full {
-      width: 100%
-    }
-
-    .tc {
-      text-align: center
-    }
-
-    /* ─── BUTTONS (no arrows ever) ──────────────────────────────────────────── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      border-radius: 6px;
-      transition: all .22s;
-      cursor: pointer;
-      border: none;
-      letter-spacing: .02em;
-      white-space: nowrap
-    }
-
-    .btn-gold {
-      background: var(--gold);
-      color: var(--navy);
-      font-size: .95rem;
-      padding: 16px 36px;
-      box-shadow: 0 4px 20px rgba(248, 202, 77, .3)
-    }
-
-    .btn-gold:hover {
-      background: var(--gold2);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(248, 202, 77, .42)
-    }
-
-    .btn-gold-lg {
-      font-size: 1.05rem;
-      padding: 18px 48px
-    }
-
-    .btn-gold-fw {
-      width: 100%;
-      max-width: 460px;
-      font-size: 1rem;
-      padding: 18px 32px
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--navy);
-      border: 2px solid var(--navy);
-      font-size: .92rem;
-      padding: 14px 32px
-    }
-
-    .btn-outline:hover {
-      background: var(--navy);
-      color: #fff
-    }
-
-    /* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
-    @keyframes ticker {
-      0% {
-        transform: translateX(0)
-      }
-
-      100% {
-        transform: translateX(-50%)
-      }
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px)
-      }
-
-      to {
-        opacity: 1;
-        transform: none
-      }
-    }
-
-    @keyframes stickyIn {
-      from {
-        opacity: 0;
-        transform: translateY(100%)
-      }
-
-      to {
-        opacity: 1;
-        transform: none
-      }
-    }
-
-    @keyframes glow {
-
-      0%,
-      100% {
-        box-shadow: 0 0 30px rgba(248, 202, 77, .2)
-      }
-
-      50% {
-        box-shadow: 0 0 60px rgba(248, 202, 77, .45)
-      }
-    }
-
-    @keyframes flipIn {
-      0% {
-        transform: rotateY(90deg);
-        opacity: 0
-      }
-
-      100% {
-        transform: rotateY(0deg);
-        opacity: 1
-      }
-    }
-
-    @keyframes flipOut {
-      0% {
-        transform: rotateY(0deg);
-        opacity: 1
-      }
-
-      100% {
-        transform: rotateY(-90deg);
-        opacity: 0
-      }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .65s, transform .65s
-    }
-
-    .reveal.in {
-      opacity: 1;
-      transform: none
-    }
-
-    .d1 {
-      transition-delay: .07s
-    }
-
-    .d2 {
-      transition-delay: .14s
-    }
-
-    .d3 {
-      transition-delay: .21s
-    }
-
-    .d4 {
-      transition-delay: .28s
-    }
-
-    .d5 {
-      transition-delay: .35s
-    }
-
-    .d6 {
-      transition-delay: .42s
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S0 — STICKY BOTTOM BAR
-════════════════════════════════════════════════════════════ */
-    .sticky {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 800;
-      background: var(--navy2);
-      border-top: 1px solid rgba(248, 202, 77, .2);
-      padding: 13px 28px;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      animation: stickyIn .35s ease;
-    }
-
-    .sticky.show {
-      display: flex
-    }
-
-    .sticky-watch {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .85rem;
-      color: rgba(255, 255, 255, .6);
-      cursor: pointer;
-      transition: color .2s;
-    }
-
-    .sticky-watch:hover {
-      color: var(--gold)
-    }
-
-    .sticky-watch-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: rgba(248, 202, 77, .15);
-      border: 1px solid rgba(248, 202, 77, .3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .sticky-watch-icon svg {
-      width: 13px;
-      height: 13px;
-      color: var(--gold);
-      margin-left: 2px
-    }
-
-    .sticky-watch-label {
-      font-size: .82rem;
-      color: rgba(255, 255, 255, .5)
-    }
-
-    .sticky-watch-label strong {
-      color: var(--gold)
-    }
-
-    @media(max-width:540px) {
-      .sticky {
-        flex-direction: column;
-        gap: 10px;
-        padding: 12px 20px
-      }
-
-      .sticky-watch {
-        display: none
-      }
-
-      .sticky .btn-gold {
-        width: 100%;
-        padding: 14px
-      }
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S1 — TICKER
-════════════════════════════════════════════════════════════ */
-    .ticker {
-      background: var(--navy);
-      overflow: hidden;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(248, 202, 77, .1)
-    }
-
-    .ticker-track {
-      display: flex;
-      white-space: nowrap;
-      animation: ticker 26s linear infinite
-    }
-
-    .ticker-track:hover {
-      animation-play-state: paused
-    }
-
-    .ticker-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 0 36px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: .08em
-    }
-
-    .ticker-star {
-      font-size: .9rem
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   NAV
-════════════════════════════════════════════════════════════ */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 700;
-      background: var(--navy);
-      border-bottom: 1px solid rgba(248, 202, 77, .1);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 32px;
-      gap: 16px;
-    }
-
-    .nav-logo {
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: #fff;
-      letter-spacing: -.01em
-    }
-
-    .nav-logo span {
-      color: var(--gold)
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      font-size: .84rem;
-      color: rgba(255, 255, 255, .55)
-    }
-
-    .nav-links a {
-      transition: color .2s
-    }
-
-    .nav-links a:hover {
-      color: var(--gold)
-    }
-
-    @media(max-width:700px) {
-      .nav-links {
-        display: none
-      }
-
-      .nav {
-        padding: 12px 20px
-      }
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S2 — HERO
-════════════════════════════════════════════════════════════ */
-    .hero {
-      background: #fff;
-      padding: 80px 0 0
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 60px;
-      align-items: center;
-      padding-bottom: 0
-    }
-
-    @media(max-width:880px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 40px
-      }
-    }
-
-    /* Left */
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--gold);
-      color: var(--navy);
-      font-size: .68rem;
-      font-weight: 800;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 22px;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 800;
-      color: var(--navy);
-      line-height: 1.08;
-      letter-spacing: -.02em;
-      margin-bottom: 18px
-    }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: var(--t2);
-      line-height: 1.75;
-      margin-bottom: 28px;
-      max-width: 520px
-    }
-
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 0
-    }
-
-    /* Right — VSL */
-    .vsl-wrap {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 2px solid rgba(13, 13, 37, .08);
-      box-shadow: 0 20px 60px rgba(13, 13, 37, .12)
-    }
-
-    .vsl-thumb {
-      aspect-ratio: 16/9;
-      background: linear-gradient(145deg, var(--navy), #1C1C50);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      cursor: pointer
-    }
-
-    .vsl-label {
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, .35)
-    }
-
-    .play-btn {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 0 14px rgba(248, 202, 77, .12);
-      transition: all .22s;
-    }
-
-    .play-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 0 20px rgba(248, 202, 77, .1)
-    }
-
-    .play-btn svg {
-      width: 26px;
-      height: 26px;
-      color: var(--navy);
-      margin-left: 4px
-    }
-
-    .vsl-caption {
-      padding: 10px 16px;
-      text-align: center;
-      font-size: .78rem;
-      color: rgba(41, 2, 56, 0.45);
-      font-style: italic
-    }
-
-    /* Stats bar */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      background: var(--grey);
-      margin-top: 56px;
-      border-top: 1px solid rgba(13, 13, 37, .06);
-    }
-
-    @media(max-width:640px) {
-      .stats-bar {
-        grid-template-columns: 1fr 1fr
-      }
-    }
-
-    .stat-block {
-      padding: 18px 20px;
-      text-align: center;
-      position: relative
-    }
-
-    .stat-block::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 14px;
-      bottom: 14px;
-      width: 1px;
-      background: var(--gold);
-      opacity: .45
-    }
-
-    .stat-block:last-child::after {
-      display: none
-    }
-
-    .stat-val {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--navy);
-      line-height: 1;
-      margin-bottom: 5px
-    }
-
-    .stat-lbl {
-      font-size: .68rem;
-      color: var(--t3);
-      line-height: 1.4
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S3 — BELIEF SHIFT
-════════════════════════════════════════════════════════════ */
-    .belief {
-      background: #fff;
-      padding: 80px 0
-    }
-
-    .belief-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: start
-    }
-
-    @media(max-width:860px) {
-      .belief-grid {
-        grid-template-columns: 1fr;
-        gap: 48px
-      }
-    }
-
-    .belief-lbl {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px
-    }
-
-    .belief h2 {
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      font-weight: 800;
-      color: var(--navy);
-      line-height: 1.1;
-      letter-spacing: -.02em;
-      margin-bottom: 16px
-    }
-
-    .belief-body {
-      font-size: .97rem;
-      color: var(--t2);
-      line-height: 1.75;
-      margin-bottom: 36px
-    }
-
-    /* 2x2 icon grid */
-    .icon-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px
-    }
-
-    .icon-card {
-      background: var(--f8);
-      border-radius: 12px;
-      padding: 20px 18px
-    }
-
-    .icon-card-ico {
-      width: 38px;
-      height: 38px;
-      background: var(--gold);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      margin-bottom: 12px
-    }
-
-    .icon-card h4 {
-      font-size: .88rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 5px;
-      line-height: 1.3
-    }
-
-    .icon-card p {
-      font-size: .78rem;
-      color: var(--t2);
-      line-height: 1.5
-    }
-
-    /* Toggle graphic */
-    .toggle-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0
-    }
-
-    .toggle-ui {
-      background: var(--navy);
-      border-radius: 20px;
-      padding: 32px 36px;
-      width: 100%;
-      border: 1px solid rgba(248, 202, 77, .15);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-      min-height: 380px;
-    }
-
-    /* Switch */
-    .switch-row {
-      display: flex;
-      align-items: center;
-      gap: 16px
-    }
-
-    .switch-lbl {
-      font-size: .8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: rgba(255, 255, 255, .35);
-      transition: color .4s
-    }
-
-    .switch-lbl.active {
-      color: var(--gold)
-    }
-
-    .switch-track {
-      width: 56px;
-      height: 28px;
-      background: rgba(255, 255, 255, .1);
-      border-radius: 100px;
-      border: 1px solid rgba(255, 255, 255, .2);
-      cursor: pointer;
-      position: relative;
-      transition: background .4s;
-    }
-
-    .switch-track.on {
-      background: rgba(248, 202, 77, .25);
-      border-color: rgba(248, 202, 77, .5)
-    }
-
-    .switch-thumb {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .4);
-      transition: all .4s cubic-bezier(.22, 1, .36, 1);
-    }
-
-    .switch-track.on .switch-thumb {
-      left: 31px;
-      background: var(--gold)
-    }
-
-    /* Flip card area */
-    .flip-area {
-      perspective: 800px;
-      width: 100%;
-      min-height: 160px
-    }
-
-    .flip-card {
-      position: relative;
-      width: 100%;
-      transform-style: preserve-3d;
-      transition: transform .6s cubic-bezier(.22, 1, .36, 1)
-    }
-
-    .flip-card.flipped {
-      transform: rotateY(180deg)
-    }
-
-    .flip-face {
-      position: absolute;
-      inset: 0;
-      backface-visibility: hidden;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 36px 28px;
-      text-align: center;
-      min-height: 160px;
-    }
-
-    .flip-front {
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid rgba(255, 255, 255, .08)
-    }
-
-    .flip-back {
-      background: rgba(248, 202, 77, .08);
-      border: 1px solid rgba(248, 202, 77, .25);
-      transform: rotateY(180deg)
-    }
-
-    .flip-state-label {
-      font-size: .65rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-bottom: 10px
-    }
-
-    .flip-front .flip-state-label {
-      color: rgba(255, 255, 255, .3)
-    }
-
-    .flip-back .flip-state-label {
-      color: rgba(248, 202, 77, .6)
-    }
-
-    .flip-plan-b {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: rgba(255, 255, 255, .45);
-      text-decoration: line-through;
-      text-decoration-color: #C0392B;
-      text-decoration-thickness: 3px
-    }
-
-    .flip-plan-a {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--gold)
-    }
-
-    .flip-sub {
-      font-size: .78rem;
-      margin-top: 8px
-    }
-
-    .flip-front .flip-sub {
-      color: rgba(255, 255, 255, .3)
-    }
-
-    .flip-back .flip-sub {
-      color: rgba(248, 202, 77, .5)
-    }
-
-    /* Stats below toggle */
-
-    /* ════════════════════════════════════════════════════════════
-   S4 — TIERED CREDENTIAL
-════════════════════════════════════════════════════════════ */
-    .cred {
-      background: #fff;
-      padding: 72px 0 0
-    }
-
-    .cred-grid {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 64px;
-      align-items: start;
-      padding-bottom: 80px
-    }
-
-    @media(max-width:860px) {
-      .cred-grid {
-        grid-template-columns: 1fr;
-        gap: 48px
-      }
-    }
-
-    .sec-lbl {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      margin-bottom: 12px
-    }
-
-    .lbl-gold {
-      color: var(--gold)
-    }
-
-    .lbl-navy {
-      color: var(--navy)
-    }
-
-    .lbl-grey {
-      color: var(--t3)
-    }
-
-    .sec-h {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -.02em;
-      color: var(--navy);
-      margin-bottom: 14px
-    }
-
-    .sec-sub {
-      font-size: .97rem;
-      color: var(--t2);
-      line-height: 1.72;
-      margin-bottom: 36px
-    }
-
-    /* Credential tier cards */
-    .tier-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 24px
-    }
-
-    .tier {
-      border: 1px solid rgba(13, 13, 37, .1);
-      border-left: 4px solid var(--navy);
-      border-radius: 0 10px 10px 0;
-      padding: 22px 22px;
-      background: #fff;
-      transition: border-left-color .2s, box-shadow .2s;
-    }
-
-    .tier:hover {
-      border-left-color: var(--gold);
-      box-shadow: 0 4px 24px rgba(13, 13, 37, .08)
-    }
-
-    .tier-num {
-      font-size: .62rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 6px
-    }
-
-    .tier h3 {
-      font-size: .97rem;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 10px
-    }
-
-    .tier ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px
-    }
-
-    .tier li {
-      font-size: .82rem;
-      color: var(--t2);
-      line-height: 1.5;
-      padding-left: 18px;
-      position: relative
-    }
-
-    .tier li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-      font-weight: 700;
-      font-size: .8rem
-    }
-
-    .cred-close {
-      font-size: .92rem;
-      font-weight: 700;
-      color: var(--navy)
-    }
-
-    /* Concentric circle diagram */
-    .circle-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 40px
-    }
-
-    .concentric {
-      position: relative;
-      width: 340px;
-      height: 340px
-    }
-
-    .c-outer {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: rgba(45, 212, 191, .15);
-      border: 2.5px solid var(--teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .c-inner {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: var(--navy);
-      border: 2px solid rgba(248, 202, 77, .3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 14px;
-    }
-
-    .c-inner p {
-      font-size: .64rem;
-      font-weight: 600;
-      color: rgba(255, 255, 255, .8);
-      line-height: 1.4
-    }
-
-    .c-outer-ring-text {
-      position: absolute;
-      bottom: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: .6rem;
-      font-weight: 700;
-      color: var(--teal);
-      text-align: center;
-      background: rgba(255, 255, 255, .95);
-      border: 1px solid var(--teal);
-      border-radius: 6px;
-      padding: 4px 10px;
-      white-space: nowrap;
-    }
-
-    .c-gap-label {
-      position: absolute;
-      right: -12px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .c-gap-arrow {
-      font-size: .65rem;
-      font-weight: 800;
-      color: var(--gold);
-      white-space: nowrap;
-      background: var(--navy);
-      border: 1px solid rgba(248, 202, 77, .3);
-      border-radius: 6px;
-      padding: 5px 10px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .c-gap-arrow::before {
-      content: '←';
-      color: var(--gold)
-    }
-
-    /* Dark block */
-    .dark-block {
-      background: var(--navy);
-      padding: 80px 0
-    }
-
-    .dark-block h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 18px;
-      max-width: 700px;
-      line-height: 1.12;
-      letter-spacing: -.02em
-    }
-
-    .dark-block p {
-      font-size: .97rem;
-      color: rgba(255, 255, 255, .6);
-      line-height: 1.75;
-      max-width: 660px;
-      margin-bottom: 14px
-    }
-
-    .dark-block p em {
-      color: rgba(255, 255, 255, .85);
-      font-style: normal;
-      font-weight: 600
-    }
-
-    .dark-block p strong {
-      color: #fff;
-      font-size: 1.05rem
-    }
-
-    .mockup-ph {
-      display: flex;
-      justify-content: center;
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid rgba(248, 202, 77, .15);
-      border-radius: 16px;
-      padding: 20px 20px;
-      text-align: center;
-      margin: 36px 0;
-    }
-
-    .mockup-ph p {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgb(255, 255, 255)
-    }
-
-    .dark-cta {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      margin-top: 36px
-    }
-
-    .logo-strip-label {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, .3);
-      text-align: center;
-      margin-bottom: 16px;
-      margin-top: 32px
-    }
-
-    .logo-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center
-    }
-
-    .logo-pill {
-      background: rgba(255, 255, 255, .08);
-      border: 1.5px solid rgba(255, 255, 255, .15);
-      border-radius: 8px;
-      padding: 14px 22px;
-      font-size: .82rem;
-      font-weight: 700;
-      color: rgba(255, 255, 255, .6);
-      transition: all .2s;
-      letter-spacing: .02em
-    }
-
-    .logo-pill:hover {
-      color: var(--gold);
-      border-color: rgba(248, 202, 77, .35);
-      background: rgba(248, 202, 77, .06)
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S5 — MYTH BUSTING
-════════════════════════════════════════════════════════════ */
-    .myths {
-      background: #fff;
-      padding: 72px 0
-    }
-
-    .myths-head {
-      margin-bottom: 48px
-    }
-
-    .myths-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px
-    }
-
-    @media(max-width:680px) {
-      .myths-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .myth-card {
-      background: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(13, 13, 37, .05)
-    }
-
-    .myth-top {
-      padding: 22px 22px 18px
-    }
-
-    .myth-tag {
-      font-size: .62rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: rgba(139, 26, 26, .6);
-      margin-bottom: 8px
-    }
-
-    .myth-text {
-      font-size: .92rem;
-      font-style: italic;
-      color: var(--red);
-      line-height: 1.55;
-      font-weight: 700
-    }
-
-    .myth-bot {
-      padding: 18px 22px;
-      background: #fafafa;
-      border-top: 1px solid #f0f0f0
-    }
-
-    .fact-label {
-      display: inline-block;
-      font-size: .65rem;
-      font-weight: 800;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--gold2);
-      background: rgba(248, 202, 77, .12);
-      border: 1px solid rgba(248, 202, 77, .3);
-      border-radius: 4px;
-      padding: 3px 10px;
-      margin-bottom: 10px
-    }
-
-    .fact-text {
-      font-size: .88rem;
-      color: #333;
-      line-height: 1.65
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S6 — WHO IT'S FOR
-════════════════════════════════════════════════════════════ */
-    .for-sec {
-      background: #fff;
-      padding: 60px 0
-    }
-
-    .for-sec h2 {
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 32px;
-      letter-spacing: -.02em
-    }
-
-    .for-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 48px
-    }
-
-    @media(max-width:680px) {
-      .for-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .for-card {
-      border: 1px solid #e8e8e8;
-      border-left: 4px solid var(--gold);
-      border-radius: 0 10px 10px 0;
-      padding: 22px 20px;
-      background: #fff;
-      transition: box-shadow .2s;
-    }
-
-    .for-card:hover {
-      box-shadow: 0 4px 20px rgba(248, 202, 77, .14)
-    }
-
-    .for-card h4 {
-      font-size: .9rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 6px;
-      line-height: 1.4
-    }
-
-    .for-card p {
-      font-size: .82rem;
-      color: var(--t2);
-      line-height: 1.6
-    }
-
-    .for-card p em {
-      color: var(--navy);
-      font-style: normal;
-      font-weight: 600
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S7 — GCC OPPORTUNITY
-════════════════════════════════════════════════════════════ */
-    .opp {
-      background: var(--fafa);
-      padding: 72px 0
-    }
-
-    .opp h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 48px;
-      letter-spacing: -.02em
-    }
-
-    .opp-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-      margin-bottom: 60px
-    }
-
-    @media(max-width:860px) {
-      .opp-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    /* Big stats */
-    .big-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 28px
-    }
-
-    .big-stat .bs-val {
-      font-size: clamp(2.8rem, 6vw, 4rem);
-      font-weight: 900;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 6px;
-      letter-spacing: -.03em
-    }
-
-    .big-stat .bs-lbl {
-      font-size: .9rem;
-      font-weight: 600;
-      color: var(--navy)
-    }
-
-    .big-stat .bs-sub {
-      font-size: .8rem;
-      color: var(--t3);
-      margin-top: 2px
-    }
-
-    /* Gap table */
-    .gap-table-wrap {
-      background: #fff;
-      border: 1px solid rgba(13, 13, 37, .08);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(13, 13, 37, .06)
-    }
-
-    .gap-table-title {
-      background: var(--navy);
-      padding: 14px 20px
-    }
-
-    .gap-table-title p {
-      font-size: .78rem;
-      font-weight: 700;
-      color: #fff
-    }
-
-    .gap-table-title span {
-      font-size: .68rem;
-      color: rgba(255, 255, 255, .45);
-      display: block;
-      margin-top: 2px
-    }
-
-    table.gap {
-      width: 100%;
-      border-collapse: collapse
-    }
-
-    table.gap th {
-      padding: 11px 16px;
-      font-size: .7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: var(--t3);
-      border-bottom: 1px solid rgba(13, 13, 37, .07);
-      text-align: left;
-      background: var(--f8)
-    }
-
-    table.gap td {
-      padding: 13px 16px;
-      font-size: .88rem;
-      color: var(--t2);
-      border-bottom: 1px solid rgba(13, 13, 37, .05);
-      vertical-align: middle
-    }
-
-    table.gap td:first-child {
-      font-weight: 600;
-      color: var(--navy);
-      font-size: .82rem
-    }
-
-    table.gap td.hl {
-      color: var(--navy);
-      font-weight: 800;
-      font-size: 1rem
-    }
-
-    table.gap td.pct {
-      color: var(--gold);
-      font-weight: 800;
-      font-size: 1rem
-    }
-
-    table.gap tr:last-child td {
-      border-bottom: none
-    }
-
-    .gap-source {
-      font-size: .67rem;
-      color: var(--t3);
-      font-style: italic;
-      padding: 10px 16px;
-      border-top: 1px solid rgba(13, 13, 37, .04);
-      background: var(--f8)
-    }
-
-    .gap-note {
-      font-size: .9rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(13, 13, 37, .07)
-    }
-
-    /* Domain cards */
-    .domain-strip {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      -webkit-overflow-scrolling: touch
-    }
-
-    .domain-strip::-webkit-scrollbar {
-      height: 4px
-    }
-
-    .domain-strip::-webkit-scrollbar-thumb {
-      background: var(--gold);
-      border-radius: 2px
-    }
-
-    .domain-card {
-      flex-shrink: 0;
-      background: #fff;
-      border: 1px solid rgba(13, 13, 37, .08);
-      border-radius: 10px;
-      padding: 18px 22px;
-      min-width: 190px;
-      border-top: 3px solid var(--gold);
-      box-shadow: 0 2px 10px rgba(13, 13, 37, .05)
-    }
-
-    .dc-name {
-      font-size: .84rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 6px;
-      line-height: 1.3
-    }
-
-    .dc-jobs {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--gold)
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S8 — ROADMAP
-════════════════════════════════════════════════════════════ */
-    .roadmap {
-      background: #fff;
-      padding: 72px 0
-    }
-
-    .roadmap h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 8px;
-      letter-spacing: -.02em
-    }
-
-    .roadmap-sub {
-      font-size: .97rem;
-      color: var(--t2);
-      margin-bottom: 40px
-    }
-
-    .phase-tabs {
-      display: flex;
-      border-bottom: 2px solid #eee;
-      margin-bottom: 0;
-      overflow-x: auto
-    }
-
-    .ptab {
-      padding: 12px 26px;
-      font-size: .85rem;
-      font-weight: 600;
-      color: var(--t3);
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      white-space: nowrap;
-      transition: color .2s, border-color .2s;
-      font-family: 'Poppins', sans-serif
-    }
-
-    .ptab.on {
-      color: var(--navy);
-      border-bottom-color: var(--gold)
-    }
-
-    .ptab:hover {
-      color: var(--navy)
-    }
-
-    .pc {
-      display: none
-    }
-
-    .pc.on {
-      display: block
-    }
-
-    .phase-row {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      border-bottom: 1px solid #f0f0f0
-    }
-
-    .phase-row:last-child {
-      border-bottom: none
-    }
-
-    .phase-time {
-      background: var(--gold3);
-      padding: 24px 16px;
-      display: flex;
-      align-items: center;
-      border-right: 3px solid var(--gold)
-    }
-
-    .ptbadge {
-      background: rgba(248, 202, 77, .35);
-      border: 1px solid rgba(248, 202, 77, .5);
-      color: var(--navy);
-      font-size: .7rem;
-      font-weight: 800;
-      border-radius: 5px;
-      padding: 5px 9px;
-      text-align: center;
-      width: 100%;
-      line-height: 1.3
-    }
-
-    .phase-body {
-      padding: 24px 28px
-    }
-
-    .phase-name {
-      font-size: .95rem;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 8px
-    }
-
-    .phase-desc {
-      font-size: .85rem;
-      color: var(--t2);
-      line-height: 1.65
-    }
-
-    @media(max-width:520px) {
-      .phase-row {
-        grid-template-columns: 1fr
-      }
-
-      .phase-time {
-        border-right: none;
-        border-bottom: 3px solid var(--gold)
-      }
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S9 — AI SECTION
-════════════════════════════════════════════════════════════ */
-    .ai-sec {
-      background: var(--navy);
-      padding: 72px 0
-    }
-
-    .ai-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start
-    }
-
-    @media(max-width:860px) {
-      .ai-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .ai-h {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.1;
-      letter-spacing: -.02em;
-      margin-bottom: 18px
-    }
-
-    .ai-h em {
-      font-style: normal;
-      color: var(--gold)
-    }
-
-    .ai-body {
-      font-size: .97rem;
-      color: rgba(255, 255, 255, .6);
-      line-height: 1.75;
-      margin-bottom: 32px
-    }
-
-    /* 4 AI cards — gold icon left */
-    .ai-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 12px
-    }
-
-    .ai-card {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      background: rgba(255, 255, 255, .05);
-      border: 1px solid rgba(248, 202, 77, .1);
-      border-radius: 12px;
-      padding: 18px 18px
-    }
-
-    .ai-card-ico {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      background: rgba(248, 202, 77, .15);
-      border: 1px solid rgba(248, 202, 77, .3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-      color: var(--gold)
-    }
-
-    .ai-card h4 {
-      font-size: .9rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 4px;
-      line-height: 1.3
-    }
-
-    .ai-card p {
-      font-size: .79rem;
-      color: rgba(255, 255, 255, .5);
-      line-height: 1.55
-    }
-
-    /* Right: dashboard + badge */
-    .ai-right {
-      display: flex;
-      flex-direction: column;
-      gap: 20px
-    }
-
-    .ai-dash {
-      background: rgba(255, 255, 255, .03);
-      border: 1px solid rgba(248, 202, 77, .12);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    .ai-dash-top {
-      background: rgba(248, 202, 77, .08);
-      border-bottom: 1px solid rgba(248, 202, 77, .1);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px
-    }
-
-    .ai-dash-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%
-    }
-
-    .ai-dash-title {
-      font-size: .7rem;
-      font-weight: 700;
-      color: rgba(255, 255, 255, .5);
-      margin-left: 4px
-    }
-
-    .ai-dash-body {
-      padding: 16px
-    }
-
-    /* SVG Dashboard */
-    .dash-svg {
-      width: 100%;
-      display: block
-    }
-
-    /* AI Badge */
-    .ai-badge {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      margin: 0 auto;
-      background: radial-gradient(circle, rgba(248, 202, 77, .12), rgba(248, 202, 77, .03));
-      border: 3px solid var(--gold);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 18px;
-      animation: glow 3s ease-in-out infinite;
-    }
-
-    .aib-top {
-      font-size: .58rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 5px
-    }
-
-    .aib-name {
-      font-size: .82rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2
-    }
-
-    .aib-stars {
-      color: var(--gold);
-      font-size: .8rem;
-      margin-top: 5px
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S10 — FACULTY & MENTORS
-════════════════════════════════════════════════════════════ */
-    .faculty {
-      background: #fff;
-      padding: 72px 0
-    }
-
-    .faculty h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 8px;
-      letter-spacing: -.02em
-    }
-
-    .faculty-sub {
-      font-size: .97rem;
-      color: var(--t2);
-      margin-bottom: 48px
-    }
-
-    /* Lead card */
-    .lead-card {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 0;
-      border: 1px solid rgba(13, 13, 37, .1);
-      border-left: 5px solid var(--navy);
-      border-radius: 0 14px 14px 0;
-      overflow: hidden;
-      margin-bottom: 52px;
-      box-shadow: 0 4px 24px rgba(13, 13, 37, .07);
-    }
-
-    @media(max-width:640px) {
-      .lead-card {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .lead-photo {
-      background: var(--grey);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 200px
-    }
-
-    .lead-photo p {
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--t3);
-      text-align: center;
-      padding: 20px
-    }
-
-    .lead-info {
-      padding: 28px 28px
-    }
-
-    .lead-name {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 4px
-    }
-
-    .lead-title {
-      font-size: .87rem;
-      color: var(--t2);
-      margin-bottom: 14px
-    }
-
-    .lead-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px
-    }
-
-    .lead-tag {
-      font-size: .66rem;
-      font-weight: 700;
-      background: var(--gold);
-      color: var(--navy);
-      border-radius: 5px;
-      padding: 4px 11px
-    }
-
-    .lead-bio {
-      font-size: .85rem;
-      color: var(--t2);
-      line-height: 1.7
-    }
-
-    .lead-li {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: .78rem;
-      color: var(--navy);
-      font-weight: 600;
-      margin-top: 14px;
-      text-decoration: underline;
-      text-underline-offset: 2px
-    }
-
-    /* Mentor section label */
-    .mentor-section-h {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 8px
-    }
-
-    .mentor-section-sub {
-      font-size: .85rem;
-      color: var(--t2);
-      margin-bottom: 24px
-    }
-
-    /* Mentor grid — text left, photo right (WebVeda guest speaker style) */
-    .mentor-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 40px
-    }
-
-    @media(max-width:720px) {
-      .mentor-grid {
-        grid-template-columns: 1fr 1fr
-      }
-    }
-
-    @media(max-width:480px) {
-      .mentor-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .mentor-card {
-      background: var(--f8);
-      border: 1px solid #eee;
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: row;
-      min-height: 120px;
-    }
-
-    .mentor-left {
-      padding: 16px 14px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center
-    }
-
-    .mentor-name {
-      font-size: .82rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 2px;
-      line-height: 1.3
-    }
-
-    .mentor-title {
-      font-size: .7rem;
-      color: var(--t3);
-      line-height: 1.3;
-      margin-bottom: 4px
-    }
-
-    .mentor-co {
-      font-size: .7rem;
-      font-weight: 600;
-      color: var(--gold2)
-    }
-
-    .mentor-li {
-      font-size: .65rem;
-      color: var(--t3);
-      margin-top: 5px;
-      display: flex;
-      align-items: center;
-      gap: 4px
-    }
-
-    .mentor-right {
-      width: 72px;
-      flex-shrink: 0;
-      background: var(--grey);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .6rem;
-      color: var(--t3);
-      text-align: center;
-      padding: 8px;
-      font-weight: 500
-    }
-
-    /* Think Tank */
-    .thinktank {
-      background: var(--f8);
-      border: 1px solid #eee;
-      border-radius: 14px;
-      padding: 28px 28px;
-      margin-top: 0
-    }
-
-    .tt-h {
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 8px
-    }
-
-    .tt-sub {
-      font-size: .82rem;
-      color: var(--t2);
-      margin-bottom: 20px
-    }
-
-    .tt-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px
-    }
-
-    .tt-pill {
-      background: #fff;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      padding: 8px 14px
-    }
-
-    .tt-name {
-      font-size: .78rem;
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1.2
-    }
-
-    .tt-org {
-      font-size: .67rem;
-      color: var(--t3)
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S11 — REFERENCES
-════════════════════════════════════════════════════════════ */
-    .refs {
-      background: var(--f8);
-      padding: 72px 0
-    }
-
-    .refs h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 48px;
-      letter-spacing: -.02em
-    }
-
-    /* Quote card */
-    .quote-card {
-      background: #fff;
-      border-left: 5px solid var(--navy);
-      border-radius: 0 14px 14px 0;
-      padding: 32px 32px 32px 36px;
-      box-shadow: 0 4px 20px rgba(13, 13, 37, .07);
-      margin-bottom: 56px;
-    }
-
-    .q-mark {
-      font-size: 4.5rem;
-      color: var(--gold);
-      line-height: .9;
-      margin-bottom: 12px;
-      font-family: Georgia, serif;
-      display: block
-    }
-
-    .q-text {
-      font-size: 1rem;
-      font-style: italic;
-      color: var(--navy);
-      line-height: 1.72;
-      margin-bottom: 20px
-    }
-
-    .q-author {
-      display: flex;
-      align-items: center;
-      gap: 14px
-    }
-
-    .q-ph {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--grey);
-      border: 2px solid #ddd;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .58rem;
-      color: var(--t3);
-      font-weight: 600;
-      text-align: center
-    }
-
-    .q-name {
-      font-size: .9rem;
-      font-weight: 700;
-      color: var(--navy)
-    }
-
-    .q-title {
-      font-size: .76rem;
-      color: var(--t3);
-      margin-top: 2px
-    }
-
-    /* Stat blocks */
-    .ref-stat-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 56px
-    }
-
-    @media(max-width:640px) {
-      .ref-stat-row {
-        grid-template-columns: 1fr 1fr
-      }
-    }
-
-    .ref-stat {
-      background: #fff;
-      border-radius: 12px;
-      padding: 22px 18px;
-      text-align: center;
-      box-shadow: 0 2px 12px rgba(13, 13, 37, .07)
-    }
-
-    .ref-val {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--gold2);
-      line-height: 1;
-      margin-bottom: 6px
-    }
-
-    .ref-lbl {
-      font-size: .73rem;
-      color: var(--t3);
-      line-height: 1.4
-    }
-
-    .ref-source {
-      font-size: .68rem;
-      color: var(--t3);
-      font-style: italic;
-      text-align: center;
-      margin-top: -40px;
-      margin-bottom: 48px
-    }
-
-    /* Logo wall */
-    .logo-wall-h {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 6px
-    }
-
-    .logo-wall-sub {
-      font-size: .87rem;
-      color: var(--t2);
-      margin-bottom: 20px
-    }
-
-    .logo-wall {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 8px
-    }
-
-    .lw-pill {
-      background: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 6px;
-      padding: 9px 16px;
-      font-size: .78rem;
-      font-weight: 600;
-      color: var(--t3);
-      transition: all .2s;
-      filter: grayscale(1);
-    }
-
-    .lw-pill:hover {
-      color: var(--navy);
-      border-color: rgba(13, 13, 37, .3);
-      filter: grayscale(0)
-    }
-
-    .lw-more {
-      font-size: .72rem;
-      color: var(--t3);
-      font-style: italic;
-      margin-bottom: 40px
-    }
-
-    /* Trust badges */
-    .trust-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-top: 24px;
-      border-top: 1px solid #e8e8e8;
-      justify-content: center
-    }
-
-    .trust-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 8px;
-      padding: 9px 16px;
-      font-size: .76rem;
-      color: var(--t2);
-      font-weight: 500
-    }
-
-    .tb-ico {
-      font-size: 1rem
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S12 — COMPARISON TABLE
-════════════════════════════════════════════════════════════ */
-    .cmp-sec {
-      background: #fff;
-      padding: 72px 0
-    }
-
-    .cmp-sec h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 8px;
-      letter-spacing: -.02em
-    }
-
-    .cmp-sub {
-      font-size: .95rem;
-      color: var(--t2);
-      margin-bottom: 44px
-    }
-
-    .cmp-wrap {
-      overflow-x: auto;
-      border-radius: 14px;
-      box-shadow: 0 4px 28px rgba(13, 13, 37, .09)
-    }
-
-    table.cmp {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: .87rem;
-      min-width: 520px
-    }
-
-    table.cmp th {
-      padding: 16px 20px;
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-align: center
-    }
-
-    table.cmp th:first-child {
-      text-align: left;
-      background: #F0F0F4;
-      color: var(--t2)
-    }
-
-    table.cmp th.trad {
-      background: #EAEAEE;
-      color: var(--t2)
-    }
-
-    table.cmp th.gccs {
-      background: var(--navy);
-      color: var(--gold)
-    }
-
-    table.cmp td {
-      padding: 13px 20px;
-      border-bottom: 1px solid rgba(13, 13, 37, .05);
-      text-align: center;
-      vertical-align: middle
-    }
-
-    table.cmp td:first-child {
-      text-align: left;
-      font-weight: 500;
-      color: var(--navy);
-      background: var(--fafa)
-    }
-
-    table.cmp td.trad {
-      background: #FAFAFA;
-      color: var(--t3)
-    }
-
-    table.cmp td.gccs {
-      background: var(--gold3)
-    }
-
-    table.cmp tr:last-child td {
-      border-bottom: none
-    }
-
-    .yes-gn {
-      color: var(--gn);
-      font-size: 1.1rem;
-      font-weight: 700
-    }
-
-    .yes-go {
-      color: var(--navy);
-      font-size: 1.1rem;
-      font-weight: 700
-    }
-
-    .no-rd {
-      color: #C0392B;
-      font-size: 1.1rem
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S13 — TRUST & GUARANTEE
-════════════════════════════════════════════════════════════ */
-    .guar {
-      background: var(--f8);
-      padding: 72px 0
-    }
-
-    .guar h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 8px;
-      letter-spacing: -.02em
-    }
-
-    .guar-sub {
-      font-size: .97rem;
-      color: var(--t2);
-      margin-bottom: 48px;
-      max-width: 580px
-    }
-
-    .guar-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px
-    }
-
-    @media(max-width:720px) {
-      .guar-grid {
-        grid-template-columns: 1fr 1fr
-      }
-    }
-
-    @media(max-width:440px) {
-      .guar-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .guar-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 26px 22px;
-      box-shadow: 0 2px 14px rgba(13, 13, 37, .07)
-    }
-
-    .guar-ico {
-      font-size: 1.8rem;
-      margin-bottom: 14px
-    }
-
-    .guar-card h4 {
-      font-size: .92rem;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 8px;
-      line-height: 1.3
-    }
-
-    .guar-card p {
-      font-size: .81rem;
-      color: var(--t2);
-      line-height: 1.6
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S14 — ENTRY & INVESTMENT
-════════════════════════════════════════════════════════════ */
-    .entry {
-      background: #fff;
-      padding: 72px 0
-    }
-
-    .entry h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 8px;
-      letter-spacing: -.02em
-    }
-
-    .entry-sub {
-      font-size: .97rem;
-      color: var(--t2);
-      margin-bottom: 48px;
-      max-width: 580px
-    }
-
-    .entry-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 40px
-    }
-
-    @media(max-width:700px) {
-      .entry-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .entry-card {
-      border: 2px solid rgba(13, 13, 37, .1);
-      border-radius: 14px;
-      overflow: hidden
-    }
-
-    .ec-head {
-      background: var(--navy);
-      border-top: 4px solid var(--gold);
-      padding: 22px 26px
-    }
-
-    .ec-step {
-      font-size: .62rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 6px
-    }
-
-    .ec-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #fff
-    }
-
-    .ec-body {
-      padding: 24px 26px
-    }
-
-    .ec-desc {
-      font-size: .86rem;
-      color: var(--t2);
-      line-height: 1.65;
-      margin-bottom: 20px
-    }
-
-    .ec-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px
-    }
-
-    .ec-list li {
-      font-size: .84rem;
-      color: var(--t2);
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      line-height: 1.5
-    }
-
-    .ec-list li::before {
-      content: '✔';
-      color: var(--gn);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 1px
-    }
-
-    .ec-list li strong {
-      color: var(--navy)
-    }
-
-    .entry-cta {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px
-    }
-
-    .entry-note {
-      font-size: .78rem;
-      color: var(--t3);
-      font-style: italic
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S15 — FAQ
-════════════════════════════════════════════════════════════ */
-    .faq {
-      background: #fff;
-      padding: 72px 0
-    }
-
-    .faq h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 44px;
-      letter-spacing: -.02em
-    }
-
-    .faq-list {
-      display: flex;
-      flex-direction: column
-    }
-
-    .faq-item {
-      border-bottom: 1px solid #eee
-    }
-
-    .faq-item:first-child {
-      border-top: 1px solid #eee
-    }
-
-    .faq-q {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 20px 0;
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--navy);
-      text-align: left;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      transition: color .2s;
-    }
-
-    .faq-q:hover {
-      color: var(--gold2)
-    }
-
-    .faq-q.on {
-      color: var(--gold2)
-    }
-
-    .faq-ico {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 1.5px solid #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .9rem;
-      color: var(--t3);
-      flex-shrink: 0;
-      transition: all .25s
-    }
-
-    .faq-q.on .faq-ico {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--navy);
-      transform: rotate(45deg)
-    }
-
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .38s ease
-    }
-
-    .faq-a.on {
-      max-height: 400px
-    }
-
-    .faq-a-inner {
-      padding: 0 0 20px;
-      font-size: .88rem;
-      color: var(--t2);
-      line-height: 1.75;
-      border-left: 3px solid var(--gold);
-      padding-left: 18px
-    }
-
-    /* ════════════════════════════════════════════════════════════
-   S16 — FOOTER CTA + FOOTER
-════════════════════════════════════════════════════════════ */
-    .fcta {
-      background: var(--navy);
-      padding: 72px 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden
-    }
-
-    .fcta::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(248, 202, 77, .06), transparent 70%);
-      pointer-events: none
-    }
-
-    .fcta h2 {
-      font-size: clamp(1.7rem, 3vw, 2.5rem);
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 32px;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.12;
-      letter-spacing: -.02em;
-      position: relative;
-      z-index: 1
-    }
-
-    .fcta .btn-gold {
-      position: relative;
-      z-index: 1
-    }
-
-    .fcta-note {
-      font-size: .84rem;
-      color: rgba(255, 255, 255, .38);
-      margin-top: 14px;
-      position: relative;
-      z-index: 1
-    }
-
-    .fcta-note a {
-      color: var(--gold)
-    }
-
-    .fcta-trust {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 36px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(255, 255, 255, .07);
-      position: relative;
-      z-index: 1
-    }
-
-    .fct-item {
-      font-size: .74rem;
-      color: rgba(255, 255, 255, .32);
-      display: flex;
-      align-items: center;
-      gap: 5px
-    }
-
-    .fct-sep {
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: rgba(248, 202, 77, .3)
-    }
-
-    /* Footer */
-    .footer {
-      background: #080818;
-      padding: 56px 0 0
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255, 255, 255, .06)
-    }
-
-    @media(max-width:700px) {
-      .footer-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .footer-brand {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 6px
-    }
-
-    .footer-brand span {
-      color: var(--gold)
-    }
-
-    .footer-tagline {
-      font-size: .82rem;
-      color: rgba(255, 255, 255, .35);
-      font-style: italic;
-      margin-bottom: 20px
-    }
-
-    .footer-socials {
-      display: flex;
-      gap: 8px
-    }
-
-    .fsoc {
-      width: 34px;
-      height: 34px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, .06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .72rem;
-      color: rgba(255, 255, 255, .45);
-      font-weight: 700;
-      transition: all .2s
-    }
-
-    .fsoc:hover {
-      background: var(--gold);
-      color: var(--navy)
-    }
-
-    .fcol-h {
-      font-size: .69rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, .28);
-      margin-bottom: 16px
-    }
-
-    .flinks {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px
-    }
-
-    .flinks li a {
-      font-size: .83rem;
-      color: rgba(255, 255, 255, .45);
-      transition: color .2s
-    }
-
-    .flinks li a:hover {
-      color: var(--gold)
-    }
-
-    .fcontact {
-      font-size: .82rem;
-      color: rgba(255, 255, 255, .45);
-      line-height: 1.6;
-      margin-bottom: 8px
-    }
-
-    .fcontact strong {
-      color: rgba(255, 255, 255, .65)
-    }
-
-    .footer-bottom {
-      padding: 14px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: .73rem;
-      color: rgba(255, 255, 255, .2)
-    }
-
-    .footer-bottom a {
-      color: rgba(255, 255, 255, .28);
-      transition: color .2s
-    }
-
-    .footer-bottom a:hover {
-      color: var(--gold)
-    }
-
-    /* ─── RESPONSIVE CATCH-ALL ───────────────────────────────────────────────── */
-    @media(max-width:480px) {
-      .hero h1 {
-        font-size: 1.85rem
-      }
-
-      .hero-ctas {
-        flex-direction: column
-      }
-
-      .hero-ctas .btn {
-        width: 100%
-      }
-
-      .icon-grid {
-        grid-template-columns: 1fr
-      }
-
-      .opp-grid,
-      .ai-grid,
-      .cred-grid,
-      .belief-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    /* =========================
-   POPUP
-========================= */
-
-    .popup-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .65);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      padding: 20px;
-    }
-
-    .popup-overlay.active {
-      display: flex;
-    }
-
-    .popup-box {
-      width: 100%;
-      max-width: 520px;
-      max-height: 92vh;
-      overflow-y: auto;
-      background: #fff;
-      border-radius: 20px;
-      position: relative;
-      animation: popupFade .3s ease;
-    }
-
-    .popup-close {
-      position: absolute;
-      top: 14px;
-      right: 16px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #f3f3f3;
-      color: #111;
-      font-size: 28px;
-      z-index: 20;
-    }
-
-    .popup-close:hover {
-      background: #ececec;
-    }
-
-    /* =========================
-   FORM
-========================= */
-
-    .hero-right.a4 {
-      width: 100%;
-    }
-
-    .lead-form {
-      background: #fff;
-      padding: 34px 28px;
-      border-radius: 20px;
-    }
-
-    .lf-title {
-      font-size: 30px;
-      font-weight: 700;
-      line-height: 1.2;
-      color: #0D0D25;
-      margin-bottom: 10px;
-    }
-
-    .lf-sub {
-      font-size: 14px;
-      color: #6b6b80;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    .lf-field {
-      margin-bottom: 18px;
-    }
-
-    .lf-label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #0D0D25;
-    }
-
-    .lf-input {
-      width: 100%;
-      height: 52px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 0 16px;
-      font-size: 14px;
-      outline: none;
-      transition: .2s;
-    }
-
-    .lf-input:focus {
-      border-color: #5f1295;
-      box-shadow: 0 0 0 4px rgba(95, 18, 149, .08);
-    }
-
-    .lf-select {
-      appearance: none;
-      background: #fff;
-    }
-
-    .field-error {
-      font-size: 12px;
-      color: #d92d20;
-      margin-top: 6px;
-    }
-
-    .custom-select-container {
-      position: relative;
-    }
-
-    .custom-select-options {
-      position: absolute;
-      top: 58px;
-      left: 0;
-      right: 0;
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      max-height: 220px;
-      overflow-y: auto;
-      z-index: 20;
-      display: none;
-    }
-
-    .lf-checkbox-wrap {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .lf-checkbox-wrap label {
-      font-size: 13px;
-      color: #666;
-      line-height: 1.5;
-    }
-
-    .gcc-form-error {
-      display: none;
-      color: #d92d20;
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-
-    .lf-btn {
-      width: 100%;
-      height: 56px;
-      border: none;
-      border-radius: 14px;
-      background: #5f1295;
-      color: #fff;
-      font-size: 15px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: .25s;
-    }
-
-    .lf-btn:hover {
-      background: #4f0f7d;
-      transform: translateY(-1px);
-    }
-
-    .lf-price {
-      text-align: center;
-      margin-top: 16px;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .lf-price strong {
-      color: #0D0D25;
-    }
-
-    .lf-secure {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 12px;
-      font-size: 12px;
-      color: #888;
-    }
-
-    /* =========================
-   ANIMATION
-========================= */
-
-    @keyframes popupFade {
-      from {
-        opacity: 0;
-        transform: translateY(20px) scale(.96);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    /* =========================
-   MOBILE
-========================= */
-
-    @media (max-width: 640px) {
-
-      .popup-box {
-        max-width: 100%;
-        border-radius: 18px;
-      }
-
-      .lead-form {
-        padding: 28px 20px;
-      }
-
-      .lf-title {
-        font-size: 24px;
-      }
-
-    }
-
-    /* PopUp Model */
-    /* .popup-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.3s ease;
-      z-index: 9999;
-      padding: 20px;
-    }
-
-    .popup-overlay.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .popup-box {
-      width: 100%;
-      max-width: 500px;
-      background: #1c0b45;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 24px;
-      padding: 40px 28px 28px;
-      position: relative;
-      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
-    }
-
-    .popup-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .popup-top-text {
-      text-align: center;
-      color: #F8CA4D;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 14px;
-    }
-
-    .popup-heading {
-      color: white;
-      text-align: center;
-      font-size: 20px;
-      line-height: 1.2;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .popup-subheading {
-      text-align: center;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 15px;
-      margin-bottom: 28px;
-    }
-
-    .popup-form {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .popup-field {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .popup-field label {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .popup-field input,
-    .popup-field select {
-      width: 100%;
-      height: 36px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: #341b69;
-      padding: 0 18px;
-      color: white;
-      font-size: 16px;
-      outline: none;
-    }
-
-    .popup-field input::placeholder {
-      color: rgba(255, 255, 255, 0.35);
-    }
-
-    .popup-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .popup-submit-btn {
-      width: 100%;
-      height: 50px;
-      border-radius: 10px;
-      background: #ff2b2b;
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      margin-top: 10px;
-      transition: 0.3s;
-    }
-
-    .popup-submit-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .popup-note {
-      text-align: center;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.4);
-      line-height: 1.6;
-    }
-
-    .popup-note a {
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    @media(max-width: 600px) {
-
-      .popup-box {
-        padding: 32px 20px 22px;
-      }
-
-      .popup-heading {
-        font-size: 28px;
-      }
-
-      .popup-row {
-        grid-template-columns: 1fr;
-      }
-
-      .popup-submit-btn {
-        font-size: 18px;
-      }
-    } */
-
-    /* THUMBNAIL */
-    .vsl-wrap {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 2px solid rgba(13, 13, 37, .08);
-      box-shadow: 0 20px 60px rgba(13, 13, 37, .12);
-      cursor: pointer;
-    }
-
-    /* IMAGE WRAPPER */
-    .vsl-thumb {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-    }
-
-    /* ACTUAL IMAGE */
-    .vsl-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* OVERLAY */
-    .vsl-overlay {
-      position: absolute;
-      inset: 0;
-
-      background: rgba(0, 0, 0, 0.35);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      transition: 0.3s;
-    }
-
-    .vsl-wrap:hover .vsl-overlay {
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    .vsl-label {
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, .8);
-    }
-
-    .play-btn {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: #F8CA4D;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 0 14px rgba(248, 202, 77, .12);
-      transition: 0.3s;
-    }
-
-    .play-btn:hover {
-      transform: scale(1.08);
-    }
-
-    .play-btn svg {
-      width: 26px;
-      height: 26px;
-      color: #5f1295;
-      margin-left: 4px;
-    }
-
-    .vsl-caption {
-      padding: 10px 16px;
-      text-align: center;
-      font-size: .78rem;
-      color: rgba(41, 2, 56, 0.45);
-      font-style: italic;
-    }
-
-
-    .lead-form {
-      background: rgba(255, 255, 255, .97);
-      border-radius: 20px;
-      padding: 32px 28px 28px;
-      box-shadow: 0 20px 80px rgba(0, 0, 0, .3), 0 0 0 1px rgba(255, 255, 255, .1);
-      position: relative;
-    }
-
-    /* orange top accent */
-    /* .lead-form::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--dp), var(--or));
-      border-radius: 20px 20px 0 0;
-    } */
-
-    .lf-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--dp);
-      margin-bottom: 4px;
-      line-height: 1.2;
-    }
-
-    .lf-sub {
-      font-size: .78rem;
-      color: var(--t3);
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-
-    .lf-field {
-      margin-bottom: 10px;
-    }
-
-    .lf-label {
-      display: block;
-      font-size: .72rem;
-      font-weight: 600;
-      color: var(--t2);
-      margin-bottom: 3px;
-      letter-spacing: .02em;
-    }
-
-    .lf-input {
-      width: 100%;
-      background: var(--off);
-      border: 1.5px solid var(--bdr);
-      border-radius: 10px;
-      padding: 8px 14px;
-      font-size: .88rem;
-      color: var(--t1);
-      font-family: var(--f);
-      transition: border-color .2s, box-shadow .2s;
-      outline: none;
-    }
-
-    .lf-input:focus {
-      border-color: var(--mp);
-      box-shadow: 0 0 0 3px rgba(122, 40, 153, .1);
-    }
-
-    .lf-input.invalid {
-      border-color: var(--rd);
-      background: rgba(192, 57, 43, 0.03);
-    }
-
-    .lf-input::placeholder {
-      color: var(--t3);
-    }
-
-    .field-error {
-      color: var(--rd);
-      font-size: 0.68rem;
-      margin-top: 4px;
-      display: none;
-      font-weight: 500;
-    }
-
-    .lf-select {
-      appearance: none;
-      -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B79A0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
-    }
-
-    /* Custom Searchable Select */
-    .custom-select-container {
-      position: relative;
-      z-index: 10;
-    }
-
-    .custom-select-options {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: #fff;
-      border: 1.5px solid var(--bdr);
-      border-radius: 0 0 10px 10px;
-      max-height: 280px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      z-index: 9999;
-      display: none;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-      margin-top: 1px;
-    }
-
-    .custom-select-options.active {
-      display: block;
-    }
-
-    .cs-opt {
-      padding: 12px 14px;
-      font-size: .85rem;
-      color: var(--t2);
-      cursor: pointer;
-      transition: all .2s;
-      white-space: normal;
-      line-height: 1.4;
-      border-bottom: 1px solid var(--off);
-    }
-
-    .cs-opt:last-child {
-      border-bottom: none;
-    }
-
-    .cs-opt:hover {
-      background: var(--off);
-      color: var(--mp);
-      padding-left: 18px;
-    }
-
-    .cs-opt.no-res {
-      cursor: default;
-      color: var(--t3);
-      font-style: italic;
-    }
-
-    .lf-btn {
-      width: 100%;
-      background: var(--or);
-      color: #fff;
-      font-size: .97rem;
-      font-weight: 700;
-      padding: 15px 20px;
-      border-radius: 100px;
-      letter-spacing: .04em;
-      transition: all .25s;
-      box-shadow: var(--sh-o);
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .lf-btn:hover {
-      background: var(--ord);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(204, 122, 5, .48);
-    }
-
-    .lf-secure {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      margin-top: 12px;
-      font-size: .68rem;
-      color: var(--t3);
-    }
-
-    .lf-price {
-      text-align: center;
-      font-size: .72rem;
-      color: var(--t3);
-      margin-top: 8px;
-    }
-
-    .lf-price strong {
-      color: var(--t1);
-      font-size: .88rem;
-    }
-
-    .lf-price sup {
-      font-size: .6em;
-    }
-    /* ─── Brand Tokens from index.html (Specific for Form) ─── */
-    :root {
-      --dp: #3B0D50;
-      --mp: #7A2899;
-      --bp: #5B32CC;
-      --pp: #F3EAF9;
-      --pb: #D4B8E3;
-      --or: #CC7A05;
-      --ord: #A86204;
-      --orl: #F5A623;
-      --orp: #FEF4E0;
-      --gd: #B89428;
-      --wh: #FFFFFF;
-      --off: #F9F7FC;
-      --bdr: #E8E0F0;
-      --t1: #1A0626;
-      --rd: #C0392B;
-      --f: 'Poppins', sans-serif;
-      --sh-o: 0 6px 30px rgba(204, 122, 5, .36);
-    }
-
-    /* Modal Styles */
-    .form-modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .form-modal-overlay.active {
-      display: flex;
-      opacity: 1;
-    }
-    .lf-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-bottom: 0;
-    }
-    .lf-row.single {
-      grid-template-columns: 1fr;
-    }
-    @media (max-width: 600px) {
-      .lf-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-    }
-
-    .form-modal-content {
-      position: relative;
-      width: 100%;
-      max-width: 520px;
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
-    }
-    .form-modal-overlay.active .form-modal-content {
-      transform: translateY(0);
-    }
-    .modal-close {
-      position: absolute;
-      top: -15px;
-      right: -15px;
-      width: 34px;
-      height: 34px;
-      background: var(--wh);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10001;
-      font-size: 20px;
-      color: var(--dp);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      border: 1px solid var(--bdr);
-    }
-
-    /* Form Styles from index.html */
-    .lead-form {
-      background: var(--wh);
-      border-radius: 20px;
-      padding: 32px 28px 28px;
-      box-shadow: 0 20px 80px rgba(0, 0, 0, .3);
-      position: relative;
-    }
-    .lf-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--dp);
-      margin-bottom: 4px;
-      line-height: 1.2;
-    }
-    .lf-sub {
-      font-size: .8rem;
-      color: var(--t3);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-    .lf-field {
-      margin-bottom: 12px;
-      text-align: left;
-    }
-    .lf-label {
-      display: block;
-      font-size: .72rem;
-      font-weight: 600;
-      color: var(--t2);
-      margin-bottom: 4px;
-      letter-spacing: .02em;
-    }
-    .lf-input {
-      width: 100%;
-      background: var(--off);
-      border: 1.5px solid var(--bdr);
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-size: .88rem;
-      color: var(--t1);
-      font-family: var(--f);
-      transition: border-color .2s, box-shadow .2s;
-      outline: none;
-    }
-    .lf-input:focus {
-      border-color: var(--mp);
-      box-shadow: 0 0 0 3px rgba(122, 40, 153, .1);
-    }
-    .lf-input.invalid {
-      border-color: var(--rd);
-      background: rgba(192, 57, 43, 0.03);
-    }
-    .field-error {
-      color: var(--rd);
-      font-size: 0.68rem;
-      margin-top: 4px;
-      display: none;
-      font-weight: 500;
-    }
-    .lf-select {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B79A0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
-    }
-    .custom-select-container { position: relative; }
-    .custom-select-options {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: #fff;
-      border: 1.5px solid var(--bdr);
-      border-radius: 0 0 10px 10px;
-      max-height: 250px;
-      overflow-y: auto;
-      z-index: 9999;
-      display: none;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    }
-    .custom-select-options.active { display: block; }
-    .cs-opt {
-      padding: 12px 14px;
-      font-size: .85rem;
-      color: var(--t2);
-      cursor: pointer;
-      border-bottom: 1px solid var(--off);
-    }
-    .cs-opt:hover { background: var(--off); color: var(--mp); }
-    .lf-btn {
-      width: 100%;
-      background: var(--or);
-      color: #fff;
-      font-size: .97rem;
-      font-weight: 700;
-      padding: 15px 20px;
-      border-radius: 100px;
-      box-shadow: var(--sh-o);
-      margin-top: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all .25s;
-    }
-    .lf-btn:hover { background: var(--ord); transform: translateY(-2px); }
-    .lf-price { text-align: center; font-size: .75rem; color: var(--t3); margin-top: 10px; }
-    .lf-price strong { color: var(--t1); }
-    .lf-secure { display: flex; align-items: center; justify-content: center; gap: 5px; margin-top: 12px; font-size: .68rem; color: var(--t3); }
-
-    /* Status Modal Styles */
-    .status-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10002;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-    .status-overlay.active { opacity: 1; pointer-events: auto; }
-    .status-modal {
-      background: #fff;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 20px;
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-  </style>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
 
 <body>
-
-  <!-- ═══ S0: STICKY BAR ══════════════════════════════════════════════════════ -->
-  <div class="sticky" id="stickyBar">
-    <div class="sticky-watch" onclick="scrollToVSL()">
-      <div class="sticky-watch-icon">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <polygon points="5 3 19 12 5 21 5 3" />
-        </svg>
-      </div>
-      <div>
-        <div style="font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:1px">▷ Watch</div>
-        <div class="sticky-watch-label"><strong>How the Hire-First Model Works</strong></div>
-      </div>
-    </div>
-    <a href="javascript:void(0)" onclick="openForm()" class="btn btn-gold open-popup" style="padding:12px 26px;font-size:.86rem">CHECK IF YOU QUALIFY — Book
-      Your
-      NFET Exam Slot</a>
-  </div>
 
   <!-- ═══ S1: TICKER ═══════════════════════════════════════════════════════════ -->
   <div class="ticker">
@@ -3778,74 +43,91 @@
 
   <!-- ═══ NAV ══════════════════════════════════════════════════════════════════ -->
   <nav class="nav">
-    <div class="nav-logo">GCC <span>School</span></div>
+    <img src="./images/logo.png" alt="GCC School">
 
-    <a href="javascript:void(0)" onclick="openForm()" class="btn btn-gold open-popup" style="padding:10px 22px;font-size:.82rem">CHECK IF YOU QUALIFY</a>
+    <a href="javascript:void(0)" onclick="openForm()" class="btn btn-gold open-popup"
+      style="padding:10px 22px;font-size:.82rem">CHECK IF YOU QUALIFY</a>
   </nav>
 
   <!-- ═══ S2: HERO ══════════════════════════════════════════════════════════════ -->
   <section class="hero" id="hero">
-    <div class="w">
-      <div class="hero-grid">
+    <!-- Background Pattern -->
+    <div class="hero-pattern"></div>
+    <div class="w hero-inner">
+      <!-- LEFT CONTENT -->
+      <div class="hero-left">
 
-        <!-- LEFT -->
-        <div>
-          <div class="hero-badge">India's First GCC Career Program</div>
-          <h1>Get Hired at Goldman Sachs, EY &amp; JPMorgan — Before You Start a Single Day of Training.</h1>
-          <p class="hero-sub">India's GCC sector is adding 5,20,000 finance jobs by 2030. GCC School was built to place
-            you inside those companies — with a Conditional Offer Letter in hand — before your training even begins.</p>
-          <div class="hero-ctas">
-            <a href="javascript:void(0)" onclick="openForm()" class="btn btn-gold btn-gold-lg open-popup">CHECK IF YOU QUALIFY — Book Your NFET Exam Slot</a>
-            <a href="#specialist" class="btn btn-outline">Speak to a Career Specialist</a>
-          </div>
+        <div class="hero-badge">
+          INDIA'S FIRST GCC CAREER PROGRAM
         </div>
 
-        <!-- RIGHT: VSL video Section -->
-        <div id="vsl">
-          <div class="vsl-wrap open-video-popup">
-            <!-- THUMBNAIL -->
-            <img src="https://storage.googleapis.com/static_files_backend/media/images/kamal%20sir%20thnml%202.jpg"
-              alt="Video Thumbnail" class="vsl-thumbnail">
+        <h1>
+          Get Hired at <span class="hl-gold">BIG MNCs</span> —
+          <br>
+          Before You Start a Single
+          <br>
+          Day of Training.
+        </h1>
 
-            <!-- DARK OVERLAY -->
-            <div class="vsl-overlay">
+        <p class="hero-sub">
+          India's GCC sector is adding 5,20,000 finance jobs by 2030.
+          GCC School was built to place you inside those companies —
+          with a Conditional Offer Letter in hand — before your training even begins.
+        </p>
 
-              <p class="vsl-label">Watch Video</p>
+        <div class="hero-ctas">
+          <a href="javascript:void(0)" onclick="openForm()" class="btn btn-purple btn-purple-lg">
+            CHECK IF YOU QUALIFY — Book Your NFET Exam Slot
+          </a>
 
-              <div class="play-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
-              </div>
-
-            </div>
-
-            <div class="vsl-caption">
-              ▷ Watch: How the Hire-First Model Works &nbsp;(4 min)
-            </div>
-
-          </div>
-
+          <a href="#specialist" class="hero-link">
+            Speak to a Career Specialist
+          </a>
         </div>
 
+      </div>
+      <!-- RIGHT VIDEO -->
+      <div class="hero-video">
+        <div class="video-card">
+          <!-- VIDEO -->
+          <video id="heroVideo" class="hero-main-video" playsinline muted autoplay loop preload="metadata">
+            <source
+              src="https://storage.googleapis.com/gcc_prod_static_files_backend/static/videos/GCC%20VSL_BASIC%20CUTS.mp4"
+              type="video/mp4">
+          </video>
+
+          <!-- CUSTOM PLAY/PAUSE BUTTON -->
+          <button id="videoControlBtn" class="video-control-btn" aria-label="Toggle Video Play/Pause">
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </button>
+        </div>
+        <div class="video-caption">
+          ▷ Watch: How the Hire-First Model Works (4 min)
+        </div>
       </div>
     </div>
 
-    <!-- STATS BAR -->
+    <!-- STATS -->
     <div class="stats-bar">
-      <div class="stat-block">
+      <div class="stat-card">
         <div class="stat-val">200+</div>
         <div class="stat-lbl">Global Hiring Partners</div>
       </div>
-      <div class="stat-block">
+      <div class="stat-card">
         <div class="stat-val">3 Qualifications</div>
-        <div class="stat-lbl">UK ACCA + AIMA PGCM + British Council</div>
+        <div class="stat-lbl">UK ACCA • AIMA PGCM • British Council</div>
       </div>
-      <div class="stat-block">
-        <div class="stat-val">4.8★</div>
+      <div class="stat-card">
+        <div class="stat-val">4.8 ★</div>
         <div class="stat-lbl">Google Rating (800+ Reviews)</div>
       </div>
-      <div class="stat-block">
+      <div class="stat-card">
         <div class="stat-val">₹10 LPA+</div>
         <div class="stat-lbl">Target Salary at Placement</div>
       </div>
@@ -3860,33 +142,12 @@
         <!-- LEFT: text + 2x2 grid -->
         <div class="reveal">
           <div class="belief-lbl">The Paradigm Flip</div>
-          <h2>A B.COM DEGREE IS NOT YOUR CEILING.</h2>
-          <p class="belief-body">It's becoming the floor for the smartest finance careers in India.<br><br>India's
+          <h2>A <span>B.COM DEGREE</span> IS NOT YOUR CEILING.</h2>
+          <p class="belief-body">It's becoming the floor for the smartest finance careers in India.</p>
+          <p class="belief-description">India's
             1,800+ Global Capability Centers don't want traditional CA-track graduates. They want globally credentialed,
             AI-capable finance professionals who can operate on day one. GCC School is the only program built to create
             exactly that — at the fastest possible speed.</p>
-          <div class="icon-grid">
-            <div class="icon-card">
-              <div class="icon-card-ico">🎯</div>
-              <h4>You control your career trajectory from Day 1.</h4>
-              <p>Get a Conditional Offer Letter before training begins. Not after.</p>
-            </div>
-            <div class="icon-card">
-              <div class="icon-card-ico">🏆</div>
-              <h4>You earn a triple qualification no other Indian program offers.</h4>
-              <p>UK ACCA + AIMA PGCM + British Council Master's — in one cohort.</p>
-            </div>
-            <div class="icon-card">
-              <div class="icon-card-ico">🏢</div>
-              <h4>You train inside the GCC environment, not outside it.</h4>
-              <p>Real-time industry learning at DLF Cyber City, Gurugram.</p>
-            </div>
-            <div class="icon-card">
-              <div class="icon-card-ico">🤖</div>
-              <h4>AI makes you more hireable, not redundant.</h4>
-              <p>GCC School graduates are Certified AI-Accountants. That's a different category.</p>
-            </div>
-          </div>
         </div>
 
         <!-- RIGHT: Animated toggle graphic -->
@@ -3904,324 +165,923 @@
             <!-- Flip card -->
             <div class="flip-area">
               <div class="flip-card" id="flipCard">
-                <!-- OFF face — Plan B -->
                 <div class="flip-face flip-front">
                   <div class="flip-state-label">OFF STATE — PLAN B</div>
                   <div class="flip-plan-b">B.Com Degree</div>
                   <div class="flip-sub">Traditional route. Uncertain outcome.</div>
                 </div>
                 <!-- ON face — Plan A -->
-                <div class="flip-face flip-back">
+                <!-- <div class="flip-face flip-back">
                   <div class="flip-state-label">ON STATE — PLAN A</div>
                   <div class="flip-plan-a">GCC Career</div>
                   <div class="flip-sub">Conditional Offer. Before training begins.</div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
 
+
+        </div>
+
+      </div>
+      <div class="icon-grid">
+
+        <div class="icon-card">
+          <img src="./images/belief/rocket.png" alt="">
+          <div class="icon-card-description">
+            <h4>You control your career trajectory from Day 1.</h4>
+            <p>Get a Conditional Offer Letter before training begins. Not after.</p>
+          </div>
+        </div>
+
+        <div class="icon-card">
+          <img src="./images/belief/star.png" alt="">
+          <div class="icon-card-description">
+            <h4>You earn a triple qualification no other Indian program offers.</h4>
+            <p>UK ACCA + AIMA PGCM + British Council Master's — in one cohort.</p>
+          </div>
+        </div>
+
+        <div class="icon-card">
+          <img src="./images/belief/comp.png" alt="">
+          <div class="icon-card-description">
+            <h4>You train inside the GCC environment, not outside it.</h4>
+            <p>Real-time industry learning at DLF Cyber City, Gurugram.</p>
+          </div>
+        </div>
+
+        <div class="icon-card">
+          <img src="./images/belief/soft.png" alt="">
+          <div class="icon-card-description">
+            <h4>AI makes you more hireable, not redundant.</h4>
+            <p>GCC School graduates are Certified AI-Accountants. That's a different category.</p>
+          </div>
 
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ S4: TIERED CREDENTIAL ════════════════════════════════════════════════ -->
-  <section class="cred" id="programme">
+  <!-- Credential section -->
+  <section class="credential-section">
     <div class="w">
-      <div class="cred-grid reveal">
+      <h2 class="credential-heading">
+        Get hired at Goldman, EY & JPMorgan AND qualify for
+        <br>
+        ₹25L roles — from the same programme.
+      </h2>
 
-        <!-- LEFT: credentials -->
-        <div>
-          <div class="sec-lbl lbl-gold">GCC School</div>
-          <h2 class="sec-h">Get hired at Goldman, EY &amp; JPMorgan AND qualify for ₹25L roles — from the same
-            programme.</h2>
-          <p class="sec-sub">Stack 3 globally-recognised credentials around ONE outcome: a GCC career. Enter once.
-            Graduate with everything GCCs look for.</p>
-
-          <div class="tier-cards">
-            <div class="tier">
-              <div class="tier-num">Credential 1</div>
-              <h3>UK ACCA — The GCC Finance Benchmark</h3>
-              <ul>
-                <li>Recognised across 180+ countries. The first credential GCC finance teams screen for.</li>
-                <li>Covers financial reporting, audit, tax, and performance management to global standards.</li>
-                <li>GCC hiring managers treat ACCA as shorthand for "globally ready."</li>
-              </ul>
-            </div>
-            <div class="tier">
-              <div class="tier-num">Credential 2</div>
-              <h3>AIMA PGCM — India's Premier Management Layer</h3>
-              <ul>
-                <li>Post-Graduate Certificate in Management from the All India Management Association.</li>
-                <li>The management layer that separates analysts from business partners inside GCCs.</li>
-                <li>Elevates your candidacy from "operational hire" to "strategic hire."</li>
-              </ul>
-            </div>
-            <div class="tier">
-              <div class="tier-num">Credential 3</div>
-              <h3>British Council Master's — Global Academic Recognition</h3>
-              <ul>
-                <li>British Council-validated Master's-level credential.</li>
-                <li>Gives your CV international academic weight before the interview begins.</li>
-                <li>Makes GCC School graduates visible to multinational hiring teams across 120+ countries.</li>
-              </ul>
-            </div>
+      <div class="credential-grid">
+        <!-- CARD 1 -->
+        <div class="credential-card acca-card">
+          <div class="credential-logo">
+            <img src="./images/cred/silver_learning_logo.png" alt="ACCA">
           </div>
-          <p class="cred-close">This is what the GCC School programme delivers for you.</p>
+          <h3>
+            Credential 1 — UK ACCA
+            <span>(The GCC Finance Benchmark)</span>
+          </h3>
+          <p>
+            Recognized across 180+ countries. The first credential GCC finance teams look for.
+          </p>
+          <p>
+            Covers financial reporting, audit, tax, and performance management to global standards.
+          </p>
+          <p>
+            GCC hiring managers treat ACCA as shorthand for "globally ready."
+          </p>
         </div>
 
-        <!-- RIGHT: concentric circle diagram -->
-        <div class="circle-wrap">
-          <div class="concentric">
-            <div class="c-outer">
-              <div class="c-inner">
-                <p>We only hire globally credentialed, AI-ready professionals</p>
-              </div>
-            </div>
-            <div class="c-outer-ring-text">I can serve ANY finance graduate at ANY stage</div>
-            <div class="c-gap-label">
-              <div class="c-gap-arrow">GCC School fills this gap</div>
-            </div>
+        <!-- CARD 2 -->
+        <div class="credential-card aima-card">
+
+          <div class="credential-logo">
+            <img src="./images/cred/AIMA_logo.png" alt="AIMA">
           </div>
+
+          <h3>
+            Credential 2 — AIMA PGCM
+            <span>(India's Premium Management Edge)</span>
+          </h3>
+
+          <p>
+            Builds strategic, business-first thinking that sets you apart in GCC leadership tracks.
+          </p>
+
+          <p>
+            The management layer that separates analysts from business partners inside GCCs.
+          </p>
+
+          <p>
+            Elevates your candidacy from "operational hire" to "strategic hire."
+          </p>
+
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="credential-card british-card">
+
+          <div class="credential-logo">
+            <img src="./images/cred/british_council_logo.png" alt="British Council">
+          </div>
+
+          <h3>
+            Credential 3 — British Council Master's
+            <span>(Global Career Passport)</span>
+          </h3>
+
+          <p>
+            International academic credibility that unlocks global mobility and leadership roles.
+          </p>
+
+          <p>
+            Gives your CV international academic weight before the interview begins.
+          </p>
+
+          <p>
+            Makes GCC School graduates visible to multinational hiring teams across 120+ countries.
+          </p>
+
         </div>
 
       </div>
+
+      <div class="credential_programmer_dilvery">
+        <img src="images/cred/program_deliver.png" alt="program_delivery">
+        <p>This is what the GCC School programme delivers for you.</p>
+      </div>
+
     </div>
 
-    <!-- DARK NAVY BLOCK -->
-    <div class="dark-block">
-      <div class="w">
-        <h2 style="text-align:center;max-width:700px;margin-left:auto;margin-right:auto">We built THIS system to place
-          you at a GCC — before the rest of India even applies.</h2>
-        <p style="text-align:center;margin-left:auto;margin-right:auto">It is BY FAR the clearest and fastest path to a
-          <em>Conditional Offer Letter from a top GCC company</em> — even if you've never worked in finance
-          professionally before.
+  </section>
+
+  <!-- Placement section -->
+  <section class="placement-system-section">
+
+    <div class="w">
+
+      <!-- HEADING -->
+      <h2 class="placement-heading">
+        We built THIS system to place you at a
+        <br>
+        GCC — before the rest of India even applies.
+      </h2>
+
+      <p class="placement-sub">
+        It is BY FAR the clearest and fastest path to a
+        <strong>Conditional Offer Letter from top GCC company</strong>
+        — even if you've never worked in finance professionally before.
+      </p>
+
+      <!-- SYSTEM FLOW -->
+      <div class="placement-flow">
+
+        <!-- CARD 1 -->
+        <div class="flow-card">
+
+          <div class="flow-label">
+            CONDITIONAL OFFER LETTER
+          </div>
+
+          <div class="flow-image">
+            <img src="./images/placement/conditional letter.png" alt="Offer Letter">
+          </div>
+
+        </div>
+
+        <!-- PLUS -->
+        <div class="flow-plus">+</div>
+
+        <!-- CARD 2 -->
+        <div class="flow-card">
+
+          <div class="flow-label">
+            3 GLOBAL CREDENTIALS
+          </div>
+
+          <div class="flow-image-m" style="display: flex; flex-direction: column; gap: 20px;">
+            <img src="./images/cred/silver_learning_logo.png" alt="Credentials">
+            <img src="./images/cred/AIMA_logo.png" alt="Credentials">
+            <img src="./images/cred/british_council_logo.png" alt="Credentials">
+          </div>
+
+        </div>
+
+        <!-- PLUS -->
+        <div class="flow-plus">+</div>
+
+        <!-- CARD 3 -->
+        <div class="flow-card">
+
+          <div class="flow-label">
+            AI-ACCOUNTANT ADVANTAGE
+          </div>
+
+          <div class="flow-image">
+            <img src="./images/placement/AI-accountant.png" alt="AI Accountant">
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- TEXT -->
+      <div class="placement-copy">
+
+        <p>
+          If you're a B.Com, M.Com or MBA graduate and you've spent months applying for
+          jobs that don't respond — while watching AI reshape every finance role around you...
         </p>
 
-        <div class="mockup-ph">
-          <p>Visual Placeholder — Offer Letter + Triple Credential Stack + AI-Accountant Dashboard</p>
+        <h3>
+          THIS programme was built EXACTLY for you.
+        </h3>
+
+      </div>
+
+      <!-- CTA -->
+      <div class="placement-cta">
+
+        <a href="javascript:void(0)" onclick="openForm()" class="placement-btn">
+
+          CHECK IF YOU QUALIFY — Book Your NFET Exam Slot
+
+          <span>→</span>
+
+        </a>
+
+      </div>
+
+      <!-- LOGOS -->
+      <div class="placement-logos-title">
+        200+ GLOBAL HIRING PARTNERS HAVE PRE-COMMITTED SEATS FOR GCC SCHOOL COHORTS
+      </div>
+
+      <div class="placement-logos">
+
+        <img src="./images/companies/accenture.svg">
+        <img src="./images/companies/bankofamerica.svg">
+        <img src="./images/companies/barclays.svg">
+        <img src="./images/companies/cognizant.svg">
+        <img src="./images/companies/ASA.svg">
+        <img src="./images/companies/standardChatered.svg">
+        <img src="./images/companies/BCC.svg">
+        <img src="./images/companies/americanExpress.svg">
+        <img src="./images/companies/SS khoteri.svg">
+        <img src="./images/companies/google.svg">
+        <img src="./images/companies/UBS.svg">
+        <img src="./images/companies/ford.svg">
+        <img src="./images/companies/JpMorgon.svg">
+        <img src="./images/companies/capegmini.svg">
+        <img src="./images/companies/KPMG.svg">
+        <img src="./images/companies/bainCompany.svg">
+        <img src="./images/companies/mazars.svg">
+        <img src="./images/companies/BDO.svg">
+        <img src="./images/companies/wellsForgo.svg">
+        <img src="./images/companies/uniqus.svg">
+        <img src="./images/companies/facebook.svg">
+        <img src="./images/companies/goldman.svg">
+
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Myth Section -->
+  <section class="myth-section">
+    <div class="w">
+      <div class="myth-top-label">
+        COMMON MISCONCEPTIONS
+      </div>
+
+      <h2 class="myth-heading">
+        The 4 Biggest Myths Keeping B.Com Graduates Out of
+        <br>
+        GCC Careers
+      </h2>
+
+      <div class="myth-grid">
+        <div class="myth-ui-card">
+          <div class="myth-id">
+            MYTH #1
+          </div>
+          <div class="myth-text-red">
+            “You need a CA or MBA from a top college to get into Goldman or EY.”
+          </div>
+          <div class="fact-divider"></div>
+          <div class="fact-tag">
+            FACT :
+          </div>
+          <p>
+            GCCs hire on credentials and capability, not college pedigree.
+            UK ACCA is the credential they actually screen for — and GCC School delivers it.
+          </p>
         </div>
 
-        <p style="text-align:center;margin-left:auto;margin-right:auto"><em>If you're a B.Com, M.Com or MBA graduate and
-            you've spent months applying for jobs that don't respond — while watching AI reshape every finance role
-            around you…</em></p>
-        <p style="margin-top:12px;text-align:center"><strong>THIS programme was built EXACTLY for you.</strong></p>
+        <!-- CARD 2 -->
+        <div class="myth-ui-card">
 
-        <div class="dark-cta">
-          <a href="#" class="btn btn-gold btn-gold-fw open-popup" style="margin-top:36px">CHECK IF YOU QUALIFY — Book
-            Your NFET
-            Exam Slot</a>
+          <div class="myth-id">
+            MYTH #2
+          </div>
+
+          <div class="myth-text-red">
+            “AI is going to eliminate finance roles anyway, so why invest now?”
+          </div>
+
+          <div class="fact-divider"></div>
+
+          <div class="fact-tag">
+            FACT :
+          </div>
+
+          <p>
+            GCCs are not cutting finance headcount because of AI. They are hiring finance
+            professionals who understand and operate AI. GCC School makes you that person.
+          </p>
+
         </div>
 
-        <div class="logo-strip-label">200+ Global Hiring Partners Have Pre-Committed Seats for GCC School Cohorts</div>
-        <div class="logo-strip">
-          <span class="logo-pill">Goldman Sachs</span>
-          <span class="logo-pill">EY</span>
-          <span class="logo-pill">JPMorgan</span>
-          <span class="logo-pill">BCG</span>
-          <span class="logo-pill">McKinsey</span>
-          <span class="logo-pill">Standard Chartered</span>
-          <span class="logo-pill">Deloitte</span>
-          <span class="logo-pill">PwC</span>
-          <span class="logo-pill">KPMG</span>
-          <span class="logo-pill" style="border-color:rgba(248,202,77,.3);color:rgba(248,202,77,.5)">+ 194 more</span>
+        <!-- CARD 3 -->
+        <div class="myth-ui-card">
+
+          <div class="myth-id">
+            MYTH #3
+          </div>
+
+          <div class="myth-text-red">
+            “You need years of experience before a company like JPMorgan will consider you.”
+          </div>
+
+          <div class="fact-divider"></div>
+
+          <div class="fact-tag">
+            FACT :
+          </div>
+
+          <p>
+            The GCC School Hire-First model flips this. You receive a Conditional Offer Letter
+            before your training begins. Experience is built inside the company, not as a prerequisite.
+          </p>
+
         </div>
+
+        <!-- CARD 4 -->
+        <div class="myth-ui-card">
+
+          <div class="myth-id">
+            MYTH #4
+          </div>
+
+          <div class="myth-text-red">
+            “These ‘guaranteed placement’ programmes never deliver what they promise.”
+          </div>
+
+          <div class="fact-divider"></div>
+
+          <div class="fact-tag">
+            FACT :
+          </div>
+
+          <p>
+            GCC School does not promise placement. It structures a formal Conditional Offer Letter
+            from a hiring partner before the programme starts. 200+ companies have signed on.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Programm fit section -->
+  <section class="programme-fit-section">
+    <div class="w">
+      <!-- HEADING -->
+      <h2 class="programme-fit-heading">
+        This Programme Is For You If...
+      </h2>
+
+      <!-- GRID -->
+      <div class="programme-fit-grid">
+        <!-- CARD 1 -->
+        <div class="fit-card">
+          <h3>
+            You have a B.Com, M.Com, or MBA degree and no clear path
+            into a premium finance role.
+          </h3>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="fit-card">
+          <h3>
+            You've applied to companies like EY, JPMorgan, or Deloitte
+            and heard nothing back.
+          </h3>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="fit-card active-fit">
+          <h3>
+            You don't know whether a CA or MBA is actually required
+            for the roles you want.
+          </h3>
+          <div>
+            The answer, for GCC roles specifically, is neither.
+            UK ACCA is what they want. GCC School delivers it.
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="fit-card">
+          <h3>
+            You're worried AI will take your finance job before
+            you even get started.
+          </h3>
+          <p>
+            GCC School graduates are trained as
+            <strong>Certified AI-Accountants.</strong>
+            AI doesn't compete with you. It works for you.
+          </p>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="fit-card">
+          <h3>
+            You've tried ‘placement guarantee’ courses before
+            and been burned.
+          </h3>
+          <p>
+            GCC School issues a Conditional Offer Letter from a
+            named hiring partner before training starts.
+            Not after. Before.
+          </p>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="fit-card">
+          <h3>
+            You want global credentials, not another Indian
+            certificate no MNC has heard of.
+          </h3>
+          <p>UK ACCA. AIMA PGCM. British Council Master's.
+            These are the credentials GCC hiring managers recognize.</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="programme-fit-cta">
+        <a href="javascript:void(0)" onclick="openForm()" class="programme-fit-btn">
+          CHECK IF YOU QUALIFY
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ═══ S5: MYTHS ══════════════════════════════════════════════════════════════ -->
-  <section class="myths">
+
+
+  <!-- Finance Section -->
+  <section class="finance-gap-section">
     <div class="w">
-      <div class="myths-head reveal" style="text-align:center">
-        <div class="sec-lbl lbl-navy">Common Misconceptions</div>
-        <h2 class="sec-h">The 4 Biggest Myths Keeping B.Com Graduates Out of GCC Careers</h2>
+      <!-- TOP LABEL -->
+      <div class="finance-gap-label">
+        MARKET REALITY
       </div>
-      <div class="myths-grid reveal">
-        <div class="myth-card">
-          <div class="myth-top">
-            <div class="myth-tag">Myth 01</div>
-            <p class="myth-text">"You need a CA or MBA from a top college to get into Goldman or EY."</p>
+      <!-- HEADING -->
+      <h2 class="finance-gap-heading">
+        The GCC Finance Gap Is Real. The Numbers Prove It.
+      </h2>
+
+      <!-- CONTENT -->
+      <div class="finance-gap-content">
+
+        <!-- LEFT STATS -->
+        <div class="finance-stats-column">
+          <div class="finance-stat-box">
+            <div class="finance-big-number">1,800+</div>
+            <h3>GCCs currently operating in Indiah3>
+              <p>The world’s largest concentration of global finance operations</p>
           </div>
-          <div class="myth-bot">
-            <div class="fact-label">FACT:</div>
-            <p class="fact-text">GCCs hire on credentials and capability, not college pedigree. UK ACCA is the
-              credential they actually screen for — and GCC School delivers it.</p>
+
+          <div class="finance-stat-box">
+            <div class="finance-big-number">3,500+</div>
+            <h3>GCCs projected by 2030</h3>
+            <p>94% capacity increase incoming</p>
+          </div>
+
+          <div class="finance-stat-box">
+            <div class="finance-big-number">$200B</div>
+            <h3>Annual GCC revenue by 2030</h3>
+            <p>Contribution to India’s economy</p>
           </div>
         </div>
-        <div class="myth-card">
-          <div class="myth-top">
-            <div class="myth-tag">Myth 02</div>
-            <p class="myth-text">"AI is going to eliminate finance roles anyway, so why invest now?"</p>
-          </div>
-          <div class="myth-bot">
-            <div class="fact-label">FACT:</div>
-            <p class="fact-text">GCCs are not cutting finance headcount because of AI. They are hiring finance
-              professionals who understand and operate AI. GCC School makes you that person.</p>
-          </div>
-        </div>
-        <div class="myth-card">
-          <div class="myth-top">
-            <div class="myth-tag">Myth 03</div>
-            <p class="myth-text">"You need years of experience before a company like JPMorgan will consider you."</p>
-          </div>
-          <div class="myth-bot">
-            <div class="fact-label">FACT:</div>
-            <p class="fact-text">The GCC School Hire-First model flips this. You receive a Conditional Offer Letter
-              before your training begins. Experience is built inside the company, not as a prerequisite to enter it.
+
+        <!-- RIGHT TABLE -->
+        <div class="finance-analysis-card">
+          <div class="analysis-header">
+            <h3>
+              Finance Professionals Gap Analysis — 2026–2035
+            </h3>
+            <p>
+              Source: GCC School Market Analysis, 2026
             </p>
           </div>
-        </div>
-        <div class="myth-card">
-          <div class="myth-top">
-            <div class="myth-tag">Myth 04</div>
-            <p class="myth-text">"These 'guaranteed placement' programmes never deliver what they promise."</p>
+
+          <!-- TABLE -->
+          <div class="analysis-table">
+
+            <div class="analysis-row analysis-head">
+
+              <div>PERIOD</div>
+              <div>DEMAND</div>
+              <div>SUPPLY</div>
+              <div>GAP</div>
+              <div>%</div>
+
+            </div>
+
+            <div class="analysis-row">
+
+              <div class="bold-cell">2026–2030</div>
+              <div>1,00,00,000</div>
+              <div>48,00,000</div>
+              <div class="bold-cell">52,00,000</div>
+              <div class="purple-cell">52%</div>
+
+            </div>
+
+            <div class="analysis-row">
+
+              <div class="bold-cell">2030–2035</div>
+              <div>1,50,00,000</div>
+              <div>60,00,000</div>
+              <div class="bold-cell">90,00,000</div>
+              <div class="purple-cell">60%</div>
+
+            </div>
+
           </div>
-          <div class="myth-bot">
-            <div class="fact-label">FACT:</div>
-            <p class="fact-text">GCC School does not promise placement. It structures a formal Conditional Offer Letter
-              from a hiring partner before the programme starts. 200+ companies have signed on as active partners.</p>
+
+          <!-- FOOTER -->
+          <div class="analysis-footer">
+
+            Source: GCC School Finance Professional Gap Analysis, 2026–2035
+
           </div>
+
+          <!-- BOTTOM TEXT -->
+          <div class="analysis-bottom-copy">
+
+            GCCs are not slowing down. The talent gap is growing.
+            GCC School was built for exactly this moment.
+
+          </div>
+
         </div>
+
       </div>
+
+      <!-- JOB BOXES -->
+      <div class="finance-job-grid">
+
+        <div class="finance-job-box">
+          <h4>Financial Accounting & Reporting</h4>
+          <span>269K+ Jobs</span>
+        </div>
+
+        <div class="finance-job-box">
+          <h4>Management Accounting</h4>
+          <span>224K+ Jobs</span>
+        </div>
+
+        <div class="finance-job-box">
+          <h4>FP&A</h4>
+          <span>77K+ Jobs</span>
+        </div>
+
+        <div class="finance-job-box">
+          <h4>Risk Management</h4>
+          <span>37K+ Jobs</span>
+        </div>
+
+        <div class="finance-job-box">
+          <h4>CFO Advisory</h4>
+          <span>20K+ Jobs</span>
+        </div>
+
+      </div>
+
     </div>
+
   </section>
 
-  <!-- ═══ S6: WHO IT'S FOR ═══════════════════════════════════════════════════════ -->
-  <section class="for-sec">
+  <!-- Roadmap Section -->
+  <section class="roadmap-section">
     <div class="w">
-      <h2 class="reveal">This Programme Is For You If…</h2>
-      <div class="for-grid">
-        <div class="for-card reveal d1">
-          <h4>You have a B.Com, M.Com, or MBA degree and no clear path into a premium finance role.</h4>
-        </div>
-        <div class="for-card reveal d2">
-          <h4>You've applied to companies like EY, JPMorgan, or Deloitte and heard nothing back.</h4>
-        </div>
-        <div class="for-card reveal d3">
-          <h4>You don't know whether a CA or MBA is actually required for the roles you want.</h4>
-          <p>The answer, for GCC roles specifically, is <em>neither</em>. UK ACCA is what they want. GCC School delivers
-            it.</p>
-        </div>
-        <div class="for-card reveal d4">
-          <h4>You're worried AI will take your finance job before you even get started.</h4>
-          <p>GCC School graduates are trained as <em>Certified AI-Accountants</em>. AI doesn't compete with you. It
-            works for you.</p>
-        </div>
-        <div class="for-card reveal d5">
-          <h4>You've tried 'placement guarantee' courses before and been burned.</h4>
-          <p>GCC School issues a Conditional Offer Letter from a <em>named</em> hiring partner before training starts.
-            Not after. Before.</p>
-        </div>
-        <div class="for-card reveal d6">
-          <h4>You want global credentials, not another Indian certificate no MNC has heard of.</h4>
-          <p>UK ACCA. AIMA PGCM. British Council Master's. These are the credentials GCC hiring managers recognise.</p>
-        </div>
+      <!-- TOP LABEL -->
+      <div class="roadmap-top-label">
+        THE GCC SCHOOL LEARNING PATHWAY
       </div>
-      <div style="text-align:center">
-        <a href="javascript:void(0)" onclick="openForm()" class="btn btn-gold btn-gold-lg open-popup">CHECK IF YOU QUALIFY</a>
+      <!-- HEADING -->
+      <h2 class="roadmap-heading">
+        The GCC School Programme Roadmap
+      </h2>
+      <!-- SUBTEXT -->
+      <p class="roadmap-subtext">
+        Four phases. One outcome: a conditional offer letter and a career
+        inside a Global Capability Center.
+      </p>
+
+      <!-- TABS -->
+      <div class="roadmap-tabs">
+
+        <button class="roadmap-tab active">
+          Phase 1
+        </button>
+
+        <button class="roadmap-tab">
+          Phase 2
+        </button>
+
+        <button class="roadmap-tab">
+          Phase 3
+        </button>
+
+        <button class="roadmap-tab">
+          Phase 4
+        </button>
+
+        <button class="roadmap-tab">
+          Ongoing
+        </button>
+
+      </div>
+
+      <!-- CONTENT -->
+      <div class="roadmap-content">
+
+        <!-- LEFT -->
+        <div class="roadmap-week-box">
+          <div class="roadmap-week-box-text">
+            Weeks 1–4
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="roadmap-detail">
+          <h3>
+            NFET Assessment & Onboarding
+          </h3>
+          <p>
+            You appear for the NFET Entrance Exam. On passing,
+            GCC School matches you with a Conditional Offer from one of
+            200+ hiring partners. Offer letter issued before training begins.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ S7: GCC OPPORTUNITY ════════════════════════════════════════════════════ -->
-  <section class="opp">
+  <!-- AI-account Section -->
+  <section class="ai-accountant-section">
     <div class="w">
-      <div class="sec-lbl lbl-grey reveal">Market Reality</div>
-      <h2 class="reveal">The GCC Finance Gap Is Real. The Numbers Prove It.</h2>
-
-      <div class="opp-grid reveal">
-        <!-- LEFT: 3 big stats -->
-        <div class="big-stats">
-          <div class="big-stat">
-            <div class="bs-val">1,800+</div>
-            <div class="bs-lbl">GCCs currently operating in India</div>
-            <div class="bs-sub">The world's largest concentration of global finance operations</div>
-          </div>
-          <div class="big-stat">
-            <div class="bs-val">3,500+</div>
-            <div class="bs-lbl">GCCs projected by 2030</div>
-            <div class="bs-sub">94% capacity increase incoming</div>
-          </div>
-          <div class="big-stat">
-            <div class="bs-val">$200B</div>
-            <div class="bs-lbl">Annual GCC revenue by 2030</div>
-            <div class="bs-sub">Contribution to India's economy</div>
-          </div>
-        </div>
-
-        <!-- RIGHT: Gap analysis table -->
-        <div class="gap-table-wrap">
-          <div class="gap-table-title">
-            <p>Finance Professionals Gap Analysis — 2026–2035</p>
-            <span>Source: GCC School Market Analysis, 2026</span>
-          </div>
-          <table class="gap">
-            <thead>
-              <tr>
-                <th>Period</th>
-                <th>Demand</th>
-                <th>Supply</th>
-                <th>Gap</th>
-                <th>%</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2026–2030</td>
-                <td>1,00,00,000</td>
-                <td>48,00,000</td>
-                <td class="hl">52,00,000</td>
-                <td class="pct">52%</td>
-              </tr>
-              <tr>
-                <td>2030–2035</td>
-                <td>1,50,00,000</td>
-                <td>60,00,000</td>
-                <td class="hl">90,00,000</td>
-                <td class="pct">60%</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="gap-source">Source: GCC School Finance Professionals Gap Analysis, 2026–2035</div>
-          <div class="gap-note" style="padding:14px 16px;font-size:.84rem">GCCs are not slowing down. The talent gap is
-            growing. GCC School was built for exactly this moment.</div>
-        </div>
+      <!-- TOP LABEL -->
+      <div class="ai-top-label">
+        CERTIFIED AI-ACCOUNTANT
       </div>
 
-      <!-- Domain cards -->
-      <div class="domain-strip reveal">
-        <div class="domain-card">
-          <div class="dc-name">Financial Accounting &amp; Reporting</div>
-          <div class="dc-jobs">269K+ Jobs</div>
+      <!-- HEADING -->
+      <h2 class="ai-heading">
+        <span>AI is not replacing GCC finance roles.</span>
+        <br>
+        It's replacing finance professionals who don't know how
+        <br>
+        to use AI.
+      </h2>
+
+      <!-- SUBTEXT -->
+      <p class="ai-subtext">
+        GCC School graduates leave as Certified AI-Accountants.
+        Every module is integrated with AI tools — not as an add-on,
+        but as the operating system of how you work inside a GCC.
+      </p>
+
+      <!-- CONTENT -->
+      <div class="ai-content-grid">
+
+        <!-- LEFT FEATURES -->
+        <div class="ai-feature-list">
+
+          <!-- ITEM -->
+          <div class="ai-feature-card blue-card">
+            <div class="ai-icon">
+              <img src="./images/ai-content-images/search.svg" alt="search-icon">
+            </div>
+            <div class="ai-feature-copy">
+              <h3>Find and land GCC roles faster.</h3>
+              <p>
+                AI-driven CV optimisation and role matching across 200+
+                partner companies.
+              </p>
+            </div>
+          </div>
+
+          <!-- ITEM -->
+          <div class="ai-feature-card gold-card">
+            <div class="ai-icon">
+              <img src="./images/ai-content-images/current.svg" alt="search-icon">
+            </div>
+
+            <div class="ai-feature-copy">
+
+              <h3>
+                Automate your financial workflows.
+              </h3>
+
+              <p>
+                Reduce time on admin, reporting, and reconciliation.
+                Bill more hours doing higher-value work.
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- ITEM -->
+          <div class="ai-feature-card red-card">
+
+            <div class="ai-icon">
+              <img src="./images/ai-content-images/analys.svg" alt="search-icon">
+            </div>
+
+            <div class="ai-feature-copy">
+
+              <h3>
+                Analyse at a level most analysts can't.
+              </h3>
+
+              <p>
+                Competitor benchmarking, financial modelling, and gap
+                analysis — in a fraction of the time.
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- ITEM -->
+          <div class="ai-feature-card green-card">
+
+            <div class="ai-icon">
+              <img src="./images/ai-content-images/scale.svg" alt="search-icon">
+            </div>
+
+            <div class="ai-feature-copy">
+
+              <h3>
+                Scale from analyst to advisor faster.
+              </h3>
+
+              <p>
+                AI systems that support your upward mobility inside
+                the GCC from your first month.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="domain-card">
-          <div class="dc-name">Management Accounting</div>
-          <div class="dc-jobs">224K+ Jobs</div>
-        </div>
-        <div class="domain-card">
-          <div class="dc-name">FP&amp;A</div>
-          <div class="dc-jobs">77K+ Jobs</div>
-        </div>
-        <div class="domain-card">
-          <div class="dc-name">Risk Management</div>
-          <div class="dc-jobs">37K+ Jobs</div>
-        </div>
-        <div class="domain-card">
-          <div class="dc-name">CFO Advisory</div>
-          <div class="dc-jobs">20K+ Jobs</div>
-        </div>
-        <div class="domain-card">
-          <div class="dc-name">Internal Audit</div>
-          <div class="dc-jobs">14% CAGR Growth</div>
+
+        <!-- RIGHT DASHBOARD -->
+        <div class="ai-dashboard-wrap">
+
+          <!-- BADGE IMAGE -->
+          <img src="./images/ai-content-images/ai-badage.svg" alt="AI Badge" class="ai-badge-img">
+
+          <!-- DASHBOARD CARD -->
+          <div class="ai-dashboard-card">
+
+            <img src="./images/ai-content-images/ai-dashboard.svg" alt="AI Dashboard" class="dashboard-main-img">
+
+          </div>
+
         </div>
       </div>
     </div>
   </section>
+
+  <!-- LeaderShip section -->
+  <section class="leadership-section">
+    <div class="w">
+      <!-- TOP LABEL -->
+      <div class="leadership-label">
+        INDUSTRY EXPERTS
+      </div>
+
+      <!-- HEADING -->
+      <h2 class="leadership-heading">
+        Built and Led by GCC Industry Leaders
+      </h2>
+
+      <p class="leadership-subtext">
+        GCC School isn't run by educators. It's built and led by people
+        who've actually built the GCC ecosystem in India.
+      </p>
+
+      <!-- FOUNDER CARD -->
+      <div class="lead-card reveal">
+        <div class="lead-photo">
+          <img src="./images/leadership/0.svg" alt="">
+        </div>
+        <div class="lead-info">
+          <div class="lead-name">Prof. (Dr.) Manpreet Singh Manna</div>
+          <div class="lead-title">Executive Director, GCC School</div>
+          <div class="lead-tags">
+            <span class="lead-tag">Former Director, AICTE</span>
+            <span class="lead-tag">30+ Years Leadership</span>
+          </div>
+          <p class="lead-bio">Dr. Manna brings three decades of institution-building experience to GCC School. As Former
+            Director of AICTE — India's apex technical education regulator — he shaped the architecture of professional
+            education at a national scale. At GCC School, he leads curriculum strategy, industry integration, and the
+            Hire-First placement model.</p>
+          <a class="lead-li" href="#">LinkedIn ↗</a>
+        </div>
+      </div>
+
+      <!-- MENTOR TITLE -->
+      <div class="mentor-title">
+        40+ Mentors from Goldman, EY, JPMorgan, BCG, McKinsey & more
+      </div>
+
+      <div class="mentor-grid-ui">
+        <img src="./images/leadership/1.svg">
+        <img src="./images/leadership/2.svg">
+        <img src="./images/leadership/3.svg">
+        <img src="./images/leadership/4.svg">
+        <img src="./images/leadership/5.svg">
+        <img src="./images/leadership/6.svg">
+      </div>
+
+      <div class="mentor-btn-wrap">
+        <button class="mentor-view-btn">
+          See All 40+ Mentors
+        </button>
+      </div>
+
+      <!-- STRATEGIC THINK TANK -->
+      <div class="thinktank-section">
+
+        <div class="thinktank-title">
+          Strategic Think Tank
+        </div>
+
+        <p class="thinktank-sub">
+          GCC School's Strategic Think Tank includes senior leaders from across the GCC ecosystem who shape programme
+          direction, curriculum design, and hiring partner relationships.
+        </p>
+
+        <div class="thinktank-grid">
+
+          <!-- <div class="thinktank-card"> -->
+          <img src="./images/leadership/subleader1.png">
+          <!-- </div> -->
+
+          <!-- <div class="thinktank-card"> -->
+          <img src="./images/leadership/subleader2.png">
+          <!-- </div> -->
+
+          <!-- <div class="thinktank-card"> -->
+          <img src="./images/leadership/subleader3.svg">
+          <!-- </div> -->
+
+          <!-- <div class="thinktank-card"> -->
+          <img src="./images/leadership/subleader4.svg">
+          <!-- </div> -->
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+
+
+
+
+
+
+
+
 
   <!-- ═══ S8: ROADMAP ════════════════════════════════════════════════════════════ -->
-  <section class="roadmap" id="roadmap">
+  <!-- <section class="roadmap" id="roadmap">
     <div class="w">
       <div class="sec-lbl lbl-gold reveal">The GCC School Learning Pathway</div>
       <h2 class="roadmap reveal">The GCC School Programme Roadmap</h2>
@@ -4297,10 +1157,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ═══ S9: AI SECTION ════════════════════════════════════════════════════════ -->
-  <section class="ai-sec">
+  <!-- <section class="ai-sec">
     <div class="w">
       <div style="text-align:center;margin-bottom:48px" class="reveal">
         <div class="sec-lbl lbl-gold">Certified AI-Accountant</div>
@@ -4311,7 +1171,6 @@
           inside a GCC.</p>
       </div>
       <div class="ai-grid">
-        <!-- LEFT -->
         <div class="reveal">
           <div class="ai-cards">
             <div class="ai-card">
@@ -4345,9 +1204,7 @@
           </div>
         </div>
 
-        <!-- RIGHT: Dashboard + Badge -->
         <div class="ai-right reveal">
-          <!-- Dark mode AI dashboard -->
           <div class="ai-dash">
             <div class="ai-dash-top">
               <div class="ai-dash-dot" style="background:#FF5F57"></div>
@@ -4357,7 +1214,7 @@
             </div>
             <div class="ai-dash-body">
               <svg class="dash-svg" viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">
-                <!-- Metric cards row -->
+                
                 <rect x="0" y="0" width="115" height="56" rx="6" fill="rgba(255,255,255,.05)" />
                 <text x="10" y="16" font-family="Poppins,sans-serif" font-size="8" fill="rgba(255,255,255,.35)"
                   font-weight="600">REVENUE FORECAST</text>
@@ -4385,31 +1242,26 @@
                 <text x="258" y="54" font-family="Poppins,sans-serif" font-size="7" fill="#F8CA4D">Confidence:
                   91%</text>
 
-                <!-- Chart area -->
                 <rect x="0" y="68" width="245" height="110" rx="6" fill="rgba(255,255,255,.04)" />
                 <text x="10" y="82" font-family="Poppins,sans-serif" font-size="8" fill="rgba(255,255,255,.35)"
                   font-weight="600">CASH FLOW ANALYSIS — AI OVERLAY</text>
-                <!-- Grid lines -->
+                
                 <line x1="10" y1="90" x2="235" y2="90" stroke="rgba(255,255,255,.05)" stroke-width="1" />
                 <line x1="10" y1="105" x2="235" y2="105" stroke="rgba(255,255,255,.05)" stroke-width="1" />
                 <line x1="10" y1="120" x2="235" y2="120" stroke="rgba(255,255,255,.05)" stroke-width="1" />
                 <line x1="10" y1="135" x2="235" y2="135" stroke="rgba(255,255,255,.05)" stroke-width="1" />
                 <line x1="10" y1="150" x2="235" y2="150" stroke="rgba(255,255,255,.05)" stroke-width="1" />
-                <!-- Actual line -->
+                
                 <polyline points="10,148 45,138 80,130 115,118 150,125 185,108 220,95 235,90"
                   stroke="rgba(255,255,255,.3)" stroke-width="1.5" fill="none" stroke-dasharray="none" />
-                <!-- AI predicted line (gold) -->
+              
                 <polyline points="185,108 220,92 235,82" stroke="#F8CA4D" stroke-width="2" fill="none"
                   stroke-dasharray="4,3" />
-                <!-- Area fill -->
                 <polygon points="10,148 45,138 80,130 115,118 150,125 185,108 235,90 235,170 10,170"
                   fill="rgba(255,255,255,.03)" />
-                <!-- AI prediction area -->
                 <polygon points="185,108 220,92 235,82 235,170 185,170" fill="rgba(248,202,77,.05)" />
-                <!-- Dots -->
                 <circle cx="185" cy="108" r="3" fill="#F8CA4D" />
                 <circle cx="220" cy="92" r="3" fill="#F8CA4D" />
-                <!-- Labels -->
                 <text x="10" y="178" font-family="Poppins,sans-serif" font-size="7"
                   fill="rgba(255,255,255,.2)">Jan</text>
                 <text x="45" y="178" font-family="Poppins,sans-serif" font-size="7"
@@ -4423,7 +1275,6 @@
                 <text x="180" y="178" font-family="Poppins,sans-serif" font-size="7" fill="rgba(248,202,77,.5)">AI
                   ▸</text>
 
-                <!-- Right panel -->
                 <rect x="255" y="68" width="125" height="110" rx="6" fill="rgba(255,255,255,.04)" />
                 <text x="265" y="82" font-family="Poppins,sans-serif" font-size="8" fill="rgba(255,255,255,.35)"
                   font-weight="600">ROLE MATCH ENGINE</text>
@@ -4442,7 +1293,6 @@
                 <text x="270" y="163" font-family="Poppins,sans-serif" font-size="7.5" fill="rgba(255,255,255,.4)">Risk
                   &amp; Compliance</text>
 
-                <!-- Bottom bar -->
                 <rect x="0" y="192" width="380" height="48" rx="6" fill="rgba(248,202,77,.06)"
                   stroke="rgba(248,202,77,.15)" stroke-width="1" />
                 <text x="12" y="208" font-family="Poppins,sans-serif" font-size="8" fill="rgba(248,202,77,.7)"
@@ -4455,7 +1305,6 @@
             </div>
           </div>
 
-          <!-- AI Badge -->
           <div style="display:flex;justify-content:center">
             <div class="ai-badge">
               <div class="aib-top">Certified</div>
@@ -4466,20 +1315,19 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>  -->
 
   <!-- ═══ S10: FACULTY & MENTORS ════════════════════════════════════════════════ -->
-  <section class="faculty" id="faculty">
+  <!-- <section class="faculty" id="faculty">
     <div class="w">
-      <div class="sec-lbl lbl-gold reveal">Faculty &amp; Mentors</div>
+      <div class="sec-lbl lbl-gold reveal" style="display: flex; justify-content: center;">Faculty &amp; Mentors</div>
       <h2 class="reveal">Built and Led by GCC Industry Leaders</h2>
       <p class="faculty-sub reveal">GCC School is not run by educators who theorise about industry. It is built by the
         people who run it.</p>
 
-      <!-- Lead card: photo left, info right -->
       <div class="lead-card reveal">
         <div class="lead-photo">
-          <p>Photo<br>Placeholder</p>
+          <img src="./images/leadership/0.svg" alt="">
         </div>
         <div class="lead-info">
           <div class="lead-name">Prof. (Dr.) Manpreet Singh Manna</div>
@@ -4496,12 +1344,10 @@
         </div>
       </div>
 
-      <!-- Mentor grid -->
       <div class="mentor-section-h reveal">40+ Mentors from Goldman, EY, JPMorgan, BCG, McKinsey &amp; more</div>
       <p class="mentor-section-sub reveal">Each mentor card: Name · Title · Company · LinkedIn icon. Photo placeholder
         on the right.</p>
       <div class="mentor-grid reveal">
-        <!-- 6 sample mentor cards — text left, photo right -->
         <div class="mentor-card">
           <div class="mentor-left">
             <div class="mentor-name">Mentor Name</div>
@@ -4562,7 +1408,6 @@
           style="font-size:.85rem;padding:12px 28px">See All 40+ Mentors</button>
       </div>
 
-      <!-- Think Tank -->
       <div class="thinktank reveal" style="background:var(--f8);border:1px solid #eee">
         <div class="tt-h">Strategic Think Tank</div>
         <div class="tt-sub">GCC School's Strategic Think Tank includes senior leaders from across the GCC ecosystem who
@@ -4595,32 +1440,28 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <!-- ═══ S11: REFERENCES ════════════════════════════════════════════════════════ -->
   <section class="refs">
     <div class="w">
-      <div class="sec-lbl lbl-navy reveal" style="text-align:center">References</div>
-      <h2 class="reveal" style="text-align:center">Don't Take Our Word For It. Take Theirs.</h2>
+      <h2 class="reveal" style="text-align:center; color: black;">Don't Take Our Word For It. Take Theirs.</h2>
 
-      <!-- Quote card -->
       <div class="quote-card reveal">
         <div class="q-mark">"</div>
         <p class="q-text">GCC School is committed to building strong fundamentals, critical thinking, and global career
           readiness. We extend our best wishes to all aspirants as they take this confident step toward their
           professional journey.</p>
-        <div class="q-author">
-          <div class="q-ph">Photo</div>
+        <div class="testimonial-user">
+          <img src="./images/testimonial/1.svg">
           <div>
-            <div class="q-name">Prof. (Dr.) Manpreet Singh Manna</div>
-            <div class="q-title">Executive Director, GCC School &nbsp;·&nbsp; Former Director, AICTE — Government of
-              India</div>
+            <h4>Prof. (Dr.) Manpreet Singh Manna</h4>
+            <span>Executive Director, GCC School  ·  Former Director, AICTE — Government of India</span>
           </div>
         </div>
       </div>
 
-      <!-- Market data stat blocks -->
-      <div class="sec-lbl lbl-navy reveal" style="text-align:center;margin-bottom:16px">The gap is not a claim. It is a
+      <div class="sec-lbl lbl-navy reveal" style="text-align:center;margin-bottom:16px; color: black;">The gap is not a
+        claim. It is a
         documented market reality.</div>
       <div class="ref-stat-row reveal">
         <div class="ref-stat">
@@ -4642,25 +1483,45 @@
       </div>
       <p class="ref-source">Source: GCC School Finance Professionals Gap Analysis, 2026–2035</p>
 
-      <!-- Partner logo wall -->
       <div class="reveal">
-        <p class="logo-wall-h">200+ global companies have not just 'expressed interest'. They have signed on as active
-          hiring partners.</p>
-        <p class="logo-wall-sub">Goldman Sachs · EY · JPMorgan · BCG · McKinsey · Standard Chartered · Deloitte · PwC ·
-          KPMG · and 190+ more.</p>
-        <div class="logo-wall">
-          <span class="lw-pill">Goldman Sachs</span><span class="lw-pill">EY</span><span class="lw-pill">JPMorgan</span>
-          <span class="lw-pill">BCG</span><span class="lw-pill">McKinsey</span><span class="lw-pill">Standard
-            Chartered</span>
-          <span class="lw-pill">Deloitte</span><span class="lw-pill">PwC</span><span class="lw-pill">KPMG</span>
-          <span class="lw-pill">Barclays</span><span class="lw-pill">Accenture</span><span class="lw-pill">HSBC</span>
-          <span class="lw-pill">Citi</span><span class="lw-pill">Deutsche Bank</span><span class="lw-pill"
-            style="border-style:dashed">+ 186 more</span>
+        <div class="reference-heading">
+          <h1> 200+ global companies have not just 'expressed interest'. They have signed on as active
+            hiring partners.
+          </h1>
+          <p class="logo-wall-sub">Goldman Sachs · EY · JPMorgan · BCG · McKinsey · Standard Chartered · Deloitte · PwC
+            ·
+            KPMG · and 190+ more.</p>
         </div>
-        <p class="lw-more"><a href="#" style="color:var(--gold2);font-weight:600">See All Partners</a></p>
+
+        <div class="logo-wall-grid">
+          <img src="./images/companies/accenture.svg" alt="accenture">
+          <img src="./images/companies/bankofamerica.svg" alt="bankofamerica">
+          <img src="./images/companies/barclays.svg" alt="barclays">
+          <img src="./images/companies/cognizant.svg" alt="cognizant">
+          <img src="./images/companies/ASA.svg" alt="asa">
+          <img src="./images/companies/standardChatered.svg" alt="standardChartered">
+          <img src="./images/companies/BCC.svg" alt="bcc">
+          <img src="./images/companies/americanExpress.svg" alt="americanExpress">
+          <img src="./images/companies/google.svg" alt="google">
+          <img src="./images/companies/UBS.svg" alt="ubs">
+          <img src="./images/companies/SS khoteri.svg" alt="ss khoteri">
+          <img src="./images/companies/ford.svg" alt="ford">
+          <img src="./images/companies/JpMorgon.svg" alt="JpMorgon">
+          <img src="./images/companies/capegmini.svg" alt="capegmini">
+          <img src="./images/companies/KPMG.svg" alt="kpmg">
+          <img src="./images/companies/wellsForgo.svg" alt="wellsForgo">
+          <img src="./images/companies/mazars.svg" alt="mazars">
+          <img src="./images/companies/bainCompany.svg" alt="bainCompany">
+          <img src="./images/companies/goldman.svg" alt="goldman">
+          <img src="./images/companies/BDO.svg" alt="bdo">
+          <img src="./images/companies/uniqus.svg" alt="uniqus">
+          <img src="./images/companies/facebook.svg" alt="face">
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <p class="lw-more"><a href="#" style="font-weight:600">See All Partners</a></p>
+        </div>
       </div>
 
-      <!-- Trust badges -->
       <div class="trust-strip reveal">
         <div class="trust-badge"><span class="tb-ico">🏅</span>ISO 21001:2025 Certified</div>
         <div class="trust-badge"><span class="tb-ico">⭐</span>4.8★ Google Rating (800+ Reviews)</div>
@@ -4672,12 +1533,13 @@
     </div>
   </section>
 
-  <!-- ═══ S12: COMPARISON TABLE ════════════════════════════════════════════════ -->
+  <!-- Comparisn Section -->
   <section class="cmp-sec">
     <div class="w">
       <div class="sec-lbl lbl-gold reveal" style="text-align:center">Why GCC School</div>
       <h2 class="reveal" style="text-align:center">Traditional Pathway vs. GCC School Journey</h2>
-      <p class="cmp-sub reveal" style="text-align:center">See why the GCC School route is the most direct path to the
+      <p class="cmp-sub reveal" style="text-align:center; font-size: 15px;">See why the GCC School route is the most
+        direct path to the
         professional world of tomorrow.</p>
       <div class="cmp-wrap reveal">
         <table class="cmp">
@@ -4756,106 +1618,271 @@
   </section>
 
   <!-- ═══ S13: TRUST & GUARANTEE ══════════════════════════════════════════════ -->
-  <section class="guar">
+  <section class="commitment-section">
     <div class="w">
-      <div class="sec-lbl lbl-navy tc reveal">Our Commitments</div>
-      <h2 class="tc reveal" style="text-align:center">A Serious Programme. A Serious Commitment.</h2>
-      <p class="guar-sub tc reveal" style="margin:0 auto 48px">GCC School is not a course you buy and forget. It is a
-        structured career pathway with formal commitments on both sides.</p>
-      <div class="guar-grid">
-        <div class="guar-card reveal d1">
-          <div class="guar-ico">📄</div>
-          <h4>Conditional Offer Letter on Qualification</h4>
-          <p>Pass the NFET Exam and a named hiring partner extends a formal conditional offer before training commences.
+      <!-- LABEL -->
+      <div class="commitment-label">
+        OUR COMMITMENTS
+      </div>
+
+      <!-- HEADING -->
+      <h2 class="commitment-heading">
+        A Serious Programme. A Serious Commitment.
+      </h2>
+
+      <!-- SUBTEXT -->
+      <p class="commitment-subtext">
+        GCC School is not a course you buy and forget.
+        It is a structured career pathway with formal commitments on both sides.
+      </p>
+
+      <!-- GRID -->
+      <div class="commitment-grid">
+
+        <!-- CARD -->
+        <div class="commitment-card">
+
+          <div class="commitment-icon">
+            <img src="./images/commitment/1.svg" alt="">
+          </div>
+
+          <h3>
+            Conditional Offer Letter on Qualification
+          </h3>
+
+          <p>
+            Pass the NFET Exam and a named hiring partner extends
+            a formal conditional offer before training commences.
           </p>
+
         </div>
-        <div class="guar-card reveal d2">
-          <div class="guar-ico">🎓</div>
-          <h4>Triple Qualification Stack</h4>
-          <p>UK ACCA + AIMA PGCM + British Council Master's. All three in one cohort. No parallel enrolment needed.</p>
+
+        <!-- CARD -->
+        <div class="commitment-card">
+
+          <div class="commitment-icon">
+            <img src="./images/commitment/2.svg" alt="">
+          </div>
+
+          <h3>
+            Triple Qualification Stack
+          </h3>
+
+          <p>
+            UK ACCA + AIMA PGCM + British Council Master's.
+            All three in one cohort. No parallel enrolment needed.
+          </p>
+
         </div>
-        <div class="guar-card reveal d3">
-          <div class="guar-ico">🏅</div>
-          <h4>ISO 21001:2025 Certified Programme</h4>
-          <p>The only GCC-sector career programme in India with this quality management certification for educational
-            institutions.</p>
+
+        <!-- CARD -->
+        <div class="commitment-card">
+
+          <div class="commitment-icon">
+            <img src="./images/commitment/3.svg" alt="">
+          </div>
+
+          <h3>
+            ISO 21001:2025 Certified Programme
+          </h3>
+
+          <p>
+            The only GCC-sector career programme in India with
+            this quality management certification for educational institutions.
+          </p>
+
         </div>
-        <div class="guar-card reveal d4">
-          <div class="guar-ico">🤝</div>
-          <h4>40+ Industry Mentors from Tier-1 GCCs</h4>
-          <p>Active professionals from Goldman, EY, JPMorgan, BCG, McKinsey, and 35+ more companies — not academic
-            advisors.</p>
+
+        <!-- CARD -->
+        <div class="commitment-card">
+
+          <div class="commitment-icon">
+            <img src="./images/commitment/4.svg" alt="">
+          </div>
+
+          <h3>
+            40+ Industry Mentors from Tier-1 GCCs
+          </h3>
+
+          <p>
+            Active professionals from Goldman, EY, JPMorgan, BCG,
+            McKinsey, and 35+ more companies — not academic advisors.
+          </p>
+
         </div>
-        <div class="guar-card reveal d5">
-          <div class="guar-ico">🤖</div>
-          <h4>AI-Enabled Learning From Day One</h4>
-          <p>Every module is designed around AI tools. You graduate as a Certified AI-Accountant — the credential GCCs
-            hire for.</p>
+
+        <!-- CARD -->
+        <div class="commitment-card">
+
+          <div class="commitment-icon">
+            <img src="./images/commitment/5.svg" alt="">
+          </div>
+
+          <h3>
+            AI-Enabled Learning From Day One
+          </h3>
+
+          <p>
+            Every module is designed around AI tools.
+            You graduate as a Certified AI-Accountant —
+            the credential GCCs hire for.
+          </p>
+
         </div>
-        <div class="guar-card reveal d6">
-          <div class="guar-ico">🏢</div>
-          <h4>DLF Cyber City, Gurugram Campus</h4>
-          <p>A physical campus inside India's premier GCC hub. Your learning environment is your professional
-            environment.</p>
+
+        <!-- CARD -->
+        <div class="commitment-card">
+
+          <div class="commitment-icon">
+            <img src="./images/commitment/6.svg" alt="">
+          </div>
+
+          <h3>
+            DLF Cyber City, Gurugram Campus
+          </h3>
+
+          <p>
+            A physical campus inside India's premier GCC hub.
+            Your learning environment is your professional environment.
+          </p>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ═══ S14: ENTRY & INVESTMENT ══════════════════════════════════════════════ -->
-  <section class="entry" id="nfet">
-    <div class="w">
-      <h2 class="tc reveal">One Exam. One Decision. One Career.</h2>
-      <p class="entry-sub tc reveal" style="margin:0 auto 48px">The NFET Entrance Exam is your entry point into GCC
-        School. Appear. Qualify. Receive your Conditional Offer Letter. Then train.</p>
-      <div class="entry-grid">
-        <div class="entry-card reveal">
-          <div class="ec-head">
-            <div class="ec-step">Step 1</div>
-            <div class="ec-title">NFET Entrance Exam</div>
+  <!-- ═══ ENTRY & INVESTMENT ══════════════════════════════════════════════ -->
+  <section class="exam-decision-section">
+    <div class="w-sm">
+      <!-- HEADING -->
+      <h2 class="exam-heading">
+        One Exam. One Decision. One Career.
+      </h2>
+      <!-- SUBTEXT -->
+      <p class="exam-subtext">
+        The NFET Entrance Exam is your entry point into GCC School. Appear. Qualify. Receive your Conditional Offer Letter. Then train.
+      </p>
+
+      <!-- GRID -->
+      <div class="exam-grid">
+        <div class="exam-card">
+          <div class="exam-card-top">
+            <span>STEP 1</span>
+            <h3>
+              NFET Entrance Exam
+            </h3>
           </div>
-          <div class="ec-body">
-            <p class="ec-desc">The National Finance &amp; Economics Test (NFET) assesses your foundational aptitude for
-              GCC-sector finance roles. It is the entry qualifier for GCC School and the basis on which Conditional
-              Offer Letters are issued.</p>
-            <ul class="ec-list">
-              <li><strong>Online exam, available across India</strong></li>
-              <li><strong>Results within 5 business days</strong></li>
-              <li><strong>Conditional Offer Letter issued on qualification</strong></li>
-              <li>Exam fee: Confirm from programme team</li>
+
+          <div class="exam-card-body">
+
+            <p>
+              The National Finance & Economics Test (NFET)
+              assesses your foundational aptitude for GCC-sector
+              finance roles. It is the entry qualifier for GCC School
+              and the basis on which Conditional Offer Letters are issued.
+            </p>
+
+            <ul>
+
+              <li>
+                Online exam, available across India
+              </li>
+
+              <li>
+                Results within 5 business days
+              </li>
+
+              <li>
+                Conditional Offer Letter issued on qualification
+              </li>
+
+              <li>
+                Exam fee: Confirm from programme team
+              </li>
+
             </ul>
+
           </div>
+
         </div>
-        <div class="entry-card reveal">
-          <div class="ec-head">
-            <div class="ec-step">Step 2</div>
-            <div class="ec-title">GCC School Programme Investment</div>
+
+        <!-- RIGHT CARD -->
+        <div class="exam-card">
+          <div class="exam-card-top">
+            <span>STEP 2</span>
+            <h3>
+              GCC School Programme Investment
+            </h3>
           </div>
-          <div class="ec-body">
-            <p class="ec-desc">Programme fee details are shared post-NFET qualification and during the specialist call.
-              Fees cover all three qualifications, AI-enabled curriculum, mentorship, and placement facilitation.</p>
-            <ul class="ec-list">
-              <li><strong>UK ACCA Papers</strong> — All relevant levels</li>
-              <li><strong>AIMA PGCM</strong> — Post-Graduate Certificate in Management</li>
-              <li><strong>British Council Master's Credential</strong></li>
-              <li><strong>AI-Accountant Certification</strong> — Integrated across all modules</li>
-              <li><strong>40+ Industry Mentor Sessions</strong></li>
-              <li><strong>Live GCC environment learning</strong> at DLF Cyber City</li>
-              <li><strong>Conditional Offer Letter</strong> from a named hiring partner</li>
-              <li><strong>200+ hiring partner</strong> network access</li>
-              <li><strong>Career acceleration &amp; placement support</strong></li>
+          <div class="exam-card-body">
+            <p>
+              Programme fee details are shared post-NFET qualification
+              and during the specialist call. Fees cover all three qualifications,
+              AI-enabled curriculum, mentorship, and placement facilitation.
+            </p>
+            <ul>
+              <li>
+                UK ACCA Papers — All relevant levels
+              </li>
+              <li>
+                AIMA PGCM — Post-Graduate Certificate in Management
+              </li>
+              <li>
+                British Council Master's Credential
+              </li>
+              <li>
+                AI-Accountant Certification — Integrated across all modules
+              </li>
+              <li>
+                40+ Industry Mentor Sessions
+              </li>
+              <li>
+                Live GCC environment learning — in DLF Cyber City
+              </li>
+              <li>
+                Conditional Offer Letter from a named hiring partner
+              </li>
+
+              <li>
+                200+ hiring partner network access
+              </li>
+
+              <li>
+                Career acceleration & placement support
+              </li>
+
             </ul>
+
           </div>
+
         </div>
+
       </div>
-      <div class="entry-cta">
-        <a href="javascript:void(0)" onclick="openForm()" class="btn btn-gold btn-gold-fw open-popup">CHECK IF YOU QUALIFY — Book Your NFET Exam Slot</a>
-        <p class="entry-note">Limited cohort intake. Conditional offers issued on a rolling basis.</p>
+
+      <!-- CTA -->
+      <div class="exam-cta-wrap">
+
+        <a href="javascript:void(0)" onclick="openForm()" class="exam-cta-btn">
+
+          CHECK IF YOU QUALIFY —
+          Book Your NFET Exam Slot
+
+        </a>
+
+        <p>
+          Limited cohort intake. Conditional offers issued on a rolling basis.
+        </p>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ═══ S15: FAQ ══════════════════════════════════════════════════════════════ -->
+  <!-- ═══ FAQ section ══════════════════════════════════════════════════════════════ -->
   <section class="faq" id="faq">
     <div class="w">
       <div class="sec-lbl lbl-gold reveal">FAQ</div>
@@ -4929,11 +1956,12 @@
     </div>
   </section>
 
-  <!-- ═══ S16: FOOTER CTA + FOOTER ════════════════════════════════════════════ -->
+  <!-- ═══ FOOTER CTA + FOOTER section ════════════════════════════════════════════ -->
   <section class="fcta" id="specialist">
     <div class="w">
       <h2>The best way to predict your GCC career is to start it today.</h2>
-      <a href="javascript:void(0)" onclick="openForm()" class="btn btn-gold btn-gold-lg open-popup">CHECK IF YOU QUALIFY — Book Your NFET Exam Slot</a>
+      <a href="javascript:void(0)" onclick="openForm()" class="btn btn-gold btn-gold-lg open-popup">CHECK IF YOU QUALIFY
+        — Book Your NFET Exam Slot</a>
       <p class="fcta-note" style="margin-top:16px">Or speak to a Career Specialist: <a href="tel:+919667583222">+91
           9667583222</a></p>
       <div class="fcta-trust">
@@ -4949,13 +1977,19 @@
     <div class="w">
       <div class="footer-grid">
         <div>
-          <div class="footer-brand">GCC <span>School</span></div>
-          <div class="footer-tagline">"Get Hired First. Then Trained."</div>
+          <div class="footer-brand"><img src="./images/logo.png" alt="" class="footer-logo"></div>
+
           <div class="footer-socials">
-            <a class="fsoc" href="https://instagram.com/gccschool" target="_blank" rel="noopener">IG</a>
-            <a class="fsoc" href="https://linkedin.com/company/gccschool" target="_blank" rel="noopener">LI</a>
-            <a class="fsoc" href="https://youtube.com/@gccschool" target="_blank" rel="noopener">YT</a>
-            <a class="fsoc" href="https://facebook.com/gccschool" target="_blank" rel="noopener">FB</a>
+            <a class="fsoc" href="https://instagram.com/gccschool" target="_blank" rel="noopener"><img
+                src="./images/footer/facebook.svg" alt="facebook"></a>
+            <a class="fsoc" href="https://linkedin.com/company/gccschool" target="_blank" rel="noopener"><img
+                src="./images/footer/x.svg" alt="twitter"></a>
+            <a class="fsoc" href="https://youtube.com/@gccschool" target="_blank" rel="noopener"><img
+                src="./images/footer/insta.svg" alt="instagram"></a>
+            <a class="fsoc" href="https://youtube.com/@gccschool" target="_blank" rel="noopener"><img
+                src="./images/footer/lindedin.svg" alt="linkedin"></a>
+            <a class="fsoc" href="https://facebook.com/gccschool" target="_blank" rel="noopener"><img
+                src="./images/footer/youtube.svg" alt="youtube"></a>
           </div>
         </div>
         <div>
@@ -5075,7 +2109,8 @@
   <!-- Status Modal (Processing/Success/Failure) -->
   <div id="statusModalOverlay" class="status-overlay">
     <div class="status-modal">
-      <div class="status-close-btn" onclick="closeStatusModal()" style="position: absolute; top: 16px; right: 16px; cursor: pointer;">✕</div>
+      <div class="status-close-btn" onclick="closeStatusModal()"
+        style="position: absolute; top: 16px; right: 16px; cursor: pointer;">✕</div>
       <div id="statusIconWrap" class="status-icon-wrap loading"></div>
       <div id="statusBadge" class="status-badge loading">✦ PROCESSING</div>
       <h3 id="statusTitle">Please <span id="statusTitleHighlight" class="text-yellow">Wait</span></h3>
@@ -5085,7 +2120,9 @@
         <span id="statusLeftText">Secure Connection</span>
       </div>
       <div id="statusPaymentId" style="font-size: 0.75rem; color: var(--t3); margin-top: 12px; display: none;"></div>
-      <button id="statusRetryBtn" class="status-retry-btn" style="display: none; width: 100%; padding: 12px; background: var(--dp); color: #fff; border-radius: 10px; margin-top: 16px; cursor: pointer;" onclick="closeStatusModal()">Try Again</button>
+      <button id="statusRetryBtn" class="status-retry-btn"
+        style="display: none; width: 100%; padding: 12px; background: var(--dp); color: #fff; border-radius: 10px; margin-top: 16px; cursor: pointer;"
+        onclick="closeStatusModal()">Try Again</button>
     </div>
   </div>
 
