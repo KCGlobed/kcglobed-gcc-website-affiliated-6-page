@@ -867,20 +867,4 @@ function toggleMentorsGrid(btn) {
 }
 // Initially hide extras (just showing 6 for now, all visible since placeholder)
 
-// ── FAQ accordion ─────────────────────────────────────────────────────────────
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const ans = item.querySelector('.faq-a');
-  const open = ans.classList.contains('on');
-  document.querySelectorAll('.faq-a.on').forEach(a => a.classList.remove('on'));
-  document.querySelectorAll('.faq-q.on').forEach(q => {
-    q.classList.remove('on');
-    q.querySelector('.faq-ico').textContent = '+';
-  });
-  if (!open) {
-    ans.classList.add('on');
-    btn.classList.add('on');
-    btn.querySelector('.faq-ico').textContent = '×';
-  }
-}
 
