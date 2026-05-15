@@ -701,7 +701,7 @@ input[type=range]::-moz-range-thumb {
     position: relative;
     z-index: 3;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     width: 100%;
     max-width: 1200px;
