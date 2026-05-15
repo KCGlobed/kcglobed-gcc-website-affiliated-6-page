@@ -2721,16 +2721,17 @@ input[type=range]::-moz-range-thumb {
 }
 
 .testimonial-user img {
-    width: 60px;
-    height: 60px;
+    width: 62px;
+    height: 63px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid black;
 }
 
 .testimonial-user h4 {
     font-size: 14px;
     font-weight: 700;
-    margin-bottom: 4px;
+    /* margin-bottom: 2px; */
 }
 
 .testimonial-user span {
