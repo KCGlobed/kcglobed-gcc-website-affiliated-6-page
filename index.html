@@ -81,7 +81,7 @@
             CHECK IF YOU QUALIFY — Book Your NFET Exam Slot
           </a>
           <div class="specialistBtn">
-            <button href="#specialist">
+            <button onclick="openSpecialistForm()">
               Speak to a Career Specialist
             </button>
           </div>
@@ -1817,6 +1817,69 @@
           </svg>
           SSL secured · UPI · Cards · Net Banking
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Specialist Form Modal -->
+  <div class="form-modal-overlay" id="specialistModal">
+    <div class="form-modal-content">
+      <div class="modal-close" onclick="closeSpecialistForm()">✕</div>
+      <div class="lead-form">
+        <div class="lf-title">Speak to a Career Specialist</div>
+        <div class="lf-sub">Leave your details and our team will get in touch with you shortly.</div>
+
+        <div class="lf-row single">
+          <div class="lf-field">
+            <label class="lf-label" for="spec_name">Full Name*</label>
+            <input class="lf-input" id="spec_name" type="text" placeholder="Your full name" autocomplete="name">
+            <div class="field-error" id="err_spec_name"></div>
+          </div>
+        </div>
+        <div class="lf-row single">
+          <div class="lf-field">
+            <label class="lf-label" for="spec_email">Email Address*</label>
+            <input class="lf-input" id="spec_email" type="email" placeholder="your@email.com" autocomplete="email">
+            <div class="field-error" id="err_spec_email"></div>
+          </div>
+        </div>
+
+        <div class="lf-row single">
+          <div class="lf-field">
+            <label class="lf-label" for="spec_phone">Mobile Number*</label>
+            <div style="display: flex; gap: 10px;">
+              <input class="lf-input" id="spec_phone" type="tel" placeholder="10-digit mobile number" autocomplete="tel"
+                style="flex: 1;">
+              <button type="button" id="btn_send_spec_otp" onclick="sendSpecOtp()" class="btn btn-purple"
+                style="white-space: nowrap; padding: 9px 20px;">Send OTP</button>
+            </div>
+            <div class="field-error" id="err_spec_phone"></div>
+
+            <div id="spec_otp_section" style="display: none; margin-top: 15px;">
+              <label class="lf-label" for="spec_otp">Enter OTP*</label>
+              <div style="display: flex; gap: 10px;">
+                <input class="lf-input" id="spec_otp" type="text" placeholder="6-digit OTP" maxlength="6"
+                  style="flex: 1;">
+                <button type="button" id="btn_verify_spec_otp" onclick="verifySpecOtp()" class="btn btn-purple"
+                  style="white-space: nowrap; padding: 10px 20px;">Verify</button>
+              </div>
+              <div class="field-error" id="err_spec_otp"></div>
+              <div id="spec_otp_success_msg" style="display: none; color: green; font-size: 0.85rem; margin-top: 5px;">OTP Verified Successfully!</div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="specFormError"
+          style="display:none; color:var(--rd); font-size:0.75rem; margin: 10px 0; padding: 10px; background: rgba(192,57,43,0.08); border-radius: 8px; border-left: 3px solid var(--rd);">
+        </div>
+        
+        <div id="specFormSuccess"
+          style="display:none; color:green; font-size:0.75rem; margin: 10px 0; padding: 10px; background: rgba(46, 204, 113, 0.1); border-radius: 8px; border-left: 3px solid green;">
+        </div>
+
+        <button class="lf-btn" id="btn_submit_spec" onclick="handleSpecialistSubmit()">
+          Submit Request
+        </button>
       </div>
     </div>
   </div>

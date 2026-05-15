@@ -15,16 +15,16 @@ var otpTimerInterval = null;
 async function sendOtp() {
   const phone = document.getElementById("gcc_phone").value.trim();
   const btn = document.getElementById("btn_send_otp");
-  
+
   if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
     setFieldError("gcc_phone", "Please enter a valid 10-digit mobile number to send OTP.");
     return;
   }
-  
+
   setFieldError("gcc_phone", ""); // Clear any previous error
   btn.disabled = true;
   btn.innerText = "Sending...";
-  
+
   try {
     const res = await fetch(OTP_BASE_URL + '/api/otp/send', {
       method: 'POST',
@@ -32,13 +32,13 @@ async function sendOtp() {
       body: JSON.stringify({ mobile: phone })
     });
     const data = await res.json();
-    
+
     if (data.success || res.ok) {
       document.getElementById("otp_section").style.display = "block";
-      
+
       let otpCountdown = 60;
       btn.innerText = `Resend in ${otpCountdown}s`;
-      
+
       if (otpTimerInterval) clearInterval(otpTimerInterval);
       otpTimerInterval = setInterval(() => {
         otpCountdown--;
@@ -50,7 +50,7 @@ async function sendOtp() {
           btn.disabled = false;
         }
       }, 1000);
-      
+
     } else {
       setFieldError("gcc_phone", data.message || data.statusMessage || "Failed to send OTP");
       btn.disabled = false;
@@ -68,16 +68,16 @@ async function verifyOtp() {
   const phone = document.getElementById("gcc_phone").value.trim();
   const otp = document.getElementById("gcc_otp").value.trim();
   const btn = document.getElementById("btn_verify_otp");
-  
+
   if (!otp || otp.length !== 6) {
     setFieldError("gcc_otp", "Please enter a valid 6-digit OTP.");
     return;
   }
-  
+
   setFieldError("gcc_otp", "");
   btn.disabled = true;
   btn.innerText = "Verifying...";
-  
+
   try {
     const res = await fetch(OTP_BASE_URL + '/api/otp/verify', {
       method: 'POST',
@@ -85,7 +85,7 @@ async function verifyOtp() {
       body: JSON.stringify({ mobile: phone, otp: otp })
     });
     const data = await res.json();
-    
+
     if (data.success || res.ok) {
       isOtpVerified = true;
       if (otpTimerInterval) clearInterval(otpTimerInterval);
@@ -1027,3 +1027,221 @@ function toggleMentorsGrid(btn) {
 // Initially hide extras (just showing 6 for now, all visible since placeholder)
 
 
+
+// --- Specialist Modal Logic ---
+var isSpecOtpVerified = false;
+var specOtpTimerInterval = null;
+
+function openSpecialistForm() {
+  const modal = document.getElementById('specialistModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeSpecialistForm() {
+  const modal = document.getElementById('specialistModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    resetSpecialistForm();
+  }
+}
+
+function resetSpecialistForm() {
+  const fields = ["spec_name", "spec_email", "spec_phone", "spec_otp"];
+  fields.forEach(f => {
+    const el = document.getElementById(f);
+    if (el) { el.value = ""; el.disabled = false; el.classList.remove("invalid"); }
+  });
+
+  fields.forEach(f => {
+    const errEl = document.getElementById("err_" + f);
+    if (errEl) errEl.style.display = "none";
+  });
+
+  const errContainer = document.getElementById("specFormError");
+  if (errContainer) errContainer.style.display = "none";
+  const successContainer = document.getElementById("specFormSuccess");
+  if (successContainer) successContainer.style.display = "none";
+
+  isSpecOtpVerified = false;
+  if (specOtpTimerInterval) clearInterval(specOtpTimerInterval);
+
+  const otpSection = document.getElementById("spec_otp_section");
+  if (otpSection) otpSection.style.display = "none";
+  const otpSuccessMsg = document.getElementById("spec_otp_success_msg");
+  if (otpSuccessMsg) otpSuccessMsg.style.display = "none";
+
+  const sendBtn = document.getElementById("btn_send_spec_otp");
+  if (sendBtn) { sendBtn.style.display = "block"; sendBtn.disabled = false; sendBtn.innerText = "Send OTP"; }
+
+  const verifyBtn = document.getElementById("btn_verify_spec_otp");
+  if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.innerText = "Verify"; }
+}
+
+async function sendSpecOtp() {
+  const phone = document.getElementById("spec_phone").value.trim();
+  const btn = document.getElementById("btn_send_spec_otp");
+
+  if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
+    setFieldError("spec_phone", "Please enter a valid 10-digit mobile number to send OTP.");
+    return;
+  }
+
+  setFieldError("spec_phone", "");
+  btn.disabled = true;
+  btn.innerText = "Sending...";
+
+  try {
+    const res = await fetch(OTP_BASE_URL + '/api/otp/send', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mobile: phone })
+    });
+    const data = await res.json();
+
+    if (data.success || res.ok) {
+      document.getElementById("spec_otp_section").style.display = "block";
+
+      let otpCountdown = 60;
+      btn.innerText = `Resend in ${otpCountdown}s`;
+
+      if (specOtpTimerInterval) clearInterval(specOtpTimerInterval);
+      specOtpTimerInterval = setInterval(() => {
+        otpCountdown--;
+        if (otpCountdown > 0) {
+          btn.innerText = `Resend in ${otpCountdown}s`;
+        } else {
+          clearInterval(specOtpTimerInterval);
+          btn.innerText = "Resend OTP";
+          btn.disabled = false;
+        }
+      }, 1000);
+    } else {
+      setFieldError("spec_phone", data.message || data.statusMessage || "Failed to send OTP");
+      btn.disabled = false;
+      btn.innerText = "Send OTP";
+    }
+  } catch (err) {
+    console.error(err);
+    setFieldError("spec_phone", "Failed to send OTP. Please try again.");
+    btn.disabled = false;
+    btn.innerText = "Send OTP";
+  }
+}
+
+async function verifySpecOtp() {
+  const phone = document.getElementById("spec_phone").value.trim();
+  const otp = document.getElementById("spec_otp").value.trim();
+  const btn = document.getElementById("btn_verify_spec_otp");
+
+  if (!otp || otp.length !== 6) {
+    setFieldError("spec_otp", "Please enter a valid 6-digit OTP.");
+    return;
+  }
+
+  setFieldError("spec_otp", "");
+  btn.disabled = true;
+  btn.innerText = "Verifying...";
+
+  try {
+    const res = await fetch(OTP_BASE_URL + '/api/otp/verify', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mobile: phone, otp: otp })
+    });
+    const data = await res.json();
+
+    if (data.success || res.ok) {
+      isSpecOtpVerified = true;
+      if (specOtpTimerInterval) clearInterval(specOtpTimerInterval);
+      document.getElementById("spec_otp_success_msg").style.display = "block";
+      document.getElementById("spec_otp").disabled = true;
+      document.getElementById("spec_phone").disabled = true;
+      document.getElementById("btn_send_spec_otp").style.display = "none";
+      btn.innerText = "Verified";
+    } else {
+      setFieldError("spec_otp", data.message || data.statusMessage || "Invalid or expired OTP");
+      btn.disabled = false;
+      btn.innerText = "Verify";
+    }
+  } catch (err) {
+    console.error(err);
+    setFieldError("spec_otp", "Failed to verify OTP. Please try again.");
+    btn.disabled = false;
+    btn.innerText = "Verify";
+  }
+}
+
+async function handleSpecialistSubmit() {
+  const name = document.getElementById("spec_name").value.trim();
+  const email = document.getElementById("spec_email").value.trim();
+  const phone = document.getElementById("spec_phone").value.trim();
+
+  // reset previous errors
+  ["spec_name", "spec_email", "spec_phone", "spec_otp"].forEach(f => {
+    const errEl = document.getElementById("err_" + f);
+    if (errEl) errEl.style.display = "none";
+    const el = document.getElementById(f);
+    if (el) el.classList.remove("invalid");
+  });
+  const errContainer = document.getElementById("specFormError");
+  errContainer.style.display = "none";
+
+  let hasError = false;
+  if (!name) { setFieldError("spec_name", "Full name is required"); hasError = true; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setFieldError("spec_email", "Valid email is required"); hasError = true; }
+  if (!phone || !/^[6-9]\d{9}$/.test(phone)) { setFieldError("spec_phone", "10-digit mobile number is required"); hasError = true; }
+
+  if (!isSpecOtpVerified) { setFieldError("spec_phone", "Please verify your mobile number with OTP"); hasError = true; }
+
+  if (hasError) return;
+
+  const btn = document.getElementById("btn_submit_spec");
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Submitting...';
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const utm_campaign = urlParams.get("utm_campaign") || "";
+  const utm_medium = urlParams.get("utm_medium") || "";
+  const utm_source = urlParams.get("utm_source") || "";
+
+  try {
+    const res = await fetch(GCC_BACKEND_URL + "/api/career/createdossierform", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        full_name: name,
+        email: email,
+        phone: phone,
+        utm_campaign,
+        utm_medium,
+        utm_source,
+        source: 14 // standard for this page
+      })
+    });
+
+    if (res.ok) {
+      document.getElementById("specFormSuccess").innerHTML = "Thank you! Our career specialist will contact you soon.";
+      document.getElementById("specFormSuccess").style.display = "block";
+      setTimeout(closeSpecialistForm, 1000);
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    } else {
+      const data = await res.json();
+      errContainer.innerHTML = data.message || data.statusMessage || "Failed to submit request. Please try again.";
+      errContainer.style.display = "block";
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    }
+  } catch (err) {
+    console.error("Specialist submit error", err);
+    errContainer.innerHTML = "Network error. Please try again.";
+    errContainer.style.display = "block";
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+}
