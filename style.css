@@ -5588,6 +5588,10 @@ table.cmp tr:last-child td {
         font-size: 30px;
     }
 
+    .exam-grid {
+        margin: 0 20px;
+    }
+
     .exam-subtext {
         font-size: 15px;
     }
