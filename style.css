@@ -333,6 +333,22 @@ img {
     ;
 }
 
+@media (max-width: 540px) {
+    .ticker-item {
+        font-size: 11px;
+        padding: 0 20px;
+        gap: 12px;
+    }
+}
+
+@media(max-width: 375px) {
+    .ticker-item {
+        font-size: 9px;
+        padding: 0 20px;
+        gap: 12px;
+    }
+}
+
 /* ════════════════════════════════════════════════════════════
    NAV
 ════════════════════════════════════════════════════════════ */
@@ -874,9 +890,7 @@ input[type=range]::-moz-range-thumb {
     .video-caption {
         font-size: 13px;
         line-height: 1.5;
-
         text-align: center;
-
         padding: 12px 14px;
     }
 
@@ -979,7 +993,7 @@ input[type=range]::-moz-range-thumb {
    EXTRA SMALL DEVICES
 ========================= */
 
-@media(max-width: 350px) {
+@media(max-width: 422px) {
 
     .hero h1 {
         font-size: 1.65rem;
@@ -989,9 +1003,22 @@ input[type=range]::-moz-range-thumb {
         font-size: 12px;
     }
 
+    .hero-ctas {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
     .hero-ctas .btn {
-        font-size: 12px;
-        padding: 12px 10px;
+        width: 282px;
+        /* padding: 12px; */
+        font-size: 9px;
+    }
+
+    .specialistBtn {
+        display: flex;
+        margin: auto;
+        justify-content: start;
     }
 
     .video-card {
@@ -1013,6 +1040,7 @@ input[type=range]::-moz-range-thumb {
     .stat-lbl {
         font-size: 10px;
     }
+
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -1438,7 +1466,6 @@ input[type=range]::-moz-range-thumb {
     text-align: center;
     font-size: 36px;
     line-height: 1.2;
-    /* font-weight:700; */
     color: #111827;
     margin-top: 60px;
     margin-bottom: 60px;
@@ -1556,42 +1583,237 @@ input[type=range]::-moz-range-thumb {
 
 /* RESPONSIVE */
 
-@media(max-width:991px) {
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width: 991px) {
+
+    .credential-section {
+        padding: 50px 0;
+    }
+
+    .credential-heading {
+        font-size: 32px;
+        line-height: 1.25;
+
+        margin-top: 30px;
+        margin-bottom: 40px;
+
+        padding: 0 10px;
+    }
+
     .credential-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+
+        padding: 0 16px;
     }
 
     .credential-card {
         min-height: auto;
-    }
-
-    .credential-heading {
-        font-size: 30px;
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
-}
-
-@media(max-width:540px) {
-
-    .credential-section {
-        padding: 70px 0;
-    }
-
-    .credential-heading {
-        font-size: 28px;
-    }
-
-    .credential-card {
-        padding: 24px 20px;
+        padding: 24px 22px 28px;
     }
 
     .credential-card h3 {
         font-size: 22px;
+        line-height: 1.4;
+    }
+
+    .credential-card h3 span {
+        font-size: 20px;
     }
 
     .credential-card p {
         font-size: 16px;
+        line-height: 1.7;
+    }
+
+    /* DELIVERY */
+
+    .credential_programmer_dilvery {
+        gap: 16px;
+
+        margin: 35px auto 0;
+    }
+
+    .credential_programmer_dilvery img {
+        width: 70%;
+    }
+
+    .credential_programmer_dilvery p {
+        font-size: 20px;
+        text-align: center;
+        line-height: 1.5;
+
+        padding: 0 10px;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 768px) {
+
+    .credential-section {
+        padding: 40px 0;
+    }
+
+    .credential-heading {
+        font-size: 28px;
+        line-height: 1.3;
+
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .credential-grid {
+        gap: 18px;
+        padding: 0 14px;
+    }
+
+    /* CARD */
+
+    .credential-card {
+        border-radius: 16px;
+
+        padding: 22px 18px 24px;
+    }
+
+    .credential-logo {
+        width: 100px;
+        height: 42px;
+
+        margin-bottom: 22px;
+    }
+
+    .credential-logo img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .credential-card h3 {
+        font-size: 20px;
+        line-height: 1.4;
+
+        margin-bottom: 16px;
+    }
+
+    .credential-card h3 span {
+        font-size: 18px;
+        margin-top: 5px;
+    }
+
+    .credential-card p {
+        font-size: 15px;
+        line-height: 1.7;
+
+        margin-bottom: 16px;
+    }
+
+    /* DELIVERY */
+
+    .credential_programmer_dilvery {
+        gap: 14px;
+        margin-top: 30px;
+    }
+
+    .credential_programmer_dilvery img {
+        width: 90%;
+    }
+
+    .credential_programmer_dilvery p {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+}
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media(max-width: 540px) {
+
+    .credential-section {
+        padding: 30px 0;
+    }
+
+    .credential-heading {
+        font-size: 24px;
+        line-height: 1.35;
+
+        margin-bottom: 26px;
+    }
+
+    .credential-grid {
+        padding: 0 12px;
+    }
+
+    .credential-card {
+        padding: 20px 16px 22px;
+    }
+
+    .credential-logo {
+        width: 90px;
+        height: 40px;
+
+        margin-bottom: 18px;
+    }
+
+    .credential-card h3 {
+        font-size: 18px;
+    }
+
+    .credential-card h3 span {
+        font-size: 16px;
+    }
+
+    .credential-card p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .credential_programmer_dilvery img {
+        width: 100%;
+    }
+
+    .credential_programmer_dilvery p {
+        font-size: 16px;
+
+        padding: 0 12px;
+    }
+}
+
+/* =========================
+   EXTRA SMALL PHONE
+========================= */
+
+@media(max-width: 350px) {
+
+    .credential-heading {
+        font-size: 21px;
+    }
+
+    .credential-card {
+        padding: 18px 14px 20px;
+    }
+
+    .credential-card h3 {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .credential-card h3 span {
+        font-size: 14px;
+    }
+
+    .credential-card p {
+        font-size: 13px;
+    }
+
+    .credential_programmer_dilvery p {
+        font-size: 14px;
     }
 }
 
@@ -1867,9 +2089,9 @@ input[type=range]::-moz-range-thumb {
         font-size: 28px;
     }
 
-    .placement-logos {
+    /* .placement-logos {
         grid-template-columns: repeat(2, 1fr);
-    }
+    } */
 
     .flow-card {
         min-height: auto;
@@ -2411,6 +2633,279 @@ input[type=range]::-moz-range-thumb {
     }
 }
 
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width: 991px) {
+
+    .finance-gap-section {
+        padding: 75px 0;
+    }
+
+    .finance-gap-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+
+        margin-bottom: 45px;
+    }
+
+    .finance-gap-heading {
+        font-size: 34px;
+        line-height: 1.2;
+
+        margin-bottom: 40px;
+    }
+
+    .finance-stats-column {
+        gap: 28px;
+    }
+
+    .finance-big-number {
+        font-size: 54px;
+    }
+
+    .finance-job-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 768px) {
+
+    .finance-gap-section {
+        padding: 65px 0;
+    }
+
+    /* LABEL */
+
+    .finance-gap-label {
+        font-size: 11px;
+        margin-bottom: 14px;
+    }
+
+    /* HEADING */
+
+    .finance-gap-heading {
+        font-size: 28px;
+        line-height: 1.25;
+
+        margin-bottom: 34px;
+    }
+
+    /* CONTENT */
+
+    .finance-gap-content {
+        gap: 34px;
+        margin-bottom: 34px;
+    }
+
+    /* LEFT STATS */
+
+    .finance-stats-column {
+        gap: 24px;
+    }
+
+    .finance-big-number {
+        font-size: 46px;
+        margin-bottom: 8px;
+    }
+
+    .finance-stat-box h3 {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .finance-stat-box p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    /* CARD */
+
+    .finance-analysis-card {
+        border-radius: 14px;
+    }
+
+    .analysis-header {
+        padding: 18px 18px;
+    }
+
+    .analysis-header h3 {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .analysis-header p {
+        font-size: 9px;
+    }
+
+    /* TABLE */
+
+    .analysis-table {
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .analysis-row {
+        min-width: 620px;
+
+        grid-template-columns: 1.2fr 1fr 1fr 1fr .6fr;
+
+        padding: 16px 18px;
+
+        gap: 10px;
+
+        font-size: 12px;
+    }
+
+    .analysis-head {
+        font-size: 10px;
+    }
+
+    .analysis-row div {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    /* FOOTER */
+
+    .analysis-footer {
+        padding: 14px 18px;
+        font-size: 9px;
+        line-height: 1.6;
+    }
+
+    /* BOTTOM COPY */
+
+    .analysis-bottom-copy {
+        padding: 18px 18px;
+
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    /* JOB GRID */
+
+    .finance-job-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .finance-job-box {
+        padding: 18px 14px;
+    }
+
+    .finance-job-box h4 {
+        font-size: 13px;
+        line-height: 1.5;
+
+        margin-bottom: 8px;
+    }
+
+    .finance-job-box span {
+        font-size: 13px;
+    }
+}
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media(max-width: 540px) {
+
+    .finance-gap-section {
+        padding: 55px 0;
+    }
+
+    .finance-gap-heading {
+        font-size: 24px;
+    }
+
+    .finance-big-number {
+        font-size: 40px;
+    }
+
+    /* TABLE */
+
+    .analysis-row {
+        min-width: 560px;
+
+        padding: 14px 16px;
+    }
+
+    .analysis-row div {
+        font-size: 11px;
+    }
+
+    .analysis-head {
+        font-size: 9px;
+    }
+
+    .analysis-bottom-copy {
+        font-size: 12px;
+    }
+
+    /* JOB BOX */
+
+    .finance-job-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .finance-job-box {
+        padding: 16px 14px;
+    }
+
+    .finance-job-box h4 {
+        font-size: 12px;
+    }
+
+    .finance-job-box span {
+        font-size: 12px;
+    }
+}
+
+/* =========================
+   EXTRA SMALL PHONE
+========================= */
+
+@media(max-width: 350px) {
+
+    .finance-gap-heading {
+        font-size: 21px;
+        line-height: 1.3;
+    }
+
+    .finance-big-number {
+        font-size: 34px;
+    }
+
+    .finance-stat-box h3,
+    .finance-stat-box p {
+        font-size: 12px;
+    }
+
+    .analysis-row {
+        min-width: 520px;
+    }
+
+    .analysis-row div {
+        font-size: 10px;
+    }
+
+    .analysis-bottom-copy {
+        font-size: 11px;
+    }
+
+    .finance-job-box h4,
+    .finance-job-box span {
+        font-size: 11px;
+    }
+}
+
 /* =========================================
    ROADMAP SECTION
 ========================================= */
@@ -2840,9 +3335,16 @@ input[type=range]::-moz-range-thumb {
     .ai-badge {
         width: 90px;
         height: 90px;
-
         font-size: 10px;
+        top: -14px;
+        right: -14px;
+    }
+}
 
+@media(max-width:350px) {
+    .ai-badge-img {
+        width: 120px;
+        height: 120px;
         top: -14px;
         right: -14px;
     }
@@ -5515,60 +6017,229 @@ table.cmp tr:last-child td {
 
 /* RESPONSIVE */
 
-@media(max-width:991px) {
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media(max-width: 991px) {
 
     .exam-grid {
+        margin: 0;
         grid-template-columns: 1fr;
+        gap: 22px;
+
+        margin-bottom: 40px;
     }
 
     .exam-heading {
         font-size: 40px;
+        line-height: 1.15;
     }
 }
 
-@media(max-width:540px) {
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width: 768px) {
 
     .exam-decision-section {
         padding: 70px 0;
     }
 
     .exam-heading {
-        font-size: 30px;
+        font-size: 34px;
+        line-height: 1.2;
+        margin-bottom: 16px;
     }
 
     .exam-subtext {
-        font-size: 15px;
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 38px;
+        padding: 0 10px;
+    }
+
+    .exam-grid {
+        gap: 18px;
+    }
+
+    /* CARD */
+
+    .exam-card {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .exam-card-top {
+        padding: 20px 22px;
     }
 
     .exam-card-top h3 {
-        font-size: 22px;
+        font-size: 18px;
+        line-height: 1.4;
     }
 
     .exam-card-body {
-        padding: 24px 20px 28px;
+        padding: 22px 20px 26px;
     }
 
-    .exam-card-body p,
-    .exam-card-body li {
-        font-size: 15px;
+    .exam-card-body p {
+        font-size: 14px;
+        line-height: 1.7;
+
+        margin-bottom: 22px;
     }
+
+    .exam-card-body li {
+        font-size: 14px;
+        line-height: 1.7;
+
+        padding-left: 24px;
+    }
+
+    /* CTA */
 
     .exam-cta-btn {
         width: 100%;
+        max-width: 100%;
 
         font-size: 15px;
         line-height: 1.5;
 
-        padding: 16px 20px;
+        text-align: center;
+
+        padding: 16px 18px;
+    }
+
+    .exam-cta-wrap p {
+        font-size: 13px;
+        line-height: 1.6;
+
+        padding: 0 10px;
     }
 }
 
-/* ════════════════════════════════════════════════════════════
-   S15 — FAQ
-════════════════════════════════════════════════════════════ */
-/* =========================================
-   FAQ SECTION
-========================================= */
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 540px) {
+
+    .exam-decision-section {
+        padding: 60px 0;
+        background-color: white;
+    }
+
+    .exam-heading {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+
+    .exam-subtext {
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+
+    .exam-card-top {
+        padding: 18px 18px;
+    }
+
+    .exam-card-top span {
+        font-size: 9px;
+    }
+
+    .exam-card-top h3 {
+        font-size: 17px;
+    }
+
+    .exam-card-body {
+        background-color: white;
+        padding: 20px 18px 24px;
+    }
+
+    .exam-card-body p,
+    .exam-card-body li {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .exam-card-body ul {
+        gap: 12px;
+    }
+
+    .exam-cta-btn {
+        font-size: 14px;
+        padding: 15px 16px;
+    }
+
+    .exam-cta-wrap {
+        margin: 10px 10px;
+    }
+
+    .exam-cta-wrap p {
+        font-size: 12px;
+    }
+
+    .exam-grid {
+        margin: 35px 21px;
+    }
+}
+
+/* =========================
+   EXTRA SMALL PHONE
+========================= */
+
+@media(max-width: 375px) {
+
+    .exam-decision-section {
+        background-color: white;
+    }
+
+    .exam-heading {
+        font-size: 24px;
+    }
+
+    .exam-card-body {
+        background-color: white;
+    }
+
+    .exam-subtext {
+        font-size: 12px;
+    }
+
+    .exam-card-top h3 {
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .exam-card-body p,
+    .exam-card-body li {
+        font-size: 12px;
+    }
+
+    .exam-card-body {
+        padding: 18px 16px 22px;
+    }
+
+    .exam-cta-btn {
+        font-size: 13px;
+        line-height: 1.5;
+        padding: 14px 14px;
+    }
+
+    .exam-cta-wrap {
+        margin: 10px 10px;
+    }
+
+    .exam-cta-wrap p {
+        font-size: 11px;
+    }
+
+    .exam-grid {
+        margin: 35px 21px;
+    }
+}
 
 /* =========================
    FAQ SECTION
@@ -5931,6 +6602,127 @@ table.cmp tr:last-child td {
     background: rgba(248, 202, 77, .3)
 }
 
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width: 768px) {
+
+    .fcta {
+        padding: 60px 20px;
+    }
+
+    .fcta h2 {
+        font-size: 32px;
+        line-height: 1.2;
+        margin-bottom: 24px;
+        max-width: 100%;
+    }
+
+    .fcta .btn-gold {
+        width: 100%;
+        max-width: 420px;
+        font-size: 15px;
+        line-height: 1.5;
+        padding: 15px 20px;
+    }
+
+    .fcta-note {
+        font-size: 13px;
+        line-height: 1.6;
+        margin-top: 14px;
+    }
+
+    .fcta-trust {
+        gap: 10px;
+        margin-top: 28px;
+        padding-top: 22px;
+    }
+
+    .fct-item {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 540px) {
+
+    .fcta {
+        background-color: #0D0D25;
+        padding: 50px 16px;
+    }
+
+    .fcta::before {
+        width: 260px;
+        height: 260px;
+        top: -70px;
+        right: -70px;
+    }
+
+    .fcta h2 {
+        font-size: 26px;
+        line-height: 1.2;
+        margin-bottom: 22px;
+    }
+
+    .fcta .btn-gold {
+        width: 100%;
+        font-size: 10px;
+        line-height: 1.5;
+        padding: 14px 16px;
+    }
+
+    .fcta-note {
+        font-size: 12px;
+    }
+
+    .fcta-trust {
+        flex-direction: column;
+        align-items: center;
+
+        gap: 12px;
+    }
+
+    .fct-item {
+        justify-content: center;
+        text-align: center;
+
+        font-size: 11px;
+    }
+}
+
+/* =========================
+   EXTRA SMALL PHONE
+========================= */
+
+@media(max-width: 350px) {
+
+    .fcta {
+        background-color: #0D0D25;
+    }
+
+    .fcta h2 {
+        font-size: 22px;
+    }
+
+    .fcta .btn-gold {
+        font-size: 9px;
+        padding: 13px 14px;
+    }
+
+    .fcta-note {
+        font-size: 11px;
+    }
+
+    .fct-item {
+        font-size: 10px;
+    }
+}
+
 /* Footer */
 .footer {
     background: #3D2860;
@@ -5973,24 +6765,6 @@ table.cmp tr:last-child td {
     display: flex;
 }
 
-/* .fsoc {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 600;
-    color: rgba(255,255,255,.88);
-    transition: .25s ease;
-} */
-
-/* .fsoc:hover {
-    background: #F8CA4D;
-    color: #2b0d45;
-} */
 
 .fsoc img {
     width: 52px;
@@ -6073,6 +6847,7 @@ table.cmp tr:last-child td {
 
     .footer {
         padding-top: 42px;
+        background-color: #080818;
     }
 
     .footer-grid {
