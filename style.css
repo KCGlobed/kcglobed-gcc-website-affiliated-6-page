@@ -2098,6 +2098,13 @@ input[type=range]::-moz-range-thumb {
     }
 }
 
+@media(max-width: 375px) {
+    .flow-image img {
+        width: 263px;
+        max-height: 200px;
+    }
+}
+
 /* =========================================
    MYTH SECTION
 ========================================= */
