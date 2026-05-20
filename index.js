@@ -749,15 +749,15 @@ function initVideoControl() {
   }
 
   // Play/Pause toggle
-  function togglePlay() {
-    if (video.paused) {
-      video.play();
-      playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    } else {
-      video.pause();
-      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-    }
-  }
+  // function togglePlay() {
+  //   if (video.paused) {
+  //     video.play();
+  //     playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  //   } else {
+  //     video.pause();
+  //     playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+  //   }
+  // }
 
   playPauseBtn.addEventListener('click', togglePlay);
   video.addEventListener('click', togglePlay);
@@ -1245,3 +1245,75 @@ async function handleSpecialistSubmit() {
     btn.innerHTML = originalText;
   }
 }
+
+const openVideoPopup = document.querySelectorAll(".openVideoPopup");
+const closeVideoPopup = document.getElementById("closeVideoPopup");
+const videoPopup = document.getElementById("videoPopup");
+const popupVideo = document.getElementById("popupVideo");
+const stickyBar = document.getElementsByClassName("stiky-container")[0];
+
+/* OPEN POPUP */
+
+openVideoPopup.forEach((button) => {
+  button.addEventListener("click", () => {
+    videoPopup.classList.add("active");
+
+    stickyBar.style.display = "none";
+
+    document.body.classList.add("no-scroll");
+
+    popupVideo.play();
+  });
+});
+
+/* CLOSE POPUP */
+
+closeVideoPopup.addEventListener("click", () => {
+  videoPopup.classList.remove("active");
+  stickyBar.style.display = "flex";
+
+  popupVideo.pause();
+  popupVideo.currentTime = 0;
+});
+
+/* CLOSE WHEN CLICK OUTSIDE */
+
+videoPopup.addEventListener("click", (e) => {
+  if (e.target === videoPopup) {
+    videoPopup.classList.remove("active");
+    stickyBar.style.display = "flex";
+    document.body.classList.remove("no-scroll");
+    popupVideo.pause();
+    popupVideo.currentTime = 0;
+  }
+});
+
+    let isPlanA = false;
+
+    function togglePlan() {
+
+        const flipCard = document.getElementById("flipCard");
+        const lblOff = document.getElementById("lbl-off");
+        const lblOn = document.getElementById("lbl-on");
+        const switchTrack = document.getElementById("switchTrack");
+
+        isPlanA = !isPlanA;
+
+        if (isPlanA) {
+            flipCard.classList.add("flipped");
+            switchTrack.classList.add("active");
+
+            lblOn.classList.add("active");
+            lblOff.classList.remove("active");
+
+        } else {
+            flipCard.classList.remove("flipped");
+            switchTrack.classList.remove("active");
+
+            lblOff.classList.add("active");
+            lblOn.classList.remove("active");
+        }
+    }
+
+    // Auto switch every 3 seconds
+    setInterval(togglePlan, 2000);
