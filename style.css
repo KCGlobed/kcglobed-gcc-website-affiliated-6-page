@@ -1167,6 +1167,10 @@ img {
     .stats-bar {
         margin-top: 32px;
     }
+    .video-popup{
+        padding-top: 140px;
+        display: block;
+    }
 }
 
 /* EXTRA SMALL */
@@ -3610,7 +3614,7 @@ img {
 }
 
 .ai-heading p {
-    font-size: 25px;
+    font-size: 19px;
     font-weight: 700;
 }
 
@@ -6354,6 +6358,42 @@ table.cmp tr:last-child td {
     .commitment-card {
         min-height: auto;
         padding: 24px 20px;
+    }
+}
+
+@media(max-width:480px) {
+
+    .commitment-section {
+        padding: 70px 0;
+    }
+
+    .commitment-card h3 {
+        font-size: 20px;
+    }
+
+    .commitment-heading {
+        font-size: 30px;
+    }
+
+    .commitment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .commitment-card {
+        min-height: auto;
+        padding: 24px 20px;
+    }
+
+    .commitment-icon {
+        margin-bottom: 6px;
+    }
+
+    .commitment-icon img {
+        width: 35px;
+    }
+
+    .commitment-card p {
+        font-size: 11px;
     }
 }
 
