@@ -42,6 +42,21 @@
     </div>
   </div>
 
+  <div class="stiky-container">
+    <div class="sticky-play-btn openVideoPopup">
+      <span class="sticky-play-icon">▶</span>
+      <span>Play Video</span>
+    </div>
+
+    <div class="sticky-enroll-btn" onclick="openForm()">
+      Enroll Now
+    </div>
+
+    <div class="sticky-price-tag">
+      Starting From ₹3,499/-
+    </div>
+  </div>
+
   <!-- ═══ NAV ══════════════════════════════════════════════════════════════════ -->
   <nav class="nav">
     <img src="./images/logo.png" alt="GCC School">
@@ -80,31 +95,61 @@
           <a href="javascript:void(0)" onclick="openForm()" class="btn btn-purple btn-purple-lg">
             CHECK IF YOU QUALIFY — Book Your NFET Exam Slot
           </a>
-          <div class="specialistBtn">
+          <!-- <div class="specialistBtn">
             <button onclick="openSpecialistForm()">
               Speak to a Career Specialist
             </button>
-          </div>
-
-
+          </div> -->
         </div>
 
       </div>
       <!-- RIGHT VIDEO -->
-      <div class="hero-video">
-        <div class="video-card">
-          <!-- VIDEO -->
-          <video id="heroVideo" class="hero-main-video" controls playsinline autoplay muted loop preload="metadata">
-            <source
-              src="https://storage.googleapis.com/gcc_prod_static_files_backend/static/videos/GCC%20VSL_BASIC%20CUTS.mp4"
-              type="video/mp4">
-          </video>
+<div class="hero-video">
 
+    <!-- VIDEO THUMBNAIL -->
+    <div class="video-thumbnail openVideoPopup">
+
+        <!-- Thumbnail Image -->
+        <img src="./images/thubnail.png"
+            alt="Video Thumbnail">
+
+        <!-- Dark Overlay -->
+        <div class="video-overlay"></div>
+
+        <!-- Play Button -->
+        <div class="play-button">
+            ▶
         </div>
-        <div class="video-caption">
-          ▷ Watch: How the Hire-First Model Works (4 min)
-        </div>
-      </div>
+
+    </div>
+
+    <!-- Caption -->
+    <div class="video-caption">
+        ▷ Watch: How the Hire-First Model Works (4 min)
+    </div>
+
+</div>
+
+<!-- VIDEO POPUP -->
+<div class="video-popup" id="videoPopup">
+
+    <!-- Close Button -->
+    <div class="close-video" id="closeVideoPopup">
+        ✕
+    </div>
+
+    <!-- Video -->
+    <div class="popup-video-box">
+
+        <video id="popupVideo" controls playsinline>
+            <source
+                src="https://storage.googleapis.com/gcc_prod_static_files_backend/static/videos/GCC%20VSL_BASIC%20CUTS.mp4"
+                type="video/mp4">
+        </video>
+
+    </div>
+
+</div>
     </div>
 
     <!-- STATS -->
@@ -118,7 +163,7 @@
         <div class="stat-lbl">UK ACCA • AIMA PGCM • British Council</div>
       </div>
       <div class="stat-card">
-        <div class="stat-val">₹10 LPA+</div>
+        <div class="stat-val">₹10 LPA</div>
         <div class="stat-lbl">Target Salary at Placement</div>
       </div>
     </div>
@@ -146,7 +191,7 @@
             <!-- Switch row -->
             <div class="switch-row">
               <span class="switch-lbl active" id="lbl-off">Plan B</span>
-              <div class="switch-track" id="switchTrack" onclick="togglePlan()">
+              <div class="switch-track" id="switchTrack">
                 <div class="switch-thumb"></div>
               </div>
               <span class="switch-lbl" id="lbl-on">Plan A</span>
@@ -162,9 +207,9 @@
                 </div>
                 <!-- ON face — Plan A -->
                 <div class="flip-face flip-back">
-                  <div class="flip-state-label">PLAN A</div>
+                  <div class="flip-state-label" style="color: #862F84;">PLAN A</div>
                   <div class="flip-plan-a">GCC Career</div>
-                  <div class="flip-sub">Conditional Offer. Before training begins.</div>
+                  <div class="flip-sub" style="color: #862F84;">Conditional Offer. Before training begins.</div>
                 </div>
               </div>
             </div>
@@ -252,10 +297,6 @@
             <span>(India's Premium Management Edge)</span>
           </h3>
 
-
-
-
-
           <p>
             Builds strategic, business-first thinking that sets you apart in GCC leadership tracks.
           </p>
@@ -282,10 +323,6 @@
             Credential 3 — British Council Master's
             <span>(Global Career Passport)</span>
           </h3>
-
-
-
-
 
           <p>
             International academic credibility that unlocks global mobility and leadership roles.
@@ -344,13 +381,13 @@
           </div>
 
           <div class="flow-image">
-            <img src="./images/placement/conditional letter.svg" alt="Offer Letter">
+            <img src="./images/placement/conditional letter.png" alt="Offer Letter">
           </div>
 
         </div>
 
         <!-- PLUS -->
-        <div class="flow-plus">+</div>
+        <!-- <div class="flow-plus">+</div> -->
 
         <!-- CARD 2 -->
         <div class="flow-card">
@@ -368,7 +405,7 @@
         </div>
 
         <!-- PLUS -->
-        <div class="flow-plus">+</div>
+        <!-- <div class="flow-plus">+</div> -->
 
         <!-- CARD 3 -->
         <div class="flow-card">
@@ -429,7 +466,7 @@
         <img src="./images/companies/google.svg">
         <img src="./images/companies/UBS.svg">
         <img src="./images/companies/ford.svg">
-        <img src="./images/companies/JpMorgon.svg">
+        <!-- <img src="./images/companies/JpMorgon.svg"> -->
         <img src="./images/companies/capegmini.svg">
         <img src="./images/companies/KPMG.svg">
         <img src="./images/companies/bainCompany.svg">
@@ -778,150 +815,193 @@
   </section>
 
   <!-- Roadmap Section -->
-  <section class="roadmap-section">
+<section class="roadmap-section">
     <div class="w">
-      <!-- TOP LABEL -->
-      <div class="roadmap-top-label">
-        THE GCC SCHOOL LEARNING PATHWAY
-      </div>
-      <!-- HEADING -->
-      <h2 class="roadmap-heading">
-        The Journey to GCC School 
-      </h2>
-      <!-- SUBTEXT -->
-      <p class="roadmap-subtext">
-        Six phases. One outcome: a conditional offer letter and a career inside a Global Capability Center.
-      </p>
 
-      <!-- TABS -->
-      <div class="roadmap-tabs">
-        <button class="roadmap-tab active" onclick="switchRoadmapPhase(0)">Stage 01</button>
-        <button class="roadmap-tab" onclick="switchRoadmapPhase(1)">Stage 02</button>
-        <button class="roadmap-tab" onclick="switchRoadmapPhase(2)">Stage 03</button>
-        <button class="roadmap-tab" onclick="switchRoadmapPhase(3)">Stage 04</button>
-        <button class="roadmap-tab" onclick="switchRoadmapPhase(4)">Stage 05</button>
-        <button class="roadmap-tab" onclick="switchRoadmapPhase(5)">Stage 06</button>
-      </div>
+        <!-- TOP LABEL -->
+        <div class="roadmap-top-label">
+            THE GCC SCHOOL LEARNING PATHWAY
+        </div>
 
-      <!-- CONTENT -->
-      <!-- STAGE 1 -->
-      <div class="roadmap-content active" id="rc0">
-        <!-- LEFT -->
-        <div class="roadmap-week-box">
-          <div class="roadmap-week-box-text">
-          NFET Exam  Eligibility
-          </div>
-        </div>
-        <!-- RIGHT -->
-        <div class="roadmap-detail">
-          <h3>
-            NFET Exam Eligibility
-          </h3>
-          <p>
-            • B.Com or M.Com (Pursuing Final Year)<br>
-            • B.Com + M.Com / MBA / PG (First Division)<br>
-            • Indian Citizen<br>
-            • Born on or after January 1, 1996
-          </p>
-        </div>
-      </div>
+        <!-- HEADING -->
+        <h2 class="roadmap-heading">
+            The Journey to GCC School
+        </h2>
 
-      <!-- STAGE 2 -->
-      <div class="roadmap-content" id="rc1">
-        <!-- LEFT -->
-        <div class="roadmap-week-box">
-          <div class="roadmap-week-box-text">
-            Application
-          </div>
-        </div>
-        <!-- RIGHT -->
-        <div class="roadmap-detail">
-          <h3>
-            Application
-          </h3>
-          <p>
-            Apply through the official GCC School website: <a href="https://www.gccschool.com" target="_blank" style="color: #8b3ba5; font-weight: 700;">www.gccschool.com</a>
-          </p>
-        </div>
-      </div>
+        <!-- SUBTEXT -->
+        <p class="roadmap-subtext">
+            Six phases. One outcome: a conditional offer letter and a career inside a Global Capability Center.
+        </p>
 
-      <!-- STAGE 3 -->
-      <div class="roadmap-content" id="rc2">
-        <!-- LEFT -->
-        <div class="roadmap-week-box">
-          <div class="roadmap-week-box-text">
-            NFET
-          </div>
-        </div>
-        <!-- RIGHT -->
-        <div class="roadmap-detail">
-          <h3>
-            NFET
-          </h3>
-          <p>
-            Home-Based Test (HBT) conducted remotely, aligned with GCC workforce expectations.
-          </p>
-        </div>
-      </div>
+        <!-- TIMELINE -->
 
-      <!-- STAGE 4 -->
-      <div class="roadmap-content" id="rc3">
-        <!-- LEFT -->
-        <div class="roadmap-week-box">
-          <div class="roadmap-week-box-text">
-            Interview
-          </div>
-        </div>
-        <!-- RIGHT -->
-        <div class="roadmap-detail">
-          <h3>
-            Campus Interview
-          </h3>
-          <p>
-            Shortlisted candidates attend industry-led interviews at the GCC School, Cyber City, Gurugram.
-          </p>
-        </div>
-      </div>
+        <div class="roadmap-timeline">
 
-      <!-- STAGE 5 -->
-      <div class="roadmap-content" id="rc4">
-        <!-- LEFT -->
-        <div class="roadmap-week-box">
-          <div class="roadmap-week-box-text">
-           Job Offers
-          </div>
-        </div>
-        <!-- RIGHT -->
-        <div class="roadmap-detail">
-          <h3>
-            Job Offers
-          </h3>
-          <p>
-            Selected candidates receive conditional job offers.
-          </p>
-        </div>
-      </div>
+            <!-- STAGE 1 -->
+            <div class="roadmap-row">
+                
+                <!-- LEFT TEXT -->
+                <div class="roadmap-left">
+                    <h3>Stage 01</h3>
+                    <p>
+                        NFET Exam Eligibility
+                    </p>
+                </div>
 
-      <!-- STAGE 6 -->
-      <div class="roadmap-content" id="rc5">
-        <!-- LEFT -->
-        <div class="roadmap-week-box">
-          <div class="roadmap-week-box-text">
-           GCC Onboarding
-          </div>
+                <!-- CENTER NUMBER -->
+                <div class="roadmap-center">
+                    <div class="roadmap-number purple">
+                        1
+                    </div>
+                </div>
+
+                <!-- RIGHT CARD -->
+                <div class="roadmap-right">
+                    <div class="roadmap-card purple-bg">
+                        NFET Exam Eligibility
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- STAGE 2 -->
+            <div class="roadmap-row reverse">
+
+                <!-- LEFT CARD -->
+                <div class="roadmap-left-card">
+                    <div class="roadmap-card pink-bg">
+                        Application
+                    </div>
+                </div>
+
+                <!-- CENTER NUMBER -->
+                <div class="roadmap-center">
+                    <div class="roadmap-number pink">
+                        2
+                    </div>
+                </div>
+
+                <!-- RIGHT TEXT -->
+                <div class="roadmap-right-text">
+                    <h3>Stage 02</h3>
+                    <p>
+                        Apply through the official GCC School website.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- STAGE 3 -->
+            <div class="roadmap-row">
+
+                <!-- LEFT TEXT -->
+                <div class="roadmap-left">
+                    <h3>Stage 03</h3>
+                    <p>
+                        Home-Based Test aligned with GCC workforce expectations.
+                    </p>
+                </div>
+
+                <!-- CENTER NUMBER -->
+                <div class="roadmap-center">
+                    <div class="roadmap-number orange">
+                        3
+                    </div>
+                </div>
+
+                <!-- RIGHT CARD -->
+                <div class="roadmap-right">
+                    <div class="roadmap-card orange-bg">
+                        NFET
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- STAGE 4 -->
+            <div class="roadmap-row reverse">
+
+                <!-- LEFT CARD -->
+                <div class="roadmap-left-card">
+                    <div class="roadmap-card navy-bg">
+                        Campus Interview
+                    </div>
+                </div>
+
+                <!-- CENTER NUMBER -->
+                <div class="roadmap-center">
+                    <div class="roadmap-number navy">
+                        4
+                    </div>
+                </div>
+
+                <!-- RIGHT TEXT -->
+                <div class="roadmap-right-text">
+                    <h3>Stage 04</h3>
+                    <p>
+                        Interviews at GCC School, Cyber City, Gurugram.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- STAGE 5 -->
+            <div class="roadmap-row">
+
+                <!-- LEFT TEXT -->
+                <div class="roadmap-left">
+                    <h3>Stage 05</h3>
+                    <p>
+                        Selected candidates receive conditional job offers.
+                    </p>
+                </div>
+
+                <!-- CENTER NUMBER -->
+                <div class="roadmap-center">
+                    <div class="roadmap-number red">
+                        5
+                    </div>
+                </div>
+
+                <!-- RIGHT CARD -->
+                <div class="roadmap-right">
+                    <div class="roadmap-card red-bg">
+                        Job Offers
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- STAGE 6 -->
+            <div class="roadmap-row reverse">
+
+                <!-- LEFT CARD -->
+                <div class="roadmap-left-card">
+                    <div class="roadmap-card purple-bg">
+                        GCC Onboarding
+                    </div>
+                </div>
+
+                <!-- CENTER NUMBER -->
+                <div class="roadmap-center">
+                    <div class="roadmap-number purple">
+                        6
+                    </div>
+                </div>
+
+                <!-- RIGHT TEXT -->
+                <div class="roadmap-right-text">
+                    <h3>Stage 06</h3>
+                    <p>
+                        Confirm onboarding after completing formalities.
+                    </p>
+                </div>
+
+            </div>
+
         </div>
-        <!-- RIGHT -->
-        <div class="roadmap-detail">
-          <h3>
-            GCC Onboarding
-          </h3>
-          <p>
-            Confirm onboarding after completing formalities.
-          </p>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
   <!-- AI-account Section -->
   <section class="ai-accountant-section">
@@ -934,10 +1014,11 @@
       <!-- HEADING -->
       <h2 class="ai-heading">
         <span>AI is not replacing GCC finance roles.</span>
-        <br>
+        <p>
         It's replacing finance professionals who don't know how
         <br>
         to use AI.
+        </p>
       </h2>
 
       <!-- SUBTEXT -->
@@ -1663,8 +1744,8 @@
           <div class="footer-socials">
             <a class="fsoc" href="https://www.facebook.com/share/187jgT5gev/" target="_blank" rel="noopener"><img
                 src="./images/footer/facebook.svg" alt="facebook"></a>
-            <a class="fsoc" href="https://www.instagram.com/gccschool?igsh=MXQxc2JhazAwcG55cQ%3D%3D" target="_blank" rel="noopener"><img
-                src="./images/footer/insta.svg" alt="instagram"></a>
+            <a class="fsoc" href="https://www.instagram.com/gccschool?igsh=MXQxc2JhazAwcG55cQ%3D%3D" target="_blank"
+              rel="noopener"><img src="./images/footer/insta.svg" alt="instagram"></a>
             <a class="fsoc" href="https://www.linkedin.com/company/gccschool/" target="_blank" rel="noopener"><img
                 src="./images/footer/lindedin.svg" alt="linkedin"></a>
             <a class="fsoc" href="https://www.youtube.com/@GCCSchool" target="_blank" rel="noopener"><img
@@ -1765,6 +1846,7 @@
           </div>
         </div>
         <div>
+
           <input type="checkbox" name="" id="gcc_commerce_graduate">
           <label for="gcc_commerce_graduate" style="font-size:.75rem;color:var(--t3);"> Are you a commerce graduate
             (B.Com/M.Com)?</label>
