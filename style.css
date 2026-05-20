@@ -2740,7 +2740,7 @@ img {
 /* JOB GRID */
 .finance-job-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 14px;
 }
 
@@ -3259,118 +3259,158 @@ img {
     background: #d14d00;
 }
 
+/* ================== TABLET ================== */
+
+@media (max-width: 768px) {
+
+    .roadmap-section {
+        padding: 70px 20px;
+    }
+
+    .roadmap-timeline {
+        max-width: 100%;
+    }
+
+    .roadmap-row {
+        grid-template-columns: 1fr 70px 1fr;
+        margin-bottom: 45px;
+    }
+
+    .roadmap-left,
+    .roadmap-right-text,
+    .roadmap-left-card,
+    .roadmap-right {
+        padding: 0 15px;
+    }
+
+    .roadmap-left h3,
+    .roadmap-right-text h3 {
+        font-size: 24px;
+    }
+
+    .roadmap-left p,
+    .roadmap-right-text p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .roadmap-card {
+        font-size: 18px;
+        padding: 18px 20px;
+        border-radius: 12px;
+    }
+
+    .roadmap-number {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+
+    .roadmap-heading {
+        font-size: 32px;
+    }
+
+    .roadmap-subtext {
+        font-size: 14px;
+        margin-bottom: 60px;
+    }
+}
+
+/* ================== 480px ================== */
+
+@media (max-width: 480px) {
+
+    .roadmap-row {
+        grid-template-columns: 1fr 55px 1fr;
+        margin-bottom: 35px;
+    }
+
+    .roadmap-left,
+    .roadmap-right-text,
+    .roadmap-left-card,
+    .roadmap-right {
+        padding: 0 10px;
+    }
+
+    .roadmap-left h3,
+    .roadmap-right-text h3 {
+        font-size: 18px;
+    }
+
+    .roadmap-left p,
+    .roadmap-right-text p {
+        font-size: 11px;
+    }
+
+    .roadmap-card {
+        font-size: 14px;
+        padding: 14px 12px;
+        border-radius: 10px;
+    }
+
+    .roadmap-number {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    .roadmap-heading {
+        font-size: 24px;
+    }
+
+    .roadmap-subtext {
+        font-size: 12px;
+    }
+}
+
+/* ================== 380px ================== */
+
+@media (max-width: 380px) {
+
+    .roadmap-row {
+        grid-template-columns: 1fr 45px 1fr;
+    }
+
+    .roadmap-left h3,
+    .roadmap-right-text h3 {
+        font-size: 15px;
+    }
+
+    .roadmap-left p,
+    .roadmap-right-text p {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .roadmap-card {
+        font-size: 12px;
+        padding: 12px 10px;
+    }
+
+    .roadmap-number {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+    }
+
+    .roadmap-heading {
+        font-size: 20px;
+    }
+}
+
 /* RESPONSIVE */
 
 /* =========================================
    TABLET
 ========================================= */
 
-@media(max-width:991px) {
 
-    .roadmap-section {
-        padding: 80px 0;
-    }
-
-    /* HEADING */
-
-    .roadmap-heading {
-        font-size: 34px;
-        line-height: 1.2;
-    }
-
-    .roadmap-subtext {
-        font-size: 15px;
-        margin-bottom: 60px;
-        padding: 0 10px;
-    }
-
-    /* TIMELINE */
-
-    .roadmap-timeline {
-        max-width: 100%;
-    }
-
-    /* LINE */
-
-    .roadmap-timeline::before {
-        left: 28px;
-        transform: none;
-    }
-
-    /* ROW */
-
-    .roadmap-row {
-        grid-template-columns: 56px 1fr;
-        gap: 18px;
-
-        margin-bottom: 42px;
-
-        align-items: flex-start;
-    }
-
-    /* FORCE ALL CONTENT RIGHT */
-
-    .roadmap-left,
-    .roadmap-right,
-    .roadmap-left-card,
-    .roadmap-right-text {
-        grid-column: 2;
-
-        text-align: left;
-
-        padding: 0;
-    }
-
-    /* NUMBER */
-
-    .roadmap-center {
-        grid-column: 1;
-        grid-row: 1;
-
-        justify-content: flex-start;
-    }
-
-    .roadmap-number {
-        width: 50px;
-        height: 50px;
-
-        font-size: 18px;
-    }
-
-    /* TEXT */
-
-    .roadmap-left h3,
-    .roadmap-right-text h3 {
-        font-size: 24px;
-        line-height: 1.2;
-        margin-bottom: 8px;
-    }
-
-    .roadmap-left p,
-    .roadmap-right-text p {
-        font-size: 15px;
-        line-height: 1.7;
-    }
-
-    /* CARD */
-
-    .roadmap-card {
-        width: 100%;
-
-        padding: 20px 22px;
-
-        font-size: 18px;
-        line-height: 1.4;
-
-        border-radius: 14px;
-    }
-}
 
 /* =========================================
    MOBILE
 ========================================= */
 
-@media(max-width:768px) {
+/* @media(max-width:768px) {
 
     .roadmap-section {
         padding: 65px 0;
@@ -3425,13 +3465,10 @@ img {
 
         padding: 18px 18px;
     }
-}
+} */
 
-/* =========================================
-   SMALL MOBILE
-========================================= */
 
-@media(max-width:480px) {
+/* @media(max-width:480px) {
 
     .roadmap-section {
         padding: 55px 0;
@@ -3481,16 +3518,14 @@ img {
         padding: 16px;
         border-radius: 12px;
     }
-}
+} */
 
 
-@media(max-width:380px) {
+/* @media(max-width:380px) {
 
     .roadmap-section {
         padding: 48px 0;
     }
-
-    /* TOP LABEL */
 
     .roadmap-top-label {
         font-size: 8px;
@@ -3502,7 +3537,6 @@ img {
         margin-bottom: 14px;
     }
 
-    /* HEADING */
 
     .roadmap-heading {
         font-size: 22px;
@@ -3513,8 +3547,6 @@ img {
         padding: 0 10px;
     }
 
-    /* SUBTEXT */
-
     .roadmap-subtext {
         font-size: 12px;
         line-height: 1.7;
@@ -3524,7 +3556,6 @@ img {
         padding: 0 10px;
     }
 
-    /* TIMELINE */
 
     .roadmap-row {
         grid-template-columns: 42px 1fr;
@@ -3538,7 +3569,6 @@ img {
         left: 15px;
     }
 
-    /* NUMBER */
 
     .roadmap-number {
         width: 32px;
@@ -3546,8 +3576,6 @@ img {
 
         font-size: 12px;
     }
-
-    /* TEXT */
 
     .roadmap-left h3,
     .roadmap-right-text h3 {
@@ -3563,8 +3591,6 @@ img {
         line-height: 1.6;
     }
 
-    /* CARD */
-
     .roadmap-card {
         font-size: 14px;
         line-height: 1.5;
@@ -3573,7 +3599,7 @@ img {
 
         border-radius: 10px;
     }
-}
+} */
 
 /* =========================================
    AI ACCOUNTANT SECTION
@@ -4012,18 +4038,15 @@ img {
     justify-content: center;
     align-items: center;
     gap: 18px;
-
     flex-wrap: wrap;
 }
 
 /* IMAGES */
 .thinktank-grid img {
     width: 100%;
-    max-width: 220px;
+    max-width: 200px;
     height: auto;
-
     object-fit: contain;
-
     transition: transform 0.3s ease;
 }
 
@@ -4111,7 +4134,7 @@ img {
     }
 
     .thinktank-grid img {
-        max-width: 40%;
+        max-width: 20%;
     }
 }
 

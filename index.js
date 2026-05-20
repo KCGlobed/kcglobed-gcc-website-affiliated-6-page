@@ -1252,6 +1252,23 @@ const videoPopup = document.getElementById("videoPopup");
 const popupVideo = document.getElementById("popupVideo");
 const stickyBar = document.getElementsByClassName("stiky-container")[0];
 
+function handleImageVisibility() {
+    const image = document.getElementById("unwanted");
+
+    // Hide image for screens smaller than 768px
+    if (window.innerWidth < 480) {
+        image.style.display = "none";
+    } else {
+        image.style.display = "block";
+    }
+}
+
+// Run on page load
+handleImageVisibility();
+
+// Run when screen resizes
+window.addEventListener("resize", handleImageVisibility);
+
 /* OPEN POPUP */
 
 openVideoPopup.forEach((button) => {
@@ -1317,3 +1334,5 @@ videoPopup.addEventListener("click", (e) => {
 
     // Auto switch every 3 seconds
     setInterval(togglePlan, 2000);
+
+  
