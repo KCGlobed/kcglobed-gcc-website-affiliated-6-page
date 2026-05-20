@@ -307,7 +307,8 @@ img {
     background: #38003C;
     overflow: hidden;
     padding: 10px 0;
-    border-bottom: 1px solid rgba(248, 202, 77, .1)
+    border-bottom: 1px solid rgba(248, 202, 77, .1);
+    z-index: 1;
 }
 
 .ticker-track {
@@ -346,7 +347,11 @@ img {
     }
 }
 
-@media(max-width: 375px) {
+@media(max-width: 380px) {
+    .ticker {
+        z-index: 0;
+    }
+
     .ticker-item {
         font-size: 9px;
         padding: 0 20px;
@@ -586,7 +591,8 @@ img {
 .hero-pattern {
     position: absolute;
     inset: 0;
-    background-image: url("./images/hero_bg.png");
+    background-color: #150116;
+    /* background-image: url("./images/hero_bg.png"); */
     background-size: cover;
     opacity: 1;
     pointer-events: none;
@@ -1167,7 +1173,8 @@ img {
     .stats-bar {
         margin-top: 32px;
     }
-    .video-popup{
+
+    .video-popup {
         padding-top: 140px;
         display: block;
     }
@@ -1613,20 +1620,20 @@ img {
     color: rgba(248, 202, 77, .5)
 }
 
-.flip-card{
+.flip-card {
     transition: transform 0.8s ease;
     transform-style: preserve-3d;
 }
 
-.flip-card.flipped{
+.flip-card.flipped {
     transform: rotateY(180deg);
 }
 
-.switch-track{
+.switch-track {
     transition: all 0.4s ease;
 }
 
-.switch-track.active .switch-thumb{
+.switch-track.active .switch-thumb {
     transform: translateX(30px);
 }
 
@@ -3640,6 +3647,7 @@ img {
 }
 
 .ai-heading p {
+    margin-top: 10px;
     font-size: 19px;
     font-weight: 700;
 }
@@ -8218,8 +8226,9 @@ table.cmp tr:last-child td {
     position: fixed;
     top: 0;
     left: 0;
+    max-height: 90vh;
+    overflow-y: auto;
     width: 100%;
-    height: 100%;
     background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(8px);
     display: none;
@@ -8229,6 +8238,7 @@ table.cmp tr:last-child td {
     padding: 20px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    margin-top: 50px;
 }
 
 .form-modal-overlay.active {
@@ -8258,6 +8268,8 @@ table.cmp tr:last-child td {
     position: relative;
     width: 100%;
     max-width: 520px;
+    /* max-height: 90vh; */
+    /* overflow-y: auto; */
     transform: translateY(20px);
     transition: transform 0.3s ease;
 }
@@ -8268,8 +8280,8 @@ table.cmp tr:last-child td {
 
 .modal-close {
     position: absolute;
-    top: -15px;
-    right: -15px;
+    top: 16px;
+    right: 16px;
     width: 34px;
     height: 34px;
     background: var(--wh);
@@ -8419,6 +8431,10 @@ table.cmp tr:last-child td {
 .lf-btn:hover {
     background: var(--ord);
     transform: translateY(-2px);
+}
+
+.lf-text {
+    font-size: 12px;
 }
 
 .lf-price {
@@ -8578,4 +8594,123 @@ table.cmp tr:last-child td {
 .status-close-btn:hover {
     background: #F9FAFB;
     border-radius: 50%;
+}
+
+@media (max-width: 480px) {
+    .status-modal {
+        padding: 30px 20px;
+    }
+
+    .lead-form {
+        margin-top: 50%;
+    }
+
+    .lf-title {
+        font-size: 17px;
+    }
+
+    .lf-sub {
+        font-size: 10px;
+    }
+
+    .lf-input {
+        font-size: 12px;
+        height: 35px;
+    }
+
+    .lf-btn {
+        font-size: 14px;
+        height: 45px;
+        margin-top: 1px;
+        padding: 0px 16px;
+    }
+
+    .btn-purple {
+        padding: 0px 20px;
+    }
+
+    .lf-text {
+        font-size: 10px;
+    }
+
+    .modal-close {
+        top: 200px;
+        right: 16px;
+    }
+}
+
+
+@media (max-width: 380px) {
+    .status-modal {
+        padding: 24px 16px;
+    }
+
+    .status-icon-wrap {
+        width: 80px;
+        height: 80px;
+    }
+
+    .status-icon-wrap svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    #statusTitle {
+        font-size: 1.5rem;
+    }
+
+    #statusDesc {
+        font-size: .95rem;
+    }
+
+    .status-footer {
+        font-size: .75rem;
+    }
+
+    .lead-form {
+        margin-top: 50%;
+    }
+
+    .modal-close {
+        top: 173px;
+        right: 5px;
+    }
+}
+
+
+@media (max-width: 330px) {
+    .status-modal {
+        padding: 24px 16px;
+    }
+
+    .status-icon-wrap {
+        width: 80px;
+        height: 80px;
+    }
+
+    .status-icon-wrap svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    #statusTitle {
+        font-size: 1.5rem;
+    }
+
+    #statusDesc {
+        font-size: .95rem;
+    }
+
+    .status-footer {
+        font-size: .75rem;
+    }
+
+    .lead-form {
+        margin-top: 129%;
+    }
+
+    .modal-close {
+        top: 373px;
+        right: 5px;
+    }
 }
