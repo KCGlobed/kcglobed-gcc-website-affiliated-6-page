@@ -586,7 +586,8 @@ img {
 .hero-pattern {
     position: absolute;
     inset: 0;
-    background-image: url("./images/hero_bg.png");
+    background-color: #150116;
+    /* background-image: url("./images/hero_bg.png"); */
     background-size: cover;
     opacity: 1;
     pointer-events: none;
@@ -8258,6 +8259,8 @@ table.cmp tr:last-child td {
     position: relative;
     width: 100%;
     max-width: 520px;
+    /* max-height: 90vh; */
+    /* overflow-y: auto; */
     transform: translateY(20px);
     transition: transform 0.3s ease;
 }
@@ -8421,6 +8424,10 @@ table.cmp tr:last-child td {
     transform: translateY(-2px);
 }
 
+.lf-text {
+    font-family: .75rem;
+}
+
 .lf-price {
     text-align: center;
     font-size: .75rem;
@@ -8578,4 +8585,41 @@ table.cmp tr:last-child td {
 .status-close-btn:hover {
     background: #F9FAFB;
     border-radius: 50%;
+}
+
+@media (max-width: 480px) {
+    .status-modal {
+        padding: 30px 20px;
+    }
+
+    .lf-title {
+        font-size: 17px;
+    }
+
+    .lf-sub {
+        font-size: 10px;
+    }
+
+    .lf-input {
+        font-size: 12px;
+        height: 35px;
+    }
+
+    .lf-btn {
+        font-size: 14px;
+        height: 45px;
+        margin-top: 1px;
+        padding: 0px 16px;
+    }
+    .btn-purple {
+        padding: 0px 20px;
+    }
+    .lf-text {
+        font-size: 10px;
+    }
+
+    .modal-close {
+        top: 0px;
+        right: 0px;
+    }
 }
