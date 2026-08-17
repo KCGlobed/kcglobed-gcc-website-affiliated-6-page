@@ -8,7 +8,7 @@ var FORM_TYPE = 1
 
 var finalFormSubmitFired = false;
 
-var OTP_BASE_URL = "https://kcglobed-gcc-website-932479078084.asia-south1.run.app";
+var OTP_BASE_URL = "https://gccschool.com";
 var isOtpVerified = false;
 var otpTimerInterval = null;
 
