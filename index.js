@@ -1,8 +1,8 @@
 var BASE_URL = "https://gccschool.com";
-// var BASE_URL = "https://kcglobed-gcc-website-932479078084.asia-south1.run.app";
+// var BASE_URL = "https://gcc-backend-dev.gccschool.com";
 var mode = "production";
-var GCC_BACKEND_URL = "https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app"
-// var GCC_BACKEND_URL = "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app"
+var GCC_BACKEND_URL = "https://gcc-backend-prod.gccschool.com"
+// var GCC_BACKEND_URL = "https://gcc-backend-dev.gccschool.com"
 // var mode = "sandbox"
 var FORM_TYPE = 1
 
@@ -1253,14 +1253,14 @@ const popupVideo = document.getElementById("popupVideo");
 const stickyBar = document.getElementsByClassName("stiky-container")[0];
 
 function handleImageVisibility() {
-    const image = document.getElementById("unwanted");
+  const image = document.getElementById("unwanted");
 
-    // Hide image for screens smaller than 768px
-    if (window.innerWidth < 480) {
-        image.style.display = "none";
-    } else {
-        image.style.display = "block";
-    }
+  // Hide image for screens smaller than 768px
+  if (window.innerWidth < 480) {
+    image.style.display = "none";
+  } else {
+    image.style.display = "block";
+  }
 }
 
 // Run on page load
@@ -1305,34 +1305,33 @@ videoPopup.addEventListener("click", (e) => {
   }
 });
 
-    let isPlanA = false;
+let isPlanA = false;
 
-    function togglePlan() {
+function togglePlan() {
 
-        const flipCard = document.getElementById("flipCard");
-        const lblOff = document.getElementById("lbl-off");
-        const lblOn = document.getElementById("lbl-on");
-        const switchTrack = document.getElementById("switchTrack");
+  const flipCard = document.getElementById("flipCard");
+  const lblOff = document.getElementById("lbl-off");
+  const lblOn = document.getElementById("lbl-on");
+  const switchTrack = document.getElementById("switchTrack");
 
-        isPlanA = !isPlanA;
+  isPlanA = !isPlanA;
 
-        if (isPlanA) {
-            flipCard.classList.add("flipped");
-            switchTrack.classList.add("active");
+  if (isPlanA) {
+    flipCard.classList.add("flipped");
+    switchTrack.classList.add("active");
 
-            lblOn.classList.add("active");
-            lblOff.classList.remove("active");
+    lblOn.classList.add("active");
+    lblOff.classList.remove("active");
 
-        } else {
-            flipCard.classList.remove("flipped");
-            switchTrack.classList.remove("active");
+  } else {
+    flipCard.classList.remove("flipped");
+    switchTrack.classList.remove("active");
 
-            lblOff.classList.add("active");
-            lblOn.classList.remove("active");
-        }
-    }
+    lblOff.classList.add("active");
+    lblOn.classList.remove("active");
+  }
+}
 
-    // Auto switch every 3 seconds
-    setInterval(togglePlan, 2000);
+// Auto switch every 3 seconds
+setInterval(togglePlan, 2000);
 
-  
