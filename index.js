@@ -939,7 +939,7 @@ async function submitBrochure() {
   closePopup();
 
   // Trigger PDF download
-  const pdfUrl = "https://storage.googleapis.com/gcc_prod_static_files_backend/static/files/GCC%20SCHOOL%20Dossier.pdf";
+  const pdfUrl = "https://pub-1c3aa4d882c24d66ac8e49a3fe6fbb71.r2.dev/static/files/GCC%20SCHOOL%20Dossier.pdf";
   const a = document.createElement('a');
   a.href = pdfUrl;
   a.download = 'GCC_SCHOOL_Dossier.pdf';
